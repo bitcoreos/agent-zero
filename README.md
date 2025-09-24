@@ -1,3 +1,3 @@
 # Agent Zero Core Framework
 
-Autonomous JSON AI agent system for recursive problem solving
+The work space for the autonomous JSON AI agent system for recursive problem solving for the BITwiki and BIThub projects.
