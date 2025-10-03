@@ -1,0 +1,77 @@
+schema: "http://json-schema.org/draft-07/schema#"
+title: Antibody Developability Research Ontology
+description: Formal ontology for antibody developability prediction research
+type: object
+properties:
+  ProteinLanguageModel:
+    type: object
+    properties:
+      name:
+        type: string
+        description: Name of the protein language model
+      type:
+        type: string
+        enum: ["BERT-based", "RNN-based", "Transformer-based"]
+        description: Architectural type of the model
+      training_data:
+        type: string
+        description: Primary dataset used for training
+      application_domain:
+        type: array
+        items:
+          type: string
+        description: Primary applications of the model
+      citation:
+        type: string
+        description: Key citation for the model
+    required: [name, type, training_data, application_domain]
+  DevelopabilityMetric:
+    type: object
+    properties:
+      name:
+        type: string
+        description: Name of the developability metric
+      definition:
+        type: string
+        description: Formal definition of the metric
+      measurement_unit:
+        type: string
+        description: Standard unit of measurement
+      importance_level:
+        type: string
+        enum: ["High", "Medium", "Low"]
+        description: Relative importance in developability assessment
+      citation:
+        type: string
+        description: Key citation for the metric
+    required: [name, definition, importance_level]
+  AntibodyProperty:
+    type: object
+    properties:
+      name:
+        type: string
+        description: Name of the antibody property
+      category:
+        type: string
+        enum: ["Structural", "Biophysical", "Functional", "Immunological"]
+        description: Primary category of the property
+      description:
+        type: string
+        description: Detailed description of the property
+      prediction_method:
+        type: string
+        description: Common computational methods for prediction
+      citation:
+        type: string
+        description: Key citation for the property
+    required: [name, category, description]
+examples:
+  - ProteinLanguageModel:
+      name: AbLang
+      type: Transformer-based
+      training_data: Observed Antibody Space (OAS) database
+      application_domain:
+        - Antibody sequence modeling
+        - CDR prediction
+        - Developability assessment
+      citation: Olsen et al., Protein Science, 2022
