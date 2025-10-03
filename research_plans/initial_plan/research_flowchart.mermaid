@@ -1,0 +1,98 @@
+graph TD
+    A[Start: Antibody Developability Competition] --> B[Create Hugging Face Account]
+    B --> C[Download Dataset GDPa1]
+    C --> D[Analyze Leaderboard Code]
+    D --> E[Set Up Workspace]
+    
+    E --> F[Sequence Processing]
+    F --> F1[Use ANARCI for CDR/FR Boundaries]
+    F --> F2[Extract CDR Lengths and Composition]
+    F --> F3[Calculate Net Charge and Frequencies]
+    
+    E --> G[Feature Engineering]
+    G --> G1[Simple Sequence Features]
+    G --> G2[Markov/HMM Features]
+    G --> G3[Structure-lite Features with IgFold]
+    G --> G4[Region-aware n-grams (FR vs CDR)]
+    G --> G5[Pairwise Coupling Features (H3-L3)]
+    
+    E --> H[Model Selection]
+    H --> H1[ESM-2]
+    H --> H2[AntiBERTa]
+    H --> H3[AbLang/AbLang-2]
+    H --> H4[BALM]
+    
+    E --> I[Cross-Validation Setup]
+    I --> I1[5-fold CV by Pair Identity]
+    I --> I2[Use Official CV Folds]
+    I --> I3[Log Spearman per Property]
+    
+    E --> J[Training Pipeline]
+    J --> J1[Multi-task Head for 5 Properties]
+    J --> J2[Loss: MSE + Rank-aware Terms]
+    J --> J3[Optimizer: AdamW]
+    J --> J4[Early Stopping on Validation Spearman]
+    J --> J5[Curriculum by Surprisal]
+    J --> J6[Loss Reweighting by Surprisal]
+    
+    E --> K[Ensemble Methods]
+    K --> K1[Train Variants with Different Features]
+    K --> K2[Blend Predictions Across Folds]
+    K --> K3[Use Entropy-aware Weights]
+    
+    E --> L[Post-processing]
+    L --> L1[Calibration: Temperature Scaling]
+    L --> L2[Clip Extreme Values]
+    L --> L3[Uncertainty Shrinkage for High-surprisal Items]
+    
+    E --> M[Validation]
+    M --> M1[Local Parity with Leaderboard]
+    M --> M2[Reproduce Spearman and Top-10% Recall]
+    M --> M3[KL Divergence Drift Check]
+    
+    E --> N[Submission]
+    N --> N1[Build CSV with Required Columns]
+    N --> N2[Include CV Folds if Applicable]
+    N --> N3[QA: No NaNs, Duplicates, or Invalid Names]
+    N --> N4[Upload to Leaderboard]
+    
+    F1 --> O[Proceed to Model Training]
+    F2 --> O
+    F3 --> O
+    G1 --> O
+    G2 --> O
+    G3 --> O
+    G4 --> O
+    G5 --> O
+    H1 --> O
+    H2 --> O
+    H3 --> O
+    H4 --> O
+    I1 --> O
+    I2 --> O
+    I3 --> O
+    J1 --> O
+    J2 --> O
+    J3 --> O
+    J4 --> O
+    J5 --> O
+    J6 --> O
+    K1 --> P[Final Predictions]
+    K2 --> P
+    K3 --> P
+    L1 --> P
+    L2 --> P
+    L3 --> P
+    M1 --> Q[Submission Ready]
+    M2 --> Q
+    M3 --> Q
+    N1 --> R[Competition Submission]
+    N2 --> R
+    N3 --> R
+    N4 --> R
+    
+    O --> K
+    O --> L
+    O --> M
+    P --> M
+    Q --> N
