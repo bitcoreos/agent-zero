@@ -1,1 +1,1 @@
-§§include(/a0/tmp/ready_content.txt)
+§§include(/a0/tmp/direct_content.txt)
