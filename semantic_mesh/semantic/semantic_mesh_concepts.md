@@ -1,1 +1,1 @@
-§§include(/a0/tmp/final_content.md)
+§§include(/a0/tmp/ready_content.txt)
