@@ -1,1 +1,194 @@
-§§include(/root/references.json)
+[
+  {
+    "title": "Observed Antibody Space: A diverse database of cleaned, annotated, and translated unpaired and paired antibody sequences",
+    "authors": [
+      "TH Olse",
+      "F Boyles",
+      "CM Deane"
+    ],
+    "journal": "Protein Science",
+    "year": 2022,
+    "volume": 31,
+    "pages": "e141-146",
+    "doi": "10.1002/pro.4220",
+    "url": "https://scholar.google.com/scholar_lookup?title=Observed+antibody+space%3A+A+diverse+database+of+cleaned%2C+annotated%2C+and+translated+unpaired+and+paired+antibody+sequences&author=TH+Olse&author=F+Boyles&author=CM+Deane&publication_year=2022&journal=Protein+Sci&volume=31&pages=141-6",
+    "abstract": "The Observed Antibody Space (OAS) database was created to offer clean, annotated, and translated repertoire data for antibody research. This resource provides a comprehensive collection of antibody sequences that serves as a foundation for training language models like AbLang."
+  },
+  {
+    "title": "A machine learning strategy for the identification of key in silico descriptors and prediction models for IgG monoclonal antibody developability properties",
+    "authors": [
+      "Tal Widatalla",
+      "David Prihoda",
+      "Pin-Kuang Lai"
+    ],
+    "url": "https://scholar.google.com/scholar_lookup?doi=10.1101/617860",
+    "abstract": "This study presents a machine learning approach to identify key computational descriptors and develop prediction models for IgG monoclonal antibody developability properties, including aggregation, viscosity, and stability metrics.",
+    "year": 2025,
+    "journal": ""
+  },
+  {
+    "title": "Machine learning prediction of antibody aggregation and viscosity for high concentration formulation development of protein therapeutics",
+    "authors": [
+      "Neil Moody"
+    ],
+    "url": "https://scholar.google.com/citations?user=Je3HxrwAAAAJ&hl=en",
+    "abstract": "Development of machine learning models to predict antibody aggregation and viscosity, critical parameters for high-concentration formulations of therapeutic antibodies. These properties are key developability metrics that impact manufacturability and stability.",
+    "year": 2025,
+    "journal": ""
+  },
+  {
+    "title": "The need to consider an antibody's 'developability' in therapeutic antibody design",
+    "authors": [
+      "Center for Antibody Technology"
+    ],
+    "journal": "Methods in Molecular Biology",
+    "year": 2021,
+    "volume": 2314,
+    "pages": "67-83",
+    "doi": "10.1007/978-1-0716-1450-1_5",
+    "url": "https://scholar.google.com/scholar_lookup?doi=10.1007%2F978-1-0716-1450-1_5&pmid=34478133",
+    "abstract": "Comprehensive review of antibody developability considerations including immunogenicity, solubility, specificity, stability, manufacturability, and storability. Predicting these properties rapidly and inexpensively is critical to industrial workflows."
+  },
+  {
+    "title": "Ginkgo Bioworks",
+    "authors": [],
+    "journal": "Ginkgo Bioworks. . GDPa1 Antibody Developability Dataset (public training data)",
+    "year": 2025,
+    "url": ""
+  },
+  {
+    "title": "SEER-MoE: Sparse Expert Efficiency through Regularization",
+    "authors": [
+      ".\nJiang, J."
+    ],
+    "journal": "SEER-MoE: Sparse Expert Efficiency through Regularization. arXiv:2404.05089",
+    "year": 2024,
+    "url": ""
+  },
+  {
+    "title": "An alternative assay to hydrophobic interaction chromatography for high-throughput characterization of monoclonal antibodies - PubMed",
+    "authors": [],
+    "journal": "An alternative assay to hydrophobic interaction chromatography for high-throughput characterization of monoclonal antibodies - PubMed",
+    "year": 2025,
+    "url": "https://pubmed.ncbi.nlm.nih.gov/25790175/"
+  },
+  {
+    "title": "Antibody - Wikipedia",
+    "authors": [],
+    "journal": "Antibody - Wikipedia",
+    "year": 2025,
+    "url": "https://en.wikipedia.org/wiki/Antibody"
+  },
+  {
+    "title": "Curriculum learning - Wikipedia",
+    "authors": [],
+    "journal": "Curriculum learning - Wikipedia",
+    "year": 2025,
+    "url": "https://en.wikipedia.org/wiki/Curriculum_learning"
+  },
+  {
+    "title": "Denaturation midpoint - Wikipedia",
+    "authors": [],
+    "journal": "Denaturation midpoint - Wikipedia",
+    "year": 2025,
+    "url": "https://en.wikipedia.org/wiki/Denaturation_midpoint"
+  },
+  {
+    "title": "Biophysical cartography of the native and human-engineered antibody landscapes quantifies the plasticity of antibody developability | Communications Biology",
+    "authors": [],
+    "journal": "Biophysical cartography of the native and human-engineered antibody landscapes quantifies the plasticity of antibody developability | Communications Biology",
+    "year": 2025,
+    "url": "https://www.nature.com/articles/s42003-024-06561-3?error=cookies_not_supported&code=f3be9a40-a3f3-45b4-9273-6c6963995c69"
+  },
+  {
+    "title": "What is ensemble learning",
+    "authors": [],
+    "journal": "What is ensemble learning? | IBM",
+    "year": 2025,
+    "url": "https://www.ibm.com/think/topics/ensemble-learning"
+  },
+  {
+    "title": "SEER-MoE: Sparse Expert Efficiency through Regularization for Mixture-of-Experts",
+    "authors": [],
+    "journal": "SEER-MoE: Sparse Expert Efficiency through Regularization for Mixture-of-Experts",
+    "year": 2025,
+    "url": "https://arxiv.org/html/2404.05089v1"
+  },
+  {
+    "title": "Entropy (information theory) - Wikipedia",
+    "authors": [],
+    "journal": "Entropy (information theory) - Wikipedia",
+    "year": 2025,
+    "url": "https://en.wikipedia.org/wiki/Entropy_(information_theory)"
+  },
+  {
+    "title": "GDPa1 \u00b7 Datasets at Hugging Face",
+    "authors": [],
+    "journal": "GDPa1 \u00b7 Datasets at Hugging Face",
+    "year": 2025,
+    "url": "https://huggingface.co/datasets/ginkgo-datapoints/GDPa1"
+  },
+  {
+    "title": "Ginkgo Antibody Developability Prediction Competition",
+    "authors": [],
+    "journal": "Ginkgo Antibody Developability Prediction Competition",
+    "year": 2025,
+    "url": "https://euphsfcyogalqiqsawbo.supabase.co/storage/v1/object/public/gdpweb/pdfs/2025%20Ginkgo%20Antibody%20Developability%20Prediction%20Competition%202025-08-28-v2.pdf"
+  },
+  {
+    "title": "JSON-LD - Wikipedia",
+    "authors": [],
+    "journal": "JSON-LD - Wikipedia",
+    "year": 2025,
+    "url": "https://en.wikipedia.org/wiki/JSON-LD"
+  },
+  {
+    "title": "Markov chain - Wikipedia",
+    "authors": [],
+    "journal": "Markov chain - Wikipedia",
+    "year": 2025,
+    "url": "https://en.wikipedia.org/wiki/Markov_chain"
+  },
+  {
+    "title": "Hidden Markov model - Wikipedia",
+    "authors": [],
+    "journal": "Hidden Markov model - Wikipedia",
+    "year": 2025,
+    "url": "https://en.wikipedia.org/wiki/Hidden_Markov_model"
+  },
+  {
+    "title": "Overview of the PolySpecificity Particle (PSP) assay for evaluating",
+    "authors": [],
+    "journal": "Overview of the PolySpecificity Particle (PSP) assay for evaluating... | Download Scientific Diagram",
+    "year": 2025,
+    "url": "https://www.researchgate.net/figure/Overview-of-the-PolySpecificity-Particle-PSP-assay-for-evaluating-antibody-nonspecific_fig1_353497548"
+  },
+  {
+    "title": "Web Ontology Language - Wikipedia",
+    "authors": [],
+    "journal": "Web Ontology Language - Wikipedia",
+    "year": 2025,
+    "url": "https://en.wikipedia.org/wiki/Web_Ontology_Language"
+  },
+  {
+    "title": "Spearman's rank correlation coefficient - Wikipedia",
+    "authors": [],
+    "journal": "Spearman's rank correlation coefficient - Wikipedia",
+    "year": 2025,
+    "url": "https://en.wikipedia.org/wiki/Spearman%27s_rank_correlation_coefficient"
+  },
+  {
+    "title": "A Comprehensive Review of Protein Language Models",
+    "authors": [],
+    "journal": "A Comprehensive Review of Protein Language Models",
+    "year": 2025,
+    "url": "https://arxiv.org/html/2502.06881v1"
+  },
+  {
+    "title": "Evolutionary coupling analysis guides identification of mistrafficking-sensitive variants in cardiac K+ channels: Validation with hERG - PMC\n\n((venv) ) root@78c408292a29:~/agent-zero#",
+    "authors": [],
+    "journal": "Evolutionary coupling analysis guides identification of mistrafficking-sensitive variants in cardiac K+ channels: Validation with hERG - PMC\n\n((venv) ) root@78c408292a29:~/agent-zero#",
+    "year": 2025,
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9632996/"
+  }
+]
