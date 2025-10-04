@@ -1,0 +1,22 @@
+// this file needs to be refactored into one that actually uses our paths to correct files . consider this file a template for the correct file.
+
+
+# Mapping of canonical feature identifiers to ontology URIs and suggested implementation paths.
+# Expand this file iteratively. Keys should match feature IDs used in research_plans (e.g., PBT_*).
+PBT_ll_illegal_bigram_frac:
+  ontology: 
+  description: "Fraction of disallowed amino-acid bigrams in chain/region"
+  canonical_impl: "features/bigrams.py::illegal_bigram_fraction"
+  provenance: "research_plans/initial_plan/gaps.md"
+
+PBT_sw_hydro_max:
+  ontology: 
+  description: "Sliding-window hydropathy maximum (window sizes: 7,11,15)"
+  canonical_impl: "features/sliding_window.py::max_hydropathy"
+  provenance: "research_plans/initial_plan/gaps.md"
+
+PBT_trie_hit_count:
+  ontology: 
+  description: "Counts of motif trie hits"
+  canonical_impl: "features/trie.py::count_trie_hits"
+  provenance: "research_plans/initial_plan/gaps.md"
