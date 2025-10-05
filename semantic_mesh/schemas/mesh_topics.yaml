@@ -1,0 +1,148 @@
+version: 0.1.0
+updated_utc: 2025-10-05T13:05:00Z
+summary: Focused topic-aligned categories for the antibody developability semantic mesh
+
+categories:
+  - id: assay_metric_definitions
+    title: Assay and Metric Definitions
+    description: Canonical assay biology, leaderboard metrics, and property alignment for GDPa1 targets.
+    related_nodes: [assays, evaluation_metrics, assay_metric_definitions]
+    core_artifacts:
+      - semantic_mesh/concepts/assay_definitions.md
+      - semantic_mesh/concepts/evaluation_metrics.md
+      - semantic_mesh/concepts/competition_target_alignment.md
+    example_queries:
+      - "Which mesh nodes describe AC-SINS_pH7.4 modeling requirements?"
+      - "List references for hydrophobicity scoring."
+
+  - id: sequence_structural_features
+    title: Sequence and Structural Features
+    description: Per-region descriptors, structure-lite metrics, and vocabulary for VH/VL analysis.
+    related_nodes: [sequence_structural_features, antibody_structure, modeling_features]
+    core_artifacts:
+      - semantic_mesh/concepts/sequence_structural_features.md
+      - semantic_mesh/concepts/context_terms.yaml
+      - research_plans/initial_plan/plan.md
+    example_queries:
+      - "Provide heavy-chain hydropathy features for CDR3."
+      - "What structural heuristics support Tm2 predictions?"
+
+  - id: feature_engineering_methods
+    title: Feature Engineering Methods
+    description: Procedures for deriving statistical, physicochemical, and LM-based features.
+    related_nodes: [feature_engineering_methods, modeling_features, markov_dynamics]
+    core_artifacts:
+      - semantic_mesh/concepts/feature_engineering_methods.md
+      - semantic_mesh/concepts/markov_notes.md
+      - semantic_mesh/concepts/semantic_mesh_concepts.md
+    example_queries:
+      - "How do we compute surprisal curriculum tiers?"
+      - "Which embeddings feed the ensemble head?"
+
+  - id: model_arch_training
+    title: Model Architectures and Training Protocols
+    description: Cross-validated training plans, curriculum learning, and deployment hooks.
+    related_nodes: [model_arch_training, training_protocols, modeling_features]
+    core_artifacts:
+      - semantic_mesh/concepts/model_architectures_training.md
+      - semantic_mesh/concepts/protocols.md
+      - research_plans/initial_plan/flow.md
+    example_queries:
+      - "What curriculum schedule do we enforce per fold?"
+      - "List required checkpoints for the training pipeline."
+
+  - id: validation_evaluation_logic
+    title: Validation and Evaluation Logic
+    description: Leaderboard parity scripts, local scoring replicas, and QA gating.
+    related_nodes: [validation_evaluation_logic, evaluation_metrics, governance]
+    core_artifacts:
+      - semantic_mesh/concepts/validation_evaluation_logic.md
+      - semantic_mesh/concepts/evaluation_metrics.md
+      - semantic_mesh/concepts/protocols.md
+    example_queries:
+      - "How do we calculate top-10% recall locally?"
+      - "What checks precede leaderboard submission?"
+
+  - id: cross_validation_integrity
+    title: Cross-Validation and Data Integrity Rules
+    description: Fold stewardship, leakage prevention, and dataset manifest requirements.
+    related_nodes: [cross_validation_integrity, dataset_assets, governance]
+    core_artifacts:
+      - semantic_mesh/concepts/cross_validation_integrity.md
+      - competition_public/dataset/README.md
+      - semantic_mesh/concepts/protocols.md
+    example_queries:
+      - "What leakage guards exist for fold splits?"
+      - "Where do we record dataset hash provenance?"
+
+  - id: submission_schema_standards
+    title: Submission Schema and File Standards
+    description: CSV schema, column requirements, and validation signatures for uploads.
+    related_nodes: [submission_schema_standards, evaluation_metrics, governance]
+    core_artifacts:
+      - semantic_mesh/concepts/submission_schema_standards.md
+      - semantic_mesh/concepts/evaluation_metrics.md
+      - competition_public/AbDev Leaderboard Overview.md
+    example_queries:
+      - "Which columns are mandatory for CV track submissions?"
+      - "How do we register schema changes in the mesh?"
+
+  - id: ensembling_post_processing
+    title: Ensembling and Post-Processing Strategies
+    description: Ensemble compositions, calibration hooks, and prediction packaging steps.
+    related_nodes: [ensembling_post_processing, modeling_features, validation_evaluation_logic]
+    core_artifacts:
+      - semantic_mesh/concepts/ensembling_postprocessing.md
+      - semantic_mesh/concepts/semantic_mesh_concepts.md
+      - research_plans/initial_plan/plan.md
+    example_queries:
+      - "Which ensemble members are blended for HIC?"
+      - "What calibration routines run before output?"
+
+  - id: statistical_information_features
+    title: Statistical and Information-Theory Features
+    description: Markov models, surprisal analytics, entropy gating, and smoothing techniques.
+    related_nodes: [statistical_information_features, markov_dynamics, feature_engineering_methods]
+    core_artifacts:
+      - semantic_mesh/concepts/statistical_information_features.md
+      - semantic_mesh/concepts/markov_notes.md
+      - semantic_mesh/concepts/semantic_mesh_concepts.md
+    example_queries:
+      - "How is surprisal computed for polyreactivity?"
+      - "What entropy thresholds gate LM features?"
+
+  - id: drift_detection_quality
+    title: Drift Detection and Quality Assurance
+    description: Monitoring, QA gates, and drift alarms across public vs. heldout cohorts.
+    related_nodes: [drift_detection_quality, governance, validation_evaluation_logic]
+    core_artifacts:
+      - semantic_mesh/concepts/drift_detection_quality_assurance.md
+      - semantic_mesh/concepts/protocols.md
+      - research_plans/initial_plan/gaps_risks.md
+    example_queries:
+      - "What KL thresholds trigger re-training?"
+      - "Which QA flags block submission?"
+
+  - id: competency_query_framework
+    title: Competency and Query Framework
+    description: Ontology bindings, glossary entries, and competency questions for agents.
+    related_nodes: [competency_query_framework, antibody_structure, assay_metric_definitions]
+    core_artifacts:
+      - semantic_mesh/concepts/competency_query_framework.md
+      - semantic_mesh/concepts/context_terms.yaml
+      - semantic_mesh/schemas/glossary.md
+    example_queries:
+      - "How do we ask the mesh for polyreactivity guidance?"
+      - "List competency questions tied to assays."
+
+  - id: references_provenance_sources
+    title: References and Provenance Sources
+    description: Citation ledger, provenance metadata, and source-of-truth registers.
+    related_nodes: [references_provenance_sources, governance, assay_metric_definitions]
+    core_artifacts:
+      - semantic_mesh/REFERENCES.md
+      - semantic_mesh/concepts/references_provenance.md
+      - semantic_mesh/library/catalog.yaml
+    example_queries:
+      - "Which sources justify hydropathy features?"
+      - "Where is the GDPa1 CSV hash documented?"

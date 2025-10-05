@@ -78,6 +78,114 @@ nodes:
       - semantic_mesh/concepts/context_terms.yaml#surprisal_curriculum
     related: [modeling_features]
 
+  - id: assay_metric_definitions
+    title: Assay & Metric Alignment
+    summary: Maps GDPa1 assays to mesh nodes, features, and citations.
+    artifacts:
+      - semantic_mesh/concepts/competition_target_alignment.md
+      - semantic_mesh/concepts/assay_definitions.md
+      - semantic_mesh/concepts/evaluation_metrics.md
+    related: [assays, evaluation_metrics, modeling_features]
+
+  - id: sequence_structural_features
+    title: Sequence & Structure Descriptors
+    summary: Region-aware hydropathy, charge, and structure-lite metrics.
+    artifacts:
+      - semantic_mesh/concepts/sequence_structural_features.md
+      - semantic_mesh/concepts/context_terms.yaml
+      - semantic_mesh/concepts/semantic_mesh_concepts.md#Sequence-and-Region-Features
+    related: [assay_metric_definitions, modeling_features, statistical_information_features]
+
+  - id: feature_engineering_methods
+    title: Feature Engineering Methods
+    summary: Procedures for deriving statistical, physicochemical, and LM-based features.
+    artifacts:
+      - semantic_mesh/concepts/feature_engineering_methods.md
+      - semantic_mesh/concepts/markov_notes.md
+      - research_plans/initial_plan/gaps.md
+    related: [sequence_structural_features, statistical_information_features, modeling_features]
+
+  - id: model_arch_training
+    title: Model Architectures & Training
+    summary: Cross-validated training plans, curriculum strategy, and deployment hooks.
+    artifacts:
+      - semantic_mesh/concepts/model_architectures_training.md
+      - semantic_mesh/concepts/protocols.md
+      - research_plans/initial_plan/flow.md
+    related: [training_protocols, modeling_features, ensembling_post_processing]
+
+  - id: validation_evaluation_logic
+    title: Validation & Evaluation Logic
+    summary: Leaderboard parity scripts, local scoring replicas, and QA gates.
+    artifacts:
+      - semantic_mesh/concepts/validation_evaluation_logic.md
+      - semantic_mesh/concepts/evaluation_metrics.md
+      - semantic_mesh/concepts/protocols.md
+    related: [governance, submission_schema_standards, drift_detection_quality]
+
+  - id: cross_validation_integrity
+    title: Cross-Validation Integrity
+    summary: Fold stewardship, leakage prevention, and dataset manifest rules.
+    artifacts:
+      - semantic_mesh/concepts/cross_validation_integrity.md
+      - competition_public/dataset/README.md
+      - semantic_mesh/concepts/protocols.md
+    related: [dataset_assets, governance, model_arch_training]
+
+  - id: submission_schema_standards
+    title: Submission Schema & Standards
+    summary: CSV schema requirements, validation metadata, and change controls.
+    artifacts:
+      - semantic_mesh/concepts/submission_schema_standards.md
+      - semantic_mesh/concepts/evaluation_metrics.md
+      - competition_public/AbDev Leaderboard Overview.md
+    related: [validation_evaluation_logic, governance]
+
+  - id: ensembling_post_processing
+    title: Ensembling & Post-Processing
+    summary: Ensemble composition, calibration, and packaging procedures.
+    artifacts:
+      - semantic_mesh/concepts/ensembling_postprocessing.md
+      - semantic_mesh/concepts/semantic_mesh_concepts.md#Ensemble-and-Gate-Mechanisms
+      - research_plans/initial_plan/plan.md
+    related: [model_arch_training, validation_evaluation_logic, statistical_information_features]
+
+  - id: statistical_information_features
+    title: Statistical & Information-Theory Features
+    summary: Markov models, surprisal analytics, entropy gating, smoothing techniques.
+    artifacts:
+      - semantic_mesh/concepts/statistical_information_features.md
+      - semantic_mesh/concepts/markov_notes.md
+      - semantic_mesh/concepts/semantic_mesh_concepts.md#Statistical-Smoothing-and-Sequence-Models
+    related: [markov_dynamics, feature_engineering_methods, sequence_structural_features]
+
+  - id: drift_detection_quality
+    title: Drift Detection & QA
+    summary: Monitoring metrics, QA gates, and alerting workflow for submissions.
+    artifacts:
+      - semantic_mesh/concepts/drift_detection_quality_assurance.md
+      - semantic_mesh/concepts/protocols.md
+      - research_plans/initial_plan/gaps_risks.md
+    related: [validation_evaluation_logic, governance, cross_validation_integrity]
+
+  - id: competency_query_framework
+    title: Competency & Query Framework
+    summary: Competency questions, ontology bindings, and query templates.
+    artifacts:
+      - semantic_mesh/concepts/competency_query_framework.md
+      - semantic_mesh/concepts/context_terms.yaml
+      - semantic_mesh/schemas/glossary.md
+    related: [assay_metric_definitions, references_provenance_sources, governance]
+
+  - id: references_provenance_sources
+    title: References & Provenance Sources
+    summary: Citation ledger, provenance metadata, and governance rules.
+    artifacts:
+      - semantic_mesh/REFERENCES.md
+      - semantic_mesh/concepts/references_provenance.md
+      - semantic_mesh/library/catalog.yaml
+    related: [governance, assay_metric_definitions, competency_query_framework]
+
 relations:
   - source: antibody_structure
     target: assays
@@ -94,3 +202,30 @@ relations:
   - source: markov_dynamics
     target: modeling_features
     type: augments
+  - source: assay_metric_definitions
+    target: modeling_features
+    type: aligns_with
+  - source: sequence_structural_features
+    target: feature_engineering_methods
+    type: supplies
+  - source: feature_engineering_methods
+    target: model_arch_training
+    type: enables
+  - source: model_arch_training
+    target: ensembling_post_processing
+    type: feeds
+  - source: validation_evaluation_logic
+    target: submission_schema_standards
+    type: governs
+  - source: cross_validation_integrity
+    target: validation_evaluation_logic
+    type: informs
+  - source: statistical_information_features
+    target: drift_detection_quality
+    type: supports
+  - source: ensembling_post_processing
+    target: validation_evaluation_logic
+    type: validates
+  - source: references_provenance_sources
+    target: competency_query_framework
+    type: documents

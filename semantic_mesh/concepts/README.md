@@ -10,6 +10,9 @@ key artefacts:
 	- `protocols.md`: workflow checklist aligning data prep, feature builds, and training loops
 	- `semantic_mesh_concepts.md`: detailed concept mesh spanning sequence, modeling, calibration, and QA themes
 	- `context_terms.yaml` + `core_concepts.yaml`: machine-friendly vocabularies for targeted retrieval
+	- `competition_target_alignment.md`: maps GDPa1 assays to mesh nodes, features, and citations
+	- `sequence_structural_features.md`, `feature_engineering_methods.md`: reusable ledgers for feature derivation
+	- `topic_categories.md`: human-readable index paired with `schemas/mesh_topics.yaml`
 
 usage:
 	- agents load only the artefacts referenced in `semantic_mesh/library/catalog.yaml` for their task scope
