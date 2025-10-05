@@ -1,0 +1,96 @@
+version: 0.1.1
+updated_utc: 2025-10-05T00:00:00Z
+namespace: urn:mesh:
+summary: lightweight semantic+ontological scaffold capturing minimal concepts required for antibody developability modeling
+
+nodes:
+  - id: antibody_structure
+    title: Antibody Structure Fundamentals
+    summary: VH/VL architecture, CDR regions, isotype context
+    artifacts:
+      - competition_public/GDPa1 Dataset Overview.md#Structure
+      - semantic_mesh/schemas/glossary.md#Antibody
+      - semantic_mesh/concepts/context_terms.yaml#vh_chain
+    related: [assays, dataset_assets]
+
+  - id: assays
+    title: Developability Assays
+    summary: Hydrophobicity (HIC), Polyreactivity (PR_CHO), AC-SINS pH7.4, Thermostability (Tm2), Titer
+    artifacts:
+      - competition_public/GDPa1 Dataset Overview.md#Assays
+      - semantic_mesh/concepts/context_terms.yaml#assays
+      - semantic_mesh/schemas/glossary.md#Self-Association
+    related: [antibody_structure, evaluation_metrics, modeling_features]
+
+  - id: dataset_assets
+    title: GDPa1 + Heldout Assets
+    summary: Sequence tables, schema fields, fold identifiers
+    artifacts:
+      - competition_public/dataset/GDPa1_v1.2_sequences.csv
+      - competition_public/dataset/heldout-set-sequences.csv
+      - competition_public/dataset/README.md
+    related: [assays, training_protocols]
+
+  - id: evaluation_metrics
+    title: Leaderboard Metrics
+    summary: Spearman correlation and top-decile recall definitions
+    artifacts:
+      - competition_public/AbDev Leaderboard Overview.md
+      - semantic_mesh/concepts/evaluation_metrics.md
+      - semantic_mesh/concepts/semantic_mesh_concepts.md#Calibration-and-Uncertainty
+    related: [assays, modeling_features, governance]
+
+  - id: modeling_features
+    title: Feature Architectures
+    summary: ANARCI regions, Markov surprisal, PBT heuristics, LM embeddings
+    artifacts:
+      - research_plans/initial_plan/plan.md
+      - research_plans/initial_plan/gaps.md
+      - semantic_mesh/concepts/semantic_mesh_concepts.md#Sequence-and-Region-Features
+    related: [assays, markov_dynamics, training_protocols]
+
+  - id: training_protocols
+    title: Training + CV Workflow
+    summary: Isotype-aware CV, curriculum strategy, submission flow
+    artifacts:
+      - research_plans/initial_plan/plan.md
+      - research_plans/initial_plan/flow.md
+      - competition_public/2025 AbDev Competition Overview.md
+      - semantic_mesh/concepts/protocols.md
+    related: [dataset_assets, modeling_features, evaluation_metrics]
+
+  - id: governance
+    title: Governance + Risk Controls
+    summary: Orchestration directives, validation gates, licensing checks
+    artifacts:
+      - AGENTS.md
+      - init.md
+      - research_plans/initial_plan/gaps_risks.md
+      - semantic_mesh/concepts/context_terms.yaml#mesh_validator
+    related: [evaluation_metrics, training_protocols]
+
+  - id: markov_dynamics
+    title: Markov + Surprisal Systems
+    summary: k-mer smoothing, entropy gates, surprisal curriculum supports
+    artifacts:
+      - research_plans/initial_plan/gaps.md
+      - semantic_mesh/concepts/markov_notes.md
+      - semantic_mesh/concepts/context_terms.yaml#surprisal_curriculum
+    related: [modeling_features]
+
+relations:
+  - source: antibody_structure
+    target: assays
+    type: informs
+  - source: dataset_assets
+    target: training_protocols
+    type: supplies
+  - source: modeling_features
+    target: evaluation_metrics
+    type: optimizes
+  - source: governance
+    target: training_protocols
+    type: constrains
+  - source: markov_dynamics
+    target: modeling_features
+    type: augments

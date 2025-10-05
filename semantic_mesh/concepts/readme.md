@@ -2,7 +2,7 @@
 
 This directory contains all research and knowledge related to the Antibody Developability Competition as discussed in the initial research plan. The purpose of this repository is to create a comprehensive semantic knowledge base that serves as the foundation for understanding all concepts, methods, and relationships within the project.
 
-See `semantic_mesh/semantic/README.md` for the authoritative semantic layer guide.
+Primary navigation lives in `semantic_mesh/concepts/README.md`.
 
 ## Purpose
 

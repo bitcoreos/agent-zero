@@ -1,0 +1,257 @@
+version: 0.2.0
+updated_utc: 2025-10-04T01:08:00Z
+summary: validated high-signal concept lattice spanning antibody biology, ML modeling, governance, and QA per repo sources
+
+concepts:
+  antibody_developability:
+    status: verified
+    domains: [biology, drug_development]
+    definition: Integrated manufacturability risk for therapeutic IgG pairs covering stability, aggregation, and yield.
+    relates_to: [core_developability_assays, leaderboard_metrics]
+    sources:
+      - competition_public/2025 AbDev Competition Overview.md
+      - competition_public/GDPa1 Dataset Overview.md
+    tags: [antibody, developability]
+
+  core_developability_assays:
+    status: verified
+    domains: [bioanalytics, assay]
+    definition: Competition-critical HIC, PR_CHO, AC-SINS_pH7.4, Tm2, and Titer measurements scored per antibody.
+    relates_to: [prophet_ab_platform, leaderboard_metrics]
+    sources:
+      - competition_public/2025 AbDev Competition Overview.md
+      - research_plans/initial_plan/plan.md
+    tags: [assay, targets]
+
+  prophet_ab_platform:
+    status: verified
+    domains: [bioinformatics, automation]
+    definition: High-throughput PROPHET-Ab workflow producing GDPa1 assays with robotics, chromatography, and curated exports.
+    relates_to: [dataset_versions, core_developability_assays]
+    sources:
+      - competition_public/GDPa1 Dataset Overview.md
+    tags: [platform, data_generation]
+
+  dataset_access_controls:
+    status: verified
+    domains: [data_management]
+    definition: Gated Hugging Face dataset requiring license acceptance and authenticated access before download.
+    relates_to: [dataset_versions, data_governance_protocol]
+    sources:
+      - competition_public/GDPa1 Dataset Overview.md
+    tags: [access, licensing]
+
+  dataset_versions:
+    status: verified
+    domains: [data_management]
+    definition: GDPa1_v1.1 and v1.2 CSV releases with median aggregation and official fold annotations referenced by the leaderboard.
+    relates_to: [cross_validation_protocol, dataset_access_controls]
+    sources:
+      - competition_public/GDPa1 Dataset Overview.md
+      - research_plans/initial_plan/plan.md
+    tags: [dataset, versioning]
+
+  cross_validation_protocol:
+    status: verified
+    domains: [model_validation]
+    definition: Hierarchical cluster IgG isotype stratified 5-fold split enforced for CV submissions and local parity checks.
+    relates_to: [leaderboard_metrics, reproducibility_controls]
+    sources:
+      - competition_public/GDPa1 Dataset Overview.md
+      - research_plans/initial_plan/plan.md
+    tags: [cv, folds]
+
+  heldout_evaluation_set:
+    status: verified
+    domains: [evaluation]
+    definition: Private panel of 80 antibody sequences without assay labels used for final leaderboard scoring.
+    relates_to: [leaderboard_metrics, qa_validations]
+    sources:
+      - competition_public/GDPa1 Dataset Overview.md
+      - competition_public/dataset/README.md
+    tags: [dataset, evaluation]
+
+  leaderboard_metrics:
+    status: verified
+    domains: [metrics]
+    definition: Primary scoring via per-assay Spearman correlation plus top-10% recall after sign flips for lower-is-better targets.
+    relates_to: [ensemble_diversity_controls, calibration_guardrails]
+    sources:
+      - research_plans/initial_plan/plan.md
+    tags: [metrics, evaluation]
+
+  isotype_effects:
+    status: verified
+    domains: [biology]
+    definition: IgG subclass identity systematically shifts assays like Tm2; modeling must encode subclass features.
+    relates_to: [cdr_feature_engineering, curriculum_surprisal_schedule]
+    sources:
+      - competition_public/How to Train an Antibody Developability Model.md
+      - competition_public/GDPa1 Dataset Overview.md
+    tags: [biology, features]
+
+  sequence_numbering_anarci:
+    status: verified
+    domains: [bioinformatics]
+    definition: ANARCI numbering labels FR/CDR boundaries per chain, enabling region-aware feature extraction.
+    relates_to: [cdr_feature_engineering, heavy_light_coupling_features]
+    sources:
+      - research_plans/initial_plan/plan.md
+    tags: [sequence, tooling]
+
+  cdr_feature_engineering:
+    status: verified
+    domains: [bioinformatics]
+    definition: Derive region metrics (lengths, charge, hydropathy, amino-acid frequencies) for VH/VL frameworks and CDRs.
+    relates_to: [markov_surprisal_features, pattern_based_tests]
+    sources:
+      - research_plans/initial_plan/plan.md
+      - competition_public/How to Train an Antibody Developability Model.md
+    tags: [features, sequence]
+
+  markov_surprisal_features:
+    status: verified
+    domains: [machine_learning, sequence_modeling]
+    definition: Region-aware n-gram log probabilities, surprisal averages, and entropy rates computed per chain orientation.
+    relates_to: [markov_smoothing_strategies, curriculum_surprisal_schedule]
+    sources:
+      - research_plans/initial_plan/plan.md
+    tags: [features, statistics]
+
+  markov_smoothing_strategies:
+    status: verified
+    domains: [machine_learning]
+    definition: Discounting choices such as Kneser–Ney and Witten–Bell controlling n-gram probability estimates and backoff depth.
+    relates_to: [markov_surprisal_features]
+    sources:
+      - research_plans/initial_plan/plan.md
+    tags: [statistics, smoothing]
+
+  pattern_based_tests:
+    status: verified
+    domains: [bioinformatics, heuristics]
+    definition: Deterministic PBT feature suite (two-pointer, sliding window, trie hits, DP alignments) capturing structural heuristics.
+    relates_to: [curriculum_surprisal_schedule, qa_validations]
+    sources:
+      - research_plans/initial_plan/gaps.md
+    tags: [features, heuristics]
+
+  structure_lite_features:
+    status: verified
+    domains: [structural_biology]
+    definition: IgFold-derived loop lengths, contacts, and confidence summaries providing structure-aware signals without full pipelines.
+    relates_to: [cdr_feature_engineering, heavy_light_coupling_features]
+    sources:
+      - research_plans/initial_plan/plan.md
+    tags: [structure, features]
+
+  protein_language_models:
+    status: verified
+    domains: [machine_learning, llm]
+    definition: Antibody and protein LMs (ESM-2, AntiBERTa, AbLang, BALM) furnishing sequence embeddings for multitask heads.
+    relates_to: [ensemble_diversity_controls, curriculum_surprisal_schedule]
+    sources:
+      - research_plans/initial_plan/plan.md
+    tags: [lm, embeddings]
+
+  p_iggen_embeddings:
+    status: verified
+    domains: [machine_learning]
+    definition: Blog-documented baseline using p-IgGen mean-pooled VH/VL embeddings feeding ridge regression on GDPa1.
+    relates_to: [protein_language_models, leaderboard_metrics]
+    sources:
+      - competition_public/How to Train an Antibody Developability Model.md
+    tags: [baseline, embeddings]
+
+  curriculum_surprisal_schedule:
+    status: verified
+    domains: [training_strategy]
+    definition: Curriculum that orders training batches by surprisal tiers, expanding to higher entropy sequences over epochs.
+    relates_to: [ensemble_diversity_controls, entropy_gating_guardrails]
+    sources:
+      - research_plans/initial_plan/plan.md
+    tags: [curriculum, training]
+
+  ensemble_diversity_controls:
+    status: verified
+    domains: [machine_learning]
+    definition: Multi-variant ensembles altering n-gram scope, smoothing, and fusion to improve robustness and uncertainty estimates.
+    relates_to: [leaderboard_metrics, calibration_guardrails]
+    sources:
+      - research_plans/initial_plan/plan.md
+    tags: [ensemble, robustness]
+
+  calibration_guardrails:
+    status: verified
+    domains: [model_validation]
+    definition: Temperature scaling, shrinkage, and clipping steps ensuring calibrated assay predictions across entropy slices.
+    relates_to: [entropy_gating_guardrails, qa_validations]
+    sources:
+      - research_plans/initial_plan/plan.md
+    tags: [calibration, validation]
+
+  entropy_gating_guardrails:
+    status: verified
+    domains: [uncertainty]
+    definition: Entropy-based fusion gates and abstain heuristics that reduce Markov influence and flag high-surprisal submissions.
+    relates_to: [qa_validations, markov_surprisal_features]
+    sources:
+      - research_plans/initial_plan/plan.md
+    tags: [uncertainty, gating]
+
+  qa_validations:
+    status: verified
+    domains: [quality_assurance]
+    definition: Pre-submission QA covering amino-acid alphabet checks, fold parity, surprisal drift (KL), and auxiliary audit exports.
+    relates_to: [data_governance_protocol, reproducibility_controls]
+    sources:
+      - research_plans/initial_plan/plan.md
+      - research_plans/initial_plan/gaps.md
+    tags: [qa, validation]
+
+  licensing_governance:
+    status: verified
+    domains: [governance]
+    definition: License diligence for IgFold, AntiBERTa, and HMMER3 before competition use, with contingencies for restricted terms.
+    relates_to: [structure_lite_features, protein_language_models]
+    sources:
+      - research_plans/initial_plan/gaps_risks.md
+    tags: [licensing, compliance]
+
+  data_governance_protocol:
+    status: verified
+    domains: [governance]
+    definition: Handling rules forbidding mutation of benchmark CSVs and mandating escalation on anomalies.
+    relates_to: [orchestration_protocols, reproducibility_controls]
+    sources:
+      - competition_public/dataset/README.md
+      - AGENTS.md
+    tags: [governance, data]
+
+  orchestration_protocols:
+    status: verified
+    domains: [operations]
+    definition: AGENTS.md directives covering objective framing, routing, validation gates, and delta logging for agent coordination.
+    relates_to: [reproducibility_controls, qa_validations]
+    sources:
+      - AGENTS.md
+    tags: [operations, governance]
+
+  reproducibility_controls:
+    status: verified
+    domains: [operations]
+    definition: Requirements to log folds, seeds, configs, and parity checks so peers can replicate leaderboard submissions.
+    relates_to: [leaderboard_metrics, cross_validation_protocol]
+    sources:
+      - research_plans/initial_plan/plan.md
+      - AGENTS.md
+    tags: [reproducibility, logging]
+
+  heavy_light_coupling_features:
+    status: verified
+    domains: [bioinformatics]
+    definition: Cross-CDR motif correlation and alignment features quantifying H3–L3 co-motif interactions.
+    relates_to: [cdr_feature_engineering, markov_surprisal_features]
+    sources:
+      - research_plans/initial_plan/plan.md
+    tags: [features, coupling]
