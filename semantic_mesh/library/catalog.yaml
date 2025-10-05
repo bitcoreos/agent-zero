@@ -87,3 +87,59 @@ resources:
     path: semantic_mesh/concepts/markov_notes.md
     summary: Planned Markov/surprisal artefact staging notes
     tags: [semantic, markov]
+  - id: competition_target_alignment
+    path: semantic_mesh/concepts/competition_target_alignment.md
+    summary: Maps assays to mesh nodes, features, citations
+    tags: [semantic, assays]
+  - id: sequence_structural_features
+    path: semantic_mesh/concepts/sequence_structural_features.md
+    summary: Region-aware sequence and structure descriptors
+    tags: [semantic, features]
+  - id: feature_engineering_methods
+    path: semantic_mesh/concepts/feature_engineering_methods.md
+    summary: Statistical, physicochemical, and LM feature recipes
+    tags: [semantic, features]
+  - id: model_arch_training
+    path: semantic_mesh/concepts/model_architectures_training.md
+    summary: Training architectures, curriculum, deployment hooks
+    tags: [semantic, modeling]
+  - id: validation_evaluation_logic
+    path: semantic_mesh/concepts/validation_evaluation_logic.md
+    summary: Local parity checks and QA gating
+    tags: [semantic, validation]
+  - id: cross_validation_integrity
+    path: semantic_mesh/concepts/cross_validation_integrity.md
+    summary: Fold stewardship and leakage prevention rules
+    tags: [semantic, data]
+  - id: submission_schema_standards
+    path: semantic_mesh/concepts/submission_schema_standards.md
+    summary: CSV schema requirements and manifests
+    tags: [semantic, submissions]
+  - id: ensembling_postprocessing
+    path: semantic_mesh/concepts/ensembling_postprocessing.md
+    summary: Ensemble composition, calibration, packaging
+    tags: [semantic, modeling]
+  - id: statistical_information_features
+    path: semantic_mesh/concepts/statistical_information_features.md
+    summary: Markov, surprisal, entropy feature definitions
+    tags: [semantic, markov]
+  - id: drift_detection_quality
+    path: semantic_mesh/concepts/drift_detection_quality_assurance.md
+    summary: Drift metrics and QA workflows
+    tags: [semantic, validation]
+  - id: competency_query_framework
+    path: semantic_mesh/concepts/competency_query_framework.md
+    summary: Competency questions and query templates
+    tags: [semantic, ontology]
+  - id: references_provenance
+    path: semantic_mesh/concepts/references_provenance.md
+    summary: Citation governance and provenance rules
+    tags: [semantic, references]
+  - id: mesh_topics_schema
+    path: semantic_mesh/schemas/mesh_topics.yaml
+    summary: Topic-aligned category index for mesh nodes
+    tags: [semantic, schema]
+  - id: mesh_topic_guide
+    path: semantic_mesh/concepts/topic_categories.md
+    summary: Human-readable catalogue of mesh categories
+    tags: [semantic, index]

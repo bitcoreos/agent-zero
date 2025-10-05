@@ -12,8 +12,10 @@ directories:
 usage:
 	- agents load mesh nodes before executing plans outlined in `AGENTS.md`
 	- humans reference mesh files for aligned terminology and pipeline context; consult `library/catalog.yaml` to pull only relevant artefacts
+	- topic-aligned categories live in `schemas/mesh_topics.yaml`; combine with `concepts/competition_target_alignment.md` to reach property-specific guidance
 
 next steps (mesh_build backlog ref `init.md`):
 	- keep library catalog current as artefacts evolve
 	- materialize ontology exports (TTL/JSON-LD)
 	- deliver mesh validator + manifest hashes
+	- review competition target alignment after every modeling milestone; update citations + manifests accordingly
