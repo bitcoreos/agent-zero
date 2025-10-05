@@ -1,0 +1,62 @@
+version: 0.1.0
+updated_utc: 2025-10-04T00:15:00Z
+notes: lightweight vocabulary for semantic mesh bootstrapping; keep definitions <=120 chars
+terms:
+  antibody:
+    definition: "Immunoglobulin with paired VH/VL chains; therapeutic target of developability modeling"
+    sources:
+      - competition_public/GDPa1 Dataset Overview.md
+      - semantic_mesh/schemas/glossary.md
+    tags: [biology, structure]
+  vh_chain:
+    definition: "Variable heavy chain sequence; contributes to antigen binding"
+    sources:
+      - competition_public/How to Train an Antibody Developability Model.md
+    tags: [sequence, antibody]
+  vl_chain:
+    definition: "Variable light chain sequence paired with VH"
+    sources:
+      - competition_public/How to Train an Antibody Developability Model.md
+    tags: [sequence, antibody]
+  cdr3h:
+    definition: "Heavy-chain CDR3 loop; key specificity determinant"
+    sources:
+      - research_plans/initial_plan/plan.md
+    tags: [sequence, feature]
+  gdp_a1_dataset:
+    definition: "246-antibody public dataset with assays and folds"
+    sources:
+      - competition_public/GDPa1 Dataset Overview.md
+    tags: [dataset]
+  heldout_set:
+    definition: "80-antibody private test sequences for final evaluation"
+    sources:
+      - competition_public/dataset/README.md
+    tags: [dataset]
+  assays:
+    definition: "Target properties: HIC, PR_CHO, AC-SINS pH7.4, Tm2, Titer"
+    sources:
+      - competition_public/2025 AbDev Competition Overview.md
+    tags: [assay]
+  cross_validation_fold:
+    definition: "hierarchical_cluster_IgG_isotype_stratified_fold indicator"
+    sources:
+      - competition_public/GDPa1 Dataset Overview.md
+      - research_plans/initial_plan/plan.md
+    tags: [validation]
+  surprisal_curriculum:
+    definition: "Training schedule ordered by Markov surprisal tiers"
+    sources:
+      - research_plans/initial_plan/plan.md
+      - research_plans/initial_plan/gaps.md
+    tags: [modeling, curriculum]
+  pbt_features:
+    definition: "Pattern-based tests capturing sequence heuristics (Two-Pointer, Sliding Window, etc.)"
+    sources:
+      - research_plans/initial_plan/gaps.md
+    tags: [features, PBT]
+  mesh_validator:
+    definition: "Planned script to enforce mesh manifest completeness"
+    sources:
+      - init.md
+    tags: [governance]

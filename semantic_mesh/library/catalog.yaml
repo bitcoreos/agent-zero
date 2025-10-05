@@ -1,0 +1,89 @@
+version: 0.1.0
+updated_utc: 2025-10-04T01:25:00Z
+notes: curate only high-signal artefacts; summaries <= 10 words
+
+resources:
+  - id: competition_overview
+    path: competition_public/2025 AbDev Competition Overview.md
+    summary: Competition scope, prizes, participation steps
+    tags: [competition, overview]
+  - id: leaderboard_overview
+    path: competition_public/AbDev Leaderboard Overview.md
+    summary: Submission workflow and scoring behavior
+    tags: [competition, leaderboard]
+  - id: dataset_overview
+    path: competition_public/GDPa1 Dataset Overview.md
+    summary: GDPa1 schema, assays, production notes
+    tags: [dataset, assays]
+  - id: tutorial_reference
+    path: competition_public/How to Train an Antibody Developability Model.md
+    summary: Baseline embedding workflow and ridge results
+    tags: [tutorial, baseline]
+  - id: dataset_public_csv
+    path: competition_public/dataset/GDPa1_v1.2_sequences.csv
+    summary: Public assay table with folds
+    tags: [dataset, csv]
+  - id: dataset_heldout_csv
+    path: competition_public/dataset/heldout-set-sequences.csv
+    summary: Heldout sequences for final scoring
+    tags: [dataset, heldout]
+  - id: plan_primary
+    path: research_plans/initial_plan/plan.md
+    summary: End-to-end modeling roadmap
+    tags: [plan, modeling]
+  - id: plan_gaps
+    path: research_plans/initial_plan/gaps.md
+    summary: Feature gaps and Markov curriculum notes
+    tags: [plan, risks]
+  - id: plan_flow
+    path: research_plans/initial_plan/flow.md
+    summary: Pipeline flow diagram description
+    tags: [plan, workflow]
+  - id: assay_definitions
+    path: semantic_mesh/concepts/assay_definitions.md
+    summary: Competition assays with modeling notes
+    tags: [semantic, assays]
+  - id: competition_structure
+    path: semantic_mesh/concepts/competition_structure.md
+    summary: Tracks, deadlines, submission gating
+    tags: [semantic, competition]
+  - id: evaluation_metrics
+    path: semantic_mesh/concepts/evaluation_metrics.md
+    summary: Spearman and recall rules + schema checks
+    tags: [semantic, metrics]
+  - id: model_requirements
+    path: semantic_mesh/concepts/model_requirements.md
+    summary: Execution-plan model expectations
+    tags: [semantic, modeling]
+  - id: mesh_protocols
+    path: semantic_mesh/concepts/protocols.md
+    summary: End-to-end workflow + QA gates
+    tags: [semantic, workflow]
+  - id: mesh_core_concepts
+    path: semantic_mesh/concepts/core_concepts.yaml
+    summary: Verified concept lattice across domains
+    tags: [semantic, concepts]
+  - id: context_terms
+    path: semantic_mesh/concepts/context_terms.yaml
+    summary: Vocabulary map with definitions and sources
+    tags: [semantic, vocabulary]
+  - id: mesh_manifest
+    path: semantic_mesh/mesh_manifest.yaml
+    summary: Node and relation scaffold linking artefacts
+    tags: [semantic, manifest]
+  - id: mesh_bootstrap
+    path: semantic_mesh/mesh_bootstrap.md
+    summary: Declarative startup blueprint and namespace
+    tags: [semantic, blueprint]
+  - id: reference_ledger
+    path: semantic_mesh/REFERENCES.md
+    summary: Redundant citation list for mesh artefacts
+    tags: [references]
+  - id: concepts_index
+    path: semantic_mesh/concepts/README.md
+    summary: Guide to concept briefs and vocab assets
+    tags: [semantic, index]
+  - id: markov_notes
+    path: semantic_mesh/concepts/markov_notes.md
+    summary: Planned Markov/surprisal artefact staging notes
+    tags: [semantic, markov]

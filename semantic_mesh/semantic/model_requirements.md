@@ -141,3 +141,38 @@ python predict.py --model models/best_model.pkl --test data/test.csv --output pr
 - **Response Time**: Organizers will respond to questions within 3 business days
 - **Clarification Updates**: Important clarifications will be posted on the competition website
 - **Deadline Extensions**: Only granted for exceptional circumstances
+
+# Model Requirements (Execution Plan Extract)
+
+Sources: `research_plans/initial_plan/plan.md`, `research_plans/initial_plan/gaps.md`, `research_plans/initial_plan/gaps_risks.md`.
+
+## Inputs & Preprocessing
+- Work from `competition_public/dataset/GDPa1_v1.2_sequences.csv`; log file hashes for every run.
+- Operate on paired VH/VL protein sequences (single-letter alphabet). Run ANARCI numbering before deriving FR/CDR features.
+- Fit scalers, encoders, and feature stats within each training fold only. Reject sequences containing non-standard amino-acid tokens.
+- Preserve metadata columns (`antibody_name`, assays, `hierarchical_cluster_IgG_isotype_stratified_fold`) so CV joins remain lossless.
+
+## Feature Stack Expectations
+- **Sequence anatomy**: per-region lengths, composition, charge, hydropathy (maps to `context_terms.yaml`).
+- **Markov & surprisal**: region-aware n-gram log probabilities, entropy rates, forward/reverse averages (`gaps.md §5`).
+- **Pattern-based tests (PBT)**: deterministic heuristics (two-pointer, sliding window, trie hits, DP alignment) for redundancy and QA.
+- **Protein language models**: at least one embedding route (ESM-2, AntiBERTa, AbLang, BALM) feeding a shared multi-output head or ensemble.
+- **Structure-lite (optional)**: IgFold-derived loop summaries and contact counts when licensing clears (`gaps_risks.md`).
+
+## Training Protocol
+- Use 5-fold hierarchical IgG-stratified CV. Train on four folds, validate on the held-out fold, retain per-fold checkpoints and metrics.
+- Apply surprisal curriculum: begin with lowest-surprisal tiers and progressively unlock high-surprisal sequences.
+- Weight losses and calibration steps by entropy where Markov features contribute; shrink high-uncertainty predictions toward fold means before export if QA flags trigger.
+- Capture deterministic seeds (`random`, `numpy`, `torch`, etc.) alongside run identifiers and configuration hashes.
+
+## Output & Submission
+- Emit predictions for any subset of `{AC-SINS_pH7.4, PR_CHO, HIC, Tm2, Titer}` with `antibody_name` as the join key.
+- CV submissions must add the canonical `hierarchical_cluster_IgG_isotype_stratified_fold`; heldout submissions omit it.
+- Refuse to write rows containing NaN/Inf. Persist submission CSV hash plus per-property Spearman/recall in experiment notes.
+- Store ancillary artefacts (feature manifests, model weights) with links back to mesh nodes in `mesh_manifest.yaml`.
+
+## Governance & Reproducibility Hooks
+- Maintain environment manifests (`requirements.txt`, Conda env, or Docker digest) per run and track GPU/CPU resources consumed.
+- Verify licensing for external assets (IgFold, AntiBERTa, HMMER3) before integration; document decisions in `gaps_risks.md`.
+- Run QA suite before submission: amino-acid alphabet check, surprisal distribution drift (KL), duplicate/chain swap detection, entropy-gated warnings (`protocols.md`).
+- Follow `AGENTS.md` validation gates—diff hygiene, rollback plan, evidence logs—before merging modeling changes into main.
