@@ -16,7 +16,7 @@ core_context:
   - competition_public/2025 AbDev Competition Overview.md
   - semantic_mesh/README.md
   - semantic_mesh/semantic/README.md
-  - semantic_mesh/ontological/README.md
+  - ontology_schema/README.md
 
 resource_snapshot:
   workspace: /workspaces/agent-zero
@@ -72,16 +72,14 @@ competition_brief:
 
 todo_stack:
   mesh_build:
-    - [TODO] extend semantic_mesh/library catalog as artefacts mature
-    - [TODO] generate ontology JSON/Turtle artefacts from prompts
-    - [TODO] implement mesh validator script (scripts/validate_semantic_mesh.py)
-    - [TODO] expand mesh_bootstrap.md into mesh_manifest.yaml with hashes + owners
+    - [ONGOING] extend semantic_mesh/library catalog as artefacts mature
+    - [DONE] publish read-only ontology exports (JSON-LD + Turtle) via `ontology_schema/generate_ontology.py`
+    - [DONE] expand mesh_bootstrap.md into mesh_manifest.yaml with hashes + owners
+    - [DONE] ship navigation index + query guide for semantic_mesh
   data_ops:
-    - [TODO] add GDPa1 data manifest (data/MANIFEST.yaml + checksums referencing competition_public/dataset)
-    - [TODO] align fold metadata with mesh references for deterministic queries
+    - [TODO] document read-only GDPa1 access pathways within mesh indices
   ci_enablement:
     - [TODO] stand up semantic_mesh CI workflow (supersedes removed templates)
-    - [TODO] wire validator into GitHub Actions post-implementation
 
 clarifications_needed (route to PI / research directors):
   - confirm canonical location + schema for data manifest (data/MANIFEST.yaml?)

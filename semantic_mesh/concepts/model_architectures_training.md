@@ -29,3 +29,8 @@ sources: `research_plans/initial_plan/plan.md`, `research_plans/initial_plan/flo
 ## Open Items
 - Prototype lightweight diffusion or protein-GNN heads (tracked in `research_plans/initial_plan/gaps.md`).
 - Integrate structural adapters once IgFold licensing is resolved.
+
+## Related Mesh Topics
+- `semantic_mesh/concepts/ai_finetuning_pipeline.md`
+- `semantic_mesh/concepts/ensembling_postprocessing.md`
+- `semantic_mesh/concepts/validation_evaluation_logic.md`

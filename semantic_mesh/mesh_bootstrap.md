@@ -82,8 +82,6 @@ nodes:
       - path: competition_public/dataset/GDPa1_v1.2_sequences.csv
       - path: competition_public/dataset/README.md
       - path: competition_public/dataset/heldout-set-sequences.csv
-    required_manifests:
-      - data/MANIFEST.yaml (pending)
   - id: modeling_playbook
     level: applied
     summary: "Feature and model architecture to produce leaderboard submissions"
@@ -100,11 +98,10 @@ nodes:
 ```
 
 ## Pre-Execution Action Stack
-1. **Index expansion**: propagate `mesh_manifest.yaml` (to-be-created) referencing nodes above with hashes + owners.
-2. **Data manifest**: generate `data/MANIFEST.yaml` covering `competition_public/dataset/*` with SHA256 + license notes.
-3. **Ontology materialization**: produce Turtle/JSON-LD expansions for nodes (`mesh:AntibodyFundamentals`, `mesh:ModelingStrategy`).
-4. **Validator sketch**: design CLI contract for `scripts/validate_semantic_mesh.py` (inputs, expected checks, failure codes).
-5. **Mesh query API stub**: define minimal JSON interface (e.g., `/mesh/query?node=antibody_fundamentals`).
+1. **Index expansion**: propagate `mesh_manifest.yaml` referencing nodes above with hashes + owners.
+2. **Ontology materialization**: ✅ maintained via `ontology_schema/generate_ontology.py` writing Turtle/JSON-LD exports under `ontology_schema/`.
+3. **Navigation surfacing**: publish read-only navigation index + query guide for the mesh.
+4. **Mesh integrity checklist**: keep provenance hashes + owners current inside `mesh_manifest.yaml`.
 
 ## Clarification Hooks
 - confirm canonical namespace (`https://agent-zero.ai/mesh#`) or supply alternative before minting IDs
@@ -112,8 +109,8 @@ nodes:
 - confirm whether competition_public artefacts should be clipped/summarized before ingestion to reduce token budgets
 
 ## Ready Signals
-- agent should not mutate resources until data manifest + validator spec agreed
-- once validator + manifests exist, integrate into CI as per `init.md` todo_stack
+- agent should not mutate resources; mesh remains read-only with provenance tracked via hashes
+- once navigation + ontology exports land, integrate references into CI per `init.md` todo_stack
 
 ```note
 Declarative only: no external installations, no directives—just schema stubs so agents can reason over antibodies, assays, datasets, and our modeling plan.

@@ -1,5 +1,5 @@
-version: 0.1.0
-updated_utc: 2025-10-04T01:25:00Z
+version: 0.2.0
+updated_utc: 2025-10-07T00:00:00Z
 notes: curate only high-signal artefacts; summaries <= 10 words
 
 resources:
@@ -7,50 +7,98 @@ resources:
     path: competition_public/2025 AbDev Competition Overview.md
     summary: Competition scope, prizes, participation steps
     tags: [competition, overview]
+    related_to: [leaderboard_overview, competition_structure]
+    answers_queries:
+      - "What are the official rules and deadlines?"
+      - "How do teams register for the competition?"
   - id: leaderboard_overview
     path: competition_public/AbDev Leaderboard Overview.md
     summary: Submission workflow and scoring behavior
     tags: [competition, leaderboard]
+    related_to: [competition_overview, submission_schema_standards]
+    answers_queries:
+      - "What steps are required to upload predictions?"
+      - "When are interim and final scoring runs?"
   - id: dataset_overview
     path: competition_public/GDPa1 Dataset Overview.md
     summary: GDPa1 schema, assays, production notes
     tags: [dataset, assays]
+    related_to: [bioinformatics_pipeline, biophysics_interpretation]
+    answers_queries:
+      - "Which assays and metadata columns does GDPa1 expose?"
+      - "How were antibodies produced and folded?"
   - id: tutorial_reference
     path: competition_public/How to Train an Antibody Developability Model.md
     summary: Baseline embedding workflow and ridge results
     tags: [tutorial, baseline]
+    related_to: [ai_finetuning_pipeline, feature_engineering_methods]
+    answers_queries:
+      - "How do we embed VH/VL sequences with p-IgGen?"
+      - "What baseline performance can we expect?"
   - id: dataset_public_csv
     path: competition_public/dataset/GDPa1_v1.2_sequences.csv
     summary: Public assay table with folds
     tags: [dataset, csv]
+    related_to: [dataset_overview, cross_validation_integrity]
+    answers_queries:
+      - "Where can I obtain the public GDPa1 measurements?"
+      - "Which fold assignments accompany the training data?"
   - id: dataset_heldout_csv
     path: competition_public/dataset/heldout-set-sequences.csv
     summary: Heldout sequences for final scoring
     tags: [dataset, heldout]
+    related_to: [submission_automation, dataset_access_controls]
+    answers_queries:
+      - "Where are the private test sequences stored?"
+      - "What file feeds the final leaderboard predictions?"
   - id: plan_primary
     path: research_plans/initial_plan/plan.md
     summary: End-to-end modeling roadmap
     tags: [plan, modeling]
+    related_to: [plan_gaps, model_arch_training]
+    answers_queries:
+      - "What is the overarching modeling plan?"
+      - "Which milestones drive the agent roadmap?"
   - id: plan_gaps
     path: research_plans/initial_plan/gaps.md
     summary: Feature gaps and Markov curriculum notes
     tags: [plan, risks]
+    related_to: [plan_primary, markov_notes]
+    answers_queries:
+      - "Which features are still pending implementation?"
+      - "What risks accompany the current plan?"
   - id: plan_flow
     path: research_plans/initial_plan/flow.md
     summary: Pipeline flow diagram description
     tags: [plan, workflow]
+    related_to: [plan_primary, mesh_protocols]
+    answers_queries:
+      - "How do pipeline stages connect end-to-end?"
+      - "Which tasks precede modeling?"
   - id: assay_definitions
     path: semantic_mesh/concepts/assay_definitions.md
     summary: Competition assays with modeling notes
     tags: [semantic, assays]
+    related_to: [biophysics_interpretation, evaluation_metrics]
+    answers_queries:
+      - "What does each leaderboard assay measure?"
+      - "Why do HIC and PR_CHO favor lower predictions?"
   - id: competition_structure
     path: semantic_mesh/concepts/competition_structure.md
     summary: Tracks, deadlines, submission gating
     tags: [semantic, competition]
+    related_to: [competition_overview, submission_schema_standards]
+    answers_queries:
+      - "Which submission tracks exist and what are their inputs?"
+      - "When do we submit cross-validation vs. heldout files?"
   - id: evaluation_metrics
     path: semantic_mesh/concepts/evaluation_metrics.md
     summary: Spearman and recall rules + schema checks
     tags: [semantic, metrics]
+    related_to: [validation_evaluation_logic, submission_schema_standards]
+    answers_queries:
+      - "How are leaderboard metrics computed?"
+      - "Which columns are required for CV scoring?"
   - id: model_requirements
     path: semantic_mesh/concepts/model_requirements.md
     summary: Execution-plan model expectations
@@ -59,26 +107,90 @@ resources:
     path: semantic_mesh/concepts/protocols.md
     summary: End-to-end workflow + QA gates
     tags: [semantic, workflow]
+    related_to: [plan_flow, validation_evaluation_logic]
+    answers_queries:
+      - "What sequence of steps do agents follow?"
+      - "Which QA checks execute before submission?"
   - id: mesh_core_concepts
     path: semantic_mesh/concepts/core_concepts.yaml
     summary: Verified concept lattice across domains
     tags: [semantic, concepts]
+    related_to: [context_terms, semantic_mesh_concepts]
+    answers_queries:
+      - "Which top-level concepts anchor the mesh?"
+      - "How do concept IDs map to artefacts?"
+  - id: semantic_mesh_concepts
+    path: semantic_mesh/concepts/semantic_mesh_concepts.md
+    summary: Concept mesh with relationships and citations
+    tags: [semantic, concepts]
+    related_to: [mesh_core_concepts, feature_engineering_methods]
+    answers_queries:
+      - "How do modeling concepts interrelate?"
+      - "Where can I find concept-level citations?"
   - id: context_terms
     path: semantic_mesh/concepts/context_terms.yaml
     summary: Vocabulary map with definitions and sources
     tags: [semantic, vocabulary]
+    related_to: [core_concepts, bioinformatics_pipeline]
+    answers_queries:
+      - "What controlled vocab terms describe assays and assets?"
+      - "Which sources back each definition?"
   - id: mesh_manifest
     path: semantic_mesh/mesh_manifest.yaml
     summary: Node and relation scaffold linking artefacts
     tags: [semantic, manifest]
+    related_to: [mesh_topics_schema, mesh_index, mesh_ontology_ttl, mesh_ontology_jsonld]
+    answers_queries:
+      - "Which artefacts belong to each mesh node?"
+      - "Who owns a given node and what is its hash?"
+  - id: mesh_index
+    path: semantic_mesh/INDEX.md
+    summary: Primary navigation for read-only mesh
+    tags: [semantic, index]
+    related_to: [mesh_manifest, mesh_query_guide]
+    answers_queries:
+      - "Where do I start in the semantic mesh?"
+      - "Which files cover each semantic category?"
+  - id: mesh_query_guide
+    path: semantic_mesh/QUERY_GUIDE.md
+    summary: Maps questions to mesh resources
+    tags: [semantic, index]
+    related_to: [mesh_index, mesh_topics_schema]
+    answers_queries:
+      - "Which file answers a specific competition question?"
+      - "How do I find dataset or governance guidance?"
   - id: mesh_bootstrap
     path: semantic_mesh/mesh_bootstrap.md
     summary: Declarative startup blueprint and namespace
     tags: [semantic, blueprint]
+  - id: mesh_ontology_ttl
+    path: ontology_schema/mesh_ontology.ttl
+    summary: Turtle serialization of mesh ontology terms
+    tags: [semantic, ontology]
+    related_to: [mesh_manifest, mesh_ontology_jsonld]
+    answers_queries:
+      - "What URNs correspond to each mesh node?"
+      - "Which relations link nodes in RDF form?"
+  - id: mesh_ontology_jsonld
+    path: ontology_schema/mesh_ontology.jsonld
+    summary: JSON-LD export of mesh ontology graph
+    tags: [semantic, ontology]
+    related_to: [mesh_manifest, mesh_ontology_ttl]
+    answers_queries:
+      - "Where is the JSON-LD vocabulary for the mesh?"
+      - "How can agents load mesh terms as linked data?"
   - id: reference_ledger
     path: semantic_mesh/REFERENCES.md
     summary: Redundant citation list for mesh artefacts
     tags: [references]
+  - id: agents_protocol
+    path: AGENTS.md
+    summary: Operating protocol and governance gates
+    tags: [governance, playbook]
+    related_to: [dataset_access_controls, validation_evaluation_logic]
+    answers_queries:
+      - "What governance steps must agents follow?"
+      - "Who approves mesh and submission changes?"
   - id: concepts_index
     path: semantic_mesh/concepts/README.md
     summary: Guide to concept briefs and vocab assets
@@ -91,42 +203,126 @@ resources:
     path: semantic_mesh/concepts/competition_target_alignment.md
     summary: Maps assays to mesh nodes, features, citations
     tags: [semantic, assays]
+  - id: bioinformatics_pipeline
+    path: semantic_mesh/concepts/bioinformatics_pipeline.md
+    summary: Auth, QC, numbering, structure linkage roadmap
+    tags: [semantic, data]
+    related_to: [dataset_access_controls, cross_validation_integrity]
+    answers_queries:
+      - "How do we sanitize GDPa1 sequences without mutation?"
+      - "Which alignment tools keep VH/VL numbering consistent?"
+  - id: biophysics_interpretation
+    path: semantic_mesh/concepts/biophysics_interpretation.md
+    summary: Biophysical rationale for GDPa1 assay signals
+    tags: [semantic, biophysics]
+    related_to: [assay_definitions, sequence_structural_features]
+    answers_queries:
+      - "Why do hydrophobicity and self-association matter?"
+      - "How do production methods influence assays?"
+  - id: isotype_systematics
+    path: semantic_mesh/concepts/isotype_systematics.md
+    summary: Subclass effects and encoding guidance for assays
+    tags: [semantic, modeling]
+    related_to: [ai_finetuning_pipeline, cross_validation_integrity]
+    answers_queries:
+      - "How should IgG subclasses enter models?"
+      - "What diagnostics catch subclass leakage?"
+  - id: ai_finetuning_pipeline
+    path: semantic_mesh/concepts/ai_finetuning_pipeline.md
+    summary: Embedding and fine-tuning workflow with reproducibility
+    tags: [semantic, modeling]
+    related_to: [feature_engineering_methods, model_arch_training]
+    answers_queries:
+      - "What steps run when fine-tuning p-IgGen embeddings?"
+      - "How do we package reproducible fine-tuning artefacts?"
+  - id: submission_automation
+    path: semantic_mesh/concepts/submission_automation.md
+    summary: Automated packaging and validation for leaderboard submissions
+    tags: [semantic, submissions]
+    related_to: [submission_schema_standards, validation_evaluation_logic]
+    answers_queries:
+      - "How do we protect the submission secret code?"
+      - "What files compose the submission bundle?"
+  - id: dataset_access_controls
+    path: semantic_mesh/concepts/dataset_access_controls.md
+    summary: License read-only audit controls for GDPa1
+    tags: [semantic, governance]
+    related_to: [bioinformatics_pipeline, agents_protocol]
+    answers_queries:
+      - "What authentication steps precede dataset access?"
+      - "How do we log hashes and incidents?"
   - id: sequence_structural_features
     path: semantic_mesh/concepts/sequence_structural_features.md
     summary: Region-aware sequence and structure descriptors
     tags: [semantic, features]
+    related_to: [feature_engineering_methods, biophysics_interpretation]
+    answers_queries:
+      - "Which sequence descriptors support HIC modeling?"
+      - "How do we summarise VH/VL structures without full 3D?"
   - id: feature_engineering_methods
     path: semantic_mesh/concepts/feature_engineering_methods.md
     summary: Statistical, physicochemical, and LM feature recipes
     tags: [semantic, features]
+    related_to: [sequence_structural_features, statistical_information_features]
+    answers_queries:
+      - "What feature stacks feed downstream models?"
+      - "Which registries track feature provenance?"
   - id: model_arch_training
     path: semantic_mesh/concepts/model_architectures_training.md
     summary: Training architectures, curriculum, deployment hooks
     tags: [semantic, modeling]
+    related_to: [ai_finetuning_pipeline, ensembling_postprocessing]
+    answers_queries:
+      - "Which model families are in play?"
+      - "How do curriculum and checkpointing operate?"
   - id: validation_evaluation_logic
     path: semantic_mesh/concepts/validation_evaluation_logic.md
     summary: Local parity checks and QA gating
     tags: [semantic, validation]
+    related_to: [evaluation_metrics, submission_automation]
+    answers_queries:
+      - "How do we mirror leaderboard metrics locally?"
+      - "What validation gates block packaging?"
   - id: cross_validation_integrity
     path: semantic_mesh/concepts/cross_validation_integrity.md
     summary: Fold stewardship and leakage prevention rules
     tags: [semantic, data]
+    related_to: [dataset_overview, bioinformatics_pipeline]
+    answers_queries:
+      - "How are folds kept stratified and leak-free?"
+      - "What audits detect duplicate sequences?"
   - id: submission_schema_standards
     path: semantic_mesh/concepts/submission_schema_standards.md
     summary: CSV schema requirements and manifests
     tags: [semantic, submissions]
+    related_to: [submission_automation, leaderboard_overview]
+    answers_queries:
+      - "Which columns must appear in CV submissions?"
+      - "What metadata accompanies each upload?"
   - id: ensembling_postprocessing
     path: semantic_mesh/concepts/ensembling_postprocessing.md
     summary: Ensemble composition, calibration, packaging
     tags: [semantic, modeling]
+    related_to: [model_arch_training, ai_finetuning_pipeline]
+    answers_queries:
+      - "Which models feed the ensemble governor?"
+      - "How are calibration constants tracked?"
   - id: statistical_information_features
     path: semantic_mesh/concepts/statistical_information_features.md
     summary: Markov, surprisal, entropy feature definitions
     tags: [semantic, markov]
+    related_to: [markov_notes, feature_engineering_methods]
+    answers_queries:
+      - "How do we compute surprisal and entropy features?"
+      - "Where are smoothing parameters documented?"
   - id: drift_detection_quality
     path: semantic_mesh/concepts/drift_detection_quality_assurance.md
     summary: Drift metrics and QA workflows
     tags: [semantic, validation]
+    related_to: [validation_evaluation_logic, submission_automation]
+    answers_queries:
+      - "How do we detect drift before submission?"
+      - "What evidence do reviewers expect in drift reports?"
   - id: competency_query_framework
     path: semantic_mesh/concepts/competency_query_framework.md
     summary: Competency questions and query templates

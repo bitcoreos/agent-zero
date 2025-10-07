@@ -60,3 +60,8 @@ recall = [recall_at_k(pred[col], truth[col], k=0.1) for col in submitted_cols]
 - Include Spearman + recall per property in experiment logs (see `protocols.md`).
 - Annotate whether submission targeted GDPa1 public, CV, or heldout track.
 - Record GDPa1 CSV hash and commit SHA for each submission to guarantee reproducibility.
+
+## Related Mesh Topics
+- `semantic_mesh/concepts/validation_evaluation_logic.md`
+- `semantic_mesh/concepts/submission_schema_standards.md`
+- `semantic_mesh/concepts/assay_definitions.md`

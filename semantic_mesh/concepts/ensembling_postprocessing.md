@@ -25,3 +25,8 @@ sources: `research_plans/initial_plan/plan.md`, `semantic_mesh/concepts/semantic
 ## Maintenance
 - Update ensemble roster after each major model addition/removal.
 - Document calibration drifts and mitigation steps in `reports/calibration/`.
+
+## Related Mesh Topics
+- `semantic_mesh/concepts/model_architectures_training.md`
+- `semantic_mesh/concepts/validation_evaluation_logic.md`
+- `semantic_mesh/concepts/ai_finetuning_pipeline.md`

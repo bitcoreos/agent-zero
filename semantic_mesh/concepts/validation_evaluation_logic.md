@@ -21,3 +21,8 @@ sources: `semantic_mesh/concepts/evaluation_metrics.md`, `semantic_mesh/concepts
 ## Governance Hooks
 - Validation must pass before packaging submission artifacts.
 - Attach validation report to PRs touching modeling code; reference `AGENTS.md` QA gate checklist.
+
+## Related Mesh Topics
+- `semantic_mesh/concepts/evaluation_metrics.md`
+- `semantic_mesh/concepts/submission_automation.md`
+- `semantic_mesh/concepts/drift_detection_quality_assurance.md`

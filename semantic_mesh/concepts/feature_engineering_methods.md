@@ -47,3 +47,8 @@ Store metadata in `features/registry.yaml` (pending automation) with fields:
 ## Maintenance Hooks
 - Attach Git commit SHA and dataset hash to each derived feature batch.
 - Update this document whenever a new feature enters production; append citation IDs to `semantic_mesh/REFERENCES.md`.
+
+## Related Mesh Topics
+- `semantic_mesh/concepts/sequence_structural_features.md`
+- `semantic_mesh/concepts/ai_finetuning_pipeline.md`
+- `semantic_mesh/concepts/statistical_information_features.md`

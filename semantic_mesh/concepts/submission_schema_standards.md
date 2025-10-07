@@ -25,3 +25,8 @@ sources: `competition_public/AbDev Leaderboard Overview.md`, `semantic_mesh/conc
 ## Change Management
 - Document schema changes in PR description and update `mesh_topics.yaml`.
 - Notify governance lead before altering submission column logic.
+
+## Related Mesh Topics
+- `semantic_mesh/concepts/submission_automation.md`
+- `semantic_mesh/concepts/validation_evaluation_logic.md`
+- `competition_public/AbDev Leaderboard Overview.md`

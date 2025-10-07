@@ -1,6 +1,6 @@
 # Topic-Aligned Category Guide
 
-updated_utc: 2025-10-05T13:22:00Z  
+updated_utc: 2025-10-07T00:00:00Z  
 sources: `semantic_mesh/schemas/mesh_topics.yaml`, `semantic_mesh/mesh_manifest.yaml`
 
 Each category corresponds to a mesh node family and is indexed in `schemas/mesh_topics.yaml` for machine access. Use this guide for human-readable summaries.
@@ -19,6 +19,12 @@ Each category corresponds to a mesh node family and is indexed in `schemas/mesh_
 | Drift Detection and Quality Assurance | `drift_detection_quality` | Monitoring metrics, QA gates, alert workflow. | `concepts/drift_detection_quality_assurance.md`, `concepts/protocols.md` |
 | Competency and Query Framework | `competency_query_framework` | Competency questions, ontology bindings, query templates. | `concepts/competency_query_framework.md`, `schemas/glossary.md` |
 | References and Provenance Sources | `references_provenance_sources` | Citation ledger and provenance governance. | `concepts/references_provenance.md`, `REFERENCES.md`, `library/catalog.yaml` |
+| Bioinformatics Data Pipeline | `bioinformatics_pipeline` | Authentication, QC, numbering, and structure linkage. | `concepts/bioinformatics_pipeline.md`, `competition_public/GDPa1 Dataset Overview.md` |
+| Biophysics Interpretation | `biophysics_interpretation` | Hydrophobicity, self-association, thermostability, yield rationale. | `concepts/biophysics_interpretation.md`, `competition_public/GDPa1 Dataset Overview.md` |
+| IgG Isotype Systematics | `isotype_systematics` | Subclass-aware modeling guidance and diagnostics. | `concepts/isotype_systematics.md`, `competition_public/How to Train an Antibody Developability Model.md` |
+| AI Fine-Tuning Pipeline | `ai_finetuning_pipeline` | Embedding generation and fine-tuning reproducibility. | `concepts/ai_finetuning_pipeline.md`, `research_plans/initial_plan/plan.md` |
+| Submission Automation | `submission_automation` | Credential handling, schema validation, packaging steps. | `concepts/submission_automation.md`, `competition_public/AbDev Leaderboard Overview.md` |
+| Dataset Access Controls | `dataset_access_controls` | License, read-only enforcement, audit logging. | `concepts/dataset_access_controls.md`, `competition_public/GDPa1 Dataset Overview.md` |
 
 ## Maintenance Checklist
 - Validate that every category links to live artifacts after each sprint.
