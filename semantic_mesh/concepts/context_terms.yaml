@@ -60,3 +60,34 @@ terms:
     sources:
       - init.md
     tags: [governance]
+  aho_numbering:
+    definition: "Antibody numbering scheme aligning VH/VL residues to AHO indices"
+    sources:
+      - competition_public/GDPa1 Dataset Overview.md
+    tags: [sequence, alignment]
+  abodybuilder3_structure:
+    definition: "Predicted antibody structure released with GDPa1 2025-07-03 update"
+    sources:
+      - competition_public/GDPa1 Dataset Overview.md
+    tags: [structure, dataset]
+  huggingface_token:
+    definition: "Scoped credential used to authenticate for GDPa1 access"
+    sources:
+      - competition_public/GDPa1 Dataset Overview.md
+      - semantic_mesh/concepts/dataset_access_controls.md
+    tags: [access, governance]
+  submission_secret_code:
+    definition: "Unique code issued after registration enabling leaderboard uploads"
+    sources:
+      - competition_public/AbDev Leaderboard Overview.md
+    tags: [submission, access]
+  valita_titer:
+    definition: "Expression yield assay measuring mg/L output in GDPa1"
+    sources:
+      - competition_public/GDPa1 Dataset Overview.md
+    tags: [assay, production]
+  nano_dsf:
+    definition: "nanoDSF thermal unfolding assay providing Tonset/Tm metrics"
+    sources:
+      - competition_public/GDPa1 Dataset Overview.md
+    tags: [assay, thermostability]

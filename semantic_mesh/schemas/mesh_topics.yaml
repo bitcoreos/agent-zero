@@ -146,3 +146,75 @@ categories:
     example_queries:
       - "Which sources justify hydropathy features?"
       - "Where is the GDPa1 CSV hash documented?"
+
+  - id: bioinformatics_pipeline
+    title: Bioinformatics Data Pipeline
+    description: Authentication, QC, numbering, and structure linkage for GDPa1 assets.
+    related_nodes: [bioinformatics_pipeline, dataset_assets, cross_validation_integrity]
+    core_artifacts:
+      - semantic_mesh/concepts/bioinformatics_pipeline.md
+      - competition_public/GDPa1 Dataset Overview.md
+      - competition_public/dataset/README.md
+    example_queries:
+      - "How do we audit GDPa1 CSV integrity?"
+      - "Which tools maintain VH/VL numbering fidelity?"
+
+  - id: biophysics_interpretation
+    title: Biophysics Interpretation
+    description: Assay-level biophysical rationale covering hydrophobicity, self-association, thermostability, and yield.
+    related_nodes: [biophysics_interpretation, assays, sequence_structural_features]
+    core_artifacts:
+      - semantic_mesh/concepts/biophysics_interpretation.md
+      - competition_public/GDPa1 Dataset Overview.md
+      - competition_public/2025 AbDev Competition Overview.md
+    example_queries:
+      - "Explain what AC-SINS reports for GDPa1 antibodies."
+      - "Which production notes affect Valita titer interpretation?"
+
+  - id: isotype_systematics
+    title: IgG Isotype Systematics
+    description: Subclass-aware modeling directives, diagnostics, and stratified validation guards.
+    related_nodes: [isotype_systematics, modeling_features, sequence_structural_features]
+    core_artifacts:
+      - semantic_mesh/concepts/isotype_systematics.md
+      - competition_public/GDPa1 Dataset Overview.md
+      - competition_public/How to Train an Antibody Developability Model.md
+    example_queries:
+      - "How should Tm2 be adjusted for IgG subclasses?"
+      - "What fold protocol preserves subclass balance?"
+
+  - id: ai_finetuning_pipeline
+    title: AI Fine-Tuning Pipeline
+    description: Embedding generation, fine-tuning loops, and reproducibility contracts.
+    related_nodes: [ai_finetuning_pipeline, model_arch_training, modeling_features]
+    core_artifacts:
+      - semantic_mesh/concepts/ai_finetuning_pipeline.md
+      - competition_public/How to Train an Antibody Developability Model.md
+      - research_plans/initial_plan/plan.md
+    example_queries:
+      - "What batch size keeps embedding runs reproducible?"
+      - "Where are fine-tuning configs stored for reruns?"
+
+  - id: submission_automation
+    title: Submission Automation
+    description: Credential handling, schema validation, and packaging steps for leaderboard uploads.
+    related_nodes: [submission_automation, submission_schema_standards, validation_evaluation_logic]
+    core_artifacts:
+      - semantic_mesh/concepts/submission_automation.md
+      - semantic_mesh/concepts/submission_schema_standards.md
+      - competition_public/AbDev Leaderboard Overview.md
+    example_queries:
+      - "How do we protect the Hugging Face submission code?"
+      - "Which files form the CV submission bundle?"
+
+  - id: dataset_access_controls
+    title: Dataset Access Controls
+    description: License acceptance, read-only enforcement, and audit logging for GDPa1 assets.
+    related_nodes: [dataset_access_controls, governance, cross_validation_integrity]
+    core_artifacts:
+      - semantic_mesh/concepts/dataset_access_controls.md
+      - competition_public/GDPa1 Dataset Overview.md
+      - AGENTS.md
+    example_queries:
+      - "What hash manifest is required before training?"
+      - "How often are Hugging Face tokens rotated?"

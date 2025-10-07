@@ -25,3 +25,8 @@ sources: `semantic_mesh/concepts/protocols.md`, `research_plans/initial_plan/gap
 ## Continuous Improvement
 - Review drift metrics at sprint retrospectives.
 - Update thresholds based on historical analysis and leaderboard feedback.
+
+## Related Mesh Topics
+- `semantic_mesh/concepts/validation_evaluation_logic.md`
+- `semantic_mesh/concepts/submission_automation.md`
+- `semantic_mesh/concepts/dataset_access_controls.md`

@@ -26,3 +26,8 @@ Source of record: `competition_public/GDPa1 Dataset Overview.md` (PROPHET-Ab pla
 - **What it measures**: Valita titer output (mg/L) from HEK293F expression.
 - **Why it matters**: Serves as a production proxy; higher yields reduce cost of goods.
 - **Notes for modeling**: Watch for distributional skew; curriculum may need surprisal-aware weighting.
+
+## Related Mesh Topics
+- `semantic_mesh/concepts/biophysics_interpretation.md`
+- `semantic_mesh/concepts/evaluation_metrics.md`
+- `semantic_mesh/concepts/competition_structure.md`

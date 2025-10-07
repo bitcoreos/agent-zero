@@ -16,10 +16,12 @@ sources: `competition_public/GDPa1 Dataset Overview.md`, `semantic_mesh/concepts
 | VH/VL interface | Predicted hydrogen bonds (IgFold-lite) | Input to thermostability models | [Chennamsetty et al. 2009](./competition_target_alignment.md#references) |
 | Whole chain | N-linked glycosylation motif count (`NXS/T`) | Impacts titer and manufacturability | [How to Train AbDev Baseline](./competition_target_alignment.md#references) |
 
+
+## Related Mesh Topics
+- `semantic_mesh/concepts/bioinformatics_pipeline.md`
+- `semantic_mesh/concepts/isotype_systematics.md`
+- `semantic_mesh/concepts/biophysics_interpretation.md`
 ## Structure-Lite Hooks
-- **IgFold Loop Snapshots**: Store RMSD, predicted TM-score, and contact counts per loop. Include provenance hash for each inference artifact.
-- **ESMFold Confidence** (optional): Retain pLDDT and predicted aligned error if we integrate the API; mark licensing approvals in `gaps_risks.md`.
-- **Contact Graphs**: Summarize heavy/light residue contacts (within 4.5Å) as counts and normalized densities.
 
 ## Export Schema (YAML stub)
 ```yaml

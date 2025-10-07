@@ -31,3 +31,8 @@ Sources: `competition_public/2025 AbDev Competition Overview.md`, `competition_p
 - Reference `mesh_manifest.yaml` to keep track-to-artifact mapping explicit.
 - Log every submission in run records with hash of GDPa1 CSV used.
 - Keep surprise-checks (KL on surprisal distributions, QA flags) wired before upload as described in `protocols.md`.
+
+## Related Mesh Topics
+- `semantic_mesh/concepts/assay_definitions.md`
+- `semantic_mesh/concepts/validation_evaluation_logic.md`
+- `semantic_mesh/concepts/submission_schema_standards.md`

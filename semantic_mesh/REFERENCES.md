@@ -16,6 +16,7 @@ scope: redundant citation list supporting semantic + ontological mesh artifacts
 - Agent Zero Team. "Gaps." research_plans/initial_plan/gaps.md.
 - Agent Zero Team. "Gaps, Risks, and Additional Considerations." research_plans/initial_plan/gaps_risks.md.
 - Agent Zero Team. "Flow Diagram." research_plans/initial_plan/flow.md.
+- Agent Zero Team. "AGENTS Operating Protocol." AGENTS.md.
 
 ## Semantic/Ontological Assets
 - Agent Zero Team. "Antibody Glossary." semantic_mesh/schemas/glossary.md.

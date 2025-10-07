@@ -35,3 +35,8 @@ Aligned with `research_plans/initial_plan/plan.md`, `flow.md`, and `gaps.md`.
 - Enforce `AGENTS.md` validation gates: diff hygiene, rollback plan, reproducibility, evidence logs.
 - Track external artefact licenses (IgFold, HMMER3, AntiBERTa) and document approvals.
 - Update `mesh_manifest.yaml` and `library/catalog.yaml` when new artefacts reach “ready” state.
+
+## Related Mesh Topics
+- `semantic_mesh/concepts/bioinformatics_pipeline.md`
+- `semantic_mesh/concepts/validation_evaluation_logic.md`
+- `semantic_mesh/concepts/submission_automation.md`

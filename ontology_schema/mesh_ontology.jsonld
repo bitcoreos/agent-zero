@@ -1,0 +1,1367 @@
+{
+  "@context": {
+    "meshnode": "urn:mesh:node/",
+    "meshowner": "urn:mesh:owner/",
+    "meshart": "urn:mesh:artifact/",
+    "meshprop": "urn:mesh:prop/",
+    "meshrel": "urn:mesh:relation/",
+    "MeshNode": "urn:mesh:class/MeshNode",
+    "MeshArtifact": "urn:mesh:class/MeshArtifact",
+    "MeshOwner": "urn:mesh:class/MeshOwner",
+    "MeshRelation": "urn:mesh:class/MeshRelation",
+    "title": "http://purl.org/dc/terms/title",
+    "summary": "http://purl.org/dc/terms/abstract",
+    "path": "urn:mesh:prop/path",
+    "sha256": "urn:mesh:prop/sha256",
+    "section": "urn:mesh:prop/section",
+    "manifestPath": "urn:mesh:prop/manifestPath",
+    "definition": "urn:mesh:prop/definition",
+    "schema": "http://schema.org/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "hasOwner": {
+      "@id": "urn:mesh:prop/hasOwner",
+      "@type": "@id"
+    },
+    "hasArtifact": {
+      "@id": "urn:mesh:prop/hasArtifact",
+      "@type": "@id"
+    },
+    "relatedTo": {
+      "@id": "urn:mesh:prop/relatedTo",
+      "@type": "@id"
+    },
+    "aligns_with": {
+      "@id": "urn:mesh:relation/aligns_with",
+      "@type": "@id"
+    },
+    "augments": {
+      "@id": "urn:mesh:relation/augments",
+      "@type": "@id"
+    },
+    "constrains": {
+      "@id": "urn:mesh:relation/constrains",
+      "@type": "@id"
+    },
+    "documents": {
+      "@id": "urn:mesh:relation/documents",
+      "@type": "@id"
+    },
+    "enables": {
+      "@id": "urn:mesh:relation/enables",
+      "@type": "@id"
+    },
+    "enforces": {
+      "@id": "urn:mesh:relation/enforces",
+      "@type": "@id"
+    },
+    "executes": {
+      "@id": "urn:mesh:relation/executes",
+      "@type": "@id"
+    },
+    "explains": {
+      "@id": "urn:mesh:relation/explains",
+      "@type": "@id"
+    },
+    "feeds": {
+      "@id": "urn:mesh:relation/feeds",
+      "@type": "@id"
+    },
+    "governs": {
+      "@id": "urn:mesh:relation/governs",
+      "@type": "@id"
+    },
+    "informs": {
+      "@id": "urn:mesh:relation/informs",
+      "@type": "@id"
+    },
+    "modulates": {
+      "@id": "urn:mesh:relation/modulates",
+      "@type": "@id"
+    },
+    "operationalizes": {
+      "@id": "urn:mesh:relation/operationalizes",
+      "@type": "@id"
+    },
+    "optimizes": {
+      "@id": "urn:mesh:relation/optimizes",
+      "@type": "@id"
+    },
+    "reinforces": {
+      "@id": "urn:mesh:relation/reinforces",
+      "@type": "@id"
+    },
+    "supplies": {
+      "@id": "urn:mesh:relation/supplies",
+      "@type": "@id"
+    },
+    "supports": {
+      "@id": "urn:mesh:relation/supports",
+      "@type": "@id"
+    },
+    "validates": {
+      "@id": "urn:mesh:relation/validates",
+      "@type": "@id"
+    }
+  },
+  "@graph": [
+    {
+      "@id": "urn:mesh:class/MeshNode",
+      "@type": "rdfs:Class",
+      "rdfs:label": "Mesh Node"
+    },
+    {
+      "@id": "urn:mesh:class/MeshArtifact",
+      "@type": "rdfs:Class",
+      "rdfs:label": "Mesh Artifact"
+    },
+    {
+      "@id": "urn:mesh:class/MeshOwner",
+      "@type": "rdfs:Class",
+      "rdfs:label": "Mesh Owner"
+    },
+    {
+      "@id": "urn:mesh:class/MeshRelation",
+      "@type": "rdfs:Class",
+      "rdfs:label": "Mesh Relation"
+    },
+    {
+      "@id": "urn:mesh:prop/hasOwner",
+      "@type": "rdf:Property",
+      "rdfs:label": "hasOwner",
+      "rdfs:comment": "Associates a mesh node with its accountable owner.",
+      "rdfs:domain": "urn:mesh:class/MeshNode",
+      "rdfs:range": "urn:mesh:class/MeshOwner"
+    },
+    {
+      "@id": "urn:mesh:prop/hasArtifact",
+      "@type": "rdf:Property",
+      "rdfs:label": "hasArtifact",
+      "rdfs:comment": "Links a mesh node to supporting evidence artifacts.",
+      "rdfs:domain": "urn:mesh:class/MeshNode",
+      "rdfs:range": "urn:mesh:class/MeshArtifact"
+    },
+    {
+      "@id": "urn:mesh:prop/relatedTo",
+      "@type": "rdf:Property",
+      "rdfs:label": "relatedTo",
+      "rdfs:comment": "Generic relationship between mesh nodes.",
+      "rdfs:domain": "urn:mesh:class/MeshNode",
+      "rdfs:range": "urn:mesh:class/MeshNode"
+    },
+    {
+      "@id": "urn:mesh:prop/manifestPath",
+      "@type": "rdf:Property",
+      "rdfs:label": "manifestPath",
+      "rdfs:comment": "Indicates the manifest file that defined the node.",
+      "rdfs:domain": "urn:mesh:class/MeshNode"
+    },
+    {
+      "@id": "urn:mesh:prop/path",
+      "@type": "rdf:Property",
+      "rdfs:label": "path",
+      "rdfs:comment": "Filesystem path of the artifact.",
+      "rdfs:domain": "urn:mesh:class/MeshArtifact"
+    },
+    {
+      "@id": "urn:mesh:prop/sha256",
+      "@type": "rdf:Property",
+      "rdfs:label": "sha256",
+      "rdfs:comment": "SHA-256 checksum recorded in the manifest.",
+      "rdfs:domain": "urn:mesh:class/MeshArtifact"
+    },
+    {
+      "@id": "urn:mesh:prop/section",
+      "@type": "rdf:Property",
+      "rdfs:label": "section",
+      "rdfs:comment": "Optional section anchor within the artifact.",
+      "rdfs:domain": "urn:mesh:class/MeshArtifact"
+    },
+    {
+      "@id": "urn:mesh:relation/aligns_with",
+      "@type": "rdf:Property",
+      "rdfs:label": "aligns_with",
+      "rdfs:subPropertyOf": "urn:mesh:prop/relatedTo",
+      "rdfs:domain": "urn:mesh:class/MeshNode",
+      "rdfs:range": "urn:mesh:class/MeshNode"
+    },
+    {
+      "@id": "urn:mesh:relation/augments",
+      "@type": "rdf:Property",
+      "rdfs:label": "augments",
+      "rdfs:subPropertyOf": "urn:mesh:prop/relatedTo",
+      "rdfs:domain": "urn:mesh:class/MeshNode",
+      "rdfs:range": "urn:mesh:class/MeshNode"
+    },
+    {
+      "@id": "urn:mesh:relation/constrains",
+      "@type": "rdf:Property",
+      "rdfs:label": "constrains",
+      "rdfs:subPropertyOf": "urn:mesh:prop/relatedTo",
+      "rdfs:domain": "urn:mesh:class/MeshNode",
+      "rdfs:range": "urn:mesh:class/MeshNode"
+    },
+    {
+      "@id": "urn:mesh:relation/documents",
+      "@type": "rdf:Property",
+      "rdfs:label": "documents",
+      "rdfs:subPropertyOf": "urn:mesh:prop/relatedTo",
+      "rdfs:domain": "urn:mesh:class/MeshNode",
+      "rdfs:range": "urn:mesh:class/MeshNode"
+    },
+    {
+      "@id": "urn:mesh:relation/enables",
+      "@type": "rdf:Property",
+      "rdfs:label": "enables",
+      "rdfs:subPropertyOf": "urn:mesh:prop/relatedTo",
+      "rdfs:domain": "urn:mesh:class/MeshNode",
+      "rdfs:range": "urn:mesh:class/MeshNode"
+    },
+    {
+      "@id": "urn:mesh:relation/enforces",
+      "@type": "rdf:Property",
+      "rdfs:label": "enforces",
+      "rdfs:subPropertyOf": "urn:mesh:prop/relatedTo",
+      "rdfs:domain": "urn:mesh:class/MeshNode",
+      "rdfs:range": "urn:mesh:class/MeshNode"
+    },
+    {
+      "@id": "urn:mesh:relation/executes",
+      "@type": "rdf:Property",
+      "rdfs:label": "executes",
+      "rdfs:subPropertyOf": "urn:mesh:prop/relatedTo",
+      "rdfs:domain": "urn:mesh:class/MeshNode",
+      "rdfs:range": "urn:mesh:class/MeshNode"
+    },
+    {
+      "@id": "urn:mesh:relation/explains",
+      "@type": "rdf:Property",
+      "rdfs:label": "explains",
+      "rdfs:subPropertyOf": "urn:mesh:prop/relatedTo",
+      "rdfs:domain": "urn:mesh:class/MeshNode",
+      "rdfs:range": "urn:mesh:class/MeshNode"
+    },
+    {
+      "@id": "urn:mesh:relation/feeds",
+      "@type": "rdf:Property",
+      "rdfs:label": "feeds",
+      "rdfs:subPropertyOf": "urn:mesh:prop/relatedTo",
+      "rdfs:domain": "urn:mesh:class/MeshNode",
+      "rdfs:range": "urn:mesh:class/MeshNode"
+    },
+    {
+      "@id": "urn:mesh:relation/governs",
+      "@type": "rdf:Property",
+      "rdfs:label": "governs",
+      "rdfs:subPropertyOf": "urn:mesh:prop/relatedTo",
+      "rdfs:domain": "urn:mesh:class/MeshNode",
+      "rdfs:range": "urn:mesh:class/MeshNode"
+    },
+    {
+      "@id": "urn:mesh:relation/informs",
+      "@type": "rdf:Property",
+      "rdfs:label": "informs",
+      "rdfs:subPropertyOf": "urn:mesh:prop/relatedTo",
+      "rdfs:domain": "urn:mesh:class/MeshNode",
+      "rdfs:range": "urn:mesh:class/MeshNode"
+    },
+    {
+      "@id": "urn:mesh:relation/modulates",
+      "@type": "rdf:Property",
+      "rdfs:label": "modulates",
+      "rdfs:subPropertyOf": "urn:mesh:prop/relatedTo",
+      "rdfs:domain": "urn:mesh:class/MeshNode",
+      "rdfs:range": "urn:mesh:class/MeshNode"
+    },
+    {
+      "@id": "urn:mesh:relation/operationalizes",
+      "@type": "rdf:Property",
+      "rdfs:label": "operationalizes",
+      "rdfs:subPropertyOf": "urn:mesh:prop/relatedTo",
+      "rdfs:domain": "urn:mesh:class/MeshNode",
+      "rdfs:range": "urn:mesh:class/MeshNode"
+    },
+    {
+      "@id": "urn:mesh:relation/optimizes",
+      "@type": "rdf:Property",
+      "rdfs:label": "optimizes",
+      "rdfs:subPropertyOf": "urn:mesh:prop/relatedTo",
+      "rdfs:domain": "urn:mesh:class/MeshNode",
+      "rdfs:range": "urn:mesh:class/MeshNode"
+    },
+    {
+      "@id": "urn:mesh:relation/reinforces",
+      "@type": "rdf:Property",
+      "rdfs:label": "reinforces",
+      "rdfs:subPropertyOf": "urn:mesh:prop/relatedTo",
+      "rdfs:domain": "urn:mesh:class/MeshNode",
+      "rdfs:range": "urn:mesh:class/MeshNode"
+    },
+    {
+      "@id": "urn:mesh:relation/supplies",
+      "@type": "rdf:Property",
+      "rdfs:label": "supplies",
+      "rdfs:subPropertyOf": "urn:mesh:prop/relatedTo",
+      "rdfs:domain": "urn:mesh:class/MeshNode",
+      "rdfs:range": "urn:mesh:class/MeshNode"
+    },
+    {
+      "@id": "urn:mesh:relation/supports",
+      "@type": "rdf:Property",
+      "rdfs:label": "supports",
+      "rdfs:subPropertyOf": "urn:mesh:prop/relatedTo",
+      "rdfs:domain": "urn:mesh:class/MeshNode",
+      "rdfs:range": "urn:mesh:class/MeshNode"
+    },
+    {
+      "@id": "urn:mesh:relation/validates",
+      "@type": "rdf:Property",
+      "rdfs:label": "validates",
+      "rdfs:subPropertyOf": "urn:mesh:prop/relatedTo",
+      "rdfs:domain": "urn:mesh:class/MeshNode",
+      "rdfs:range": "urn:mesh:class/MeshNode"
+    },
+    {
+      "@id": "urn:mesh:owner/biology_lead",
+      "@type": "MeshOwner",
+      "rdfs:label": "Research Director – Structural Biology"
+    },
+    {
+      "@id": "urn:mesh:owner/assay_lead",
+      "@type": "MeshOwner",
+      "rdfs:label": "Research Director – Assay Science"
+    },
+    {
+      "@id": "urn:mesh:owner/data_steward",
+      "@type": "MeshOwner",
+      "rdfs:label": "Data Operations Steward"
+    },
+    {
+      "@id": "urn:mesh:owner/evaluation_lead",
+      "@type": "MeshOwner",
+      "rdfs:label": "Model Evaluation Lead"
+    },
+    {
+      "@id": "urn:mesh:owner/modeling_lead",
+      "@type": "MeshOwner",
+      "rdfs:label": "Modeling Lead"
+    },
+    {
+      "@id": "urn:mesh:owner/training_lead",
+      "@type": "MeshOwner",
+      "rdfs:label": "Training Pipeline Lead"
+    },
+    {
+      "@id": "urn:mesh:owner/governance_lead",
+      "@type": "MeshOwner",
+      "rdfs:label": "Governance & Compliance Lead"
+    },
+    {
+      "@id": "urn:mesh:owner/markov_lead",
+      "@type": "MeshOwner",
+      "rdfs:label": "Statistical Modeling Lead"
+    },
+    {
+      "@id": "urn:mesh:owner/automation_lead",
+      "@type": "MeshOwner",
+      "rdfs:label": "Automation & Submission Lead"
+    },
+    {
+      "@id": "urn:mesh:owner/ontology_lead",
+      "@type": "MeshOwner",
+      "rdfs:label": "Ontology Steward"
+    },
+    {
+      "@id": "urn:mesh:artifact/agents_md",
+      "@type": "MeshArtifact",
+      "path": "AGENTS.md",
+      "sha256": "6fb895fcfba140001d0d4411602e3f6f5dd8517710482c67f735c40e64dcb246"
+    },
+    {
+      "@id": "urn:mesh:artifact/competition_public_2025_abdev_competition_overview_md",
+      "@type": "MeshArtifact",
+      "path": "competition_public/2025 AbDev Competition Overview.md",
+      "sha256": "d37d36702b5632ff3fcdbc4b90fd2cb8c4f092b7fc1cca0d096175974f918b30"
+    },
+    {
+      "@id": "urn:mesh:artifact/competition_public_2025_abdev_competition_overview_md",
+      "@type": "MeshArtifact",
+      "path": "competition_public/2025 AbDev Competition Overview.md",
+      "sha256": "d37d36702b5632ff3fcdbc4b90fd2cb8c4f092b7fc1cca0d096175974f918b30",
+      "section": "Developability Properties"
+    },
+    {
+      "@id": "urn:mesh:artifact/competition_public_abdev_leaderboard_overview_md",
+      "@type": "MeshArtifact",
+      "path": "competition_public/AbDev Leaderboard Overview.md",
+      "sha256": "952b0840d3bd66927be78416394c8898d2394af0fd2f82e920b8b6af51caec94"
+    },
+    {
+      "@id": "urn:mesh:artifact/competition_public_abdev_leaderboard_overview_md",
+      "@type": "MeshArtifact",
+      "path": "competition_public/AbDev Leaderboard Overview.md",
+      "sha256": "952b0840d3bd66927be78416394c8898d2394af0fd2f82e920b8b6af51caec94",
+      "section": "Participation Checklist"
+    },
+    {
+      "@id": "urn:mesh:artifact/competition_public_dataset_gdpa1_v1_2_sequences_csv",
+      "@type": "MeshArtifact",
+      "path": "competition_public/dataset/GDPa1_v1.2_sequences.csv",
+      "sha256": "9f3c68431802185e072f86e06ba65475fb6e4b097b5ff689486dd8ad266164f1"
+    },
+    {
+      "@id": "urn:mesh:artifact/competition_public_dataset_heldout_set_sequences_csv",
+      "@type": "MeshArtifact",
+      "path": "competition_public/dataset/heldout-set-sequences.csv",
+      "sha256": "cab3383787b88808be863dc2a329f73a643d47e39f01fa6e83d372071a780609"
+    },
+    {
+      "@id": "urn:mesh:artifact/competition_public_dataset_readme_md",
+      "@type": "MeshArtifact",
+      "path": "competition_public/dataset/README.md",
+      "sha256": "6464b01eaa2cd04da0314a9d8f14e070492ae9d0fcba677cd09b0171085564d4"
+    },
+    {
+      "@id": "urn:mesh:artifact/competition_public_gdpa1_dataset_overview_md",
+      "@type": "MeshArtifact",
+      "path": "competition_public/GDPa1 Dataset Overview.md",
+      "sha256": "aac58a68d8b71c31579fede1f962e3249f3189a955cc560b52d7c7900954f266",
+      "section": "Structure"
+    },
+    {
+      "@id": "urn:mesh:artifact/competition_public_gdpa1_dataset_overview_md",
+      "@type": "MeshArtifact",
+      "path": "competition_public/GDPa1 Dataset Overview.md",
+      "sha256": "aac58a68d8b71c31579fede1f962e3249f3189a955cc560b52d7c7900954f266",
+      "section": "Assays"
+    },
+    {
+      "@id": "urn:mesh:artifact/competition_public_gdpa1_dataset_overview_md",
+      "@type": "MeshArtifact",
+      "path": "competition_public/GDPa1 Dataset Overview.md",
+      "sha256": "aac58a68d8b71c31579fede1f962e3249f3189a955cc560b52d7c7900954f266",
+      "section": "Dataset Contents"
+    },
+    {
+      "@id": "urn:mesh:artifact/competition_public_gdpa1_dataset_overview_md",
+      "@type": "MeshArtifact",
+      "path": "competition_public/GDPa1 Dataset Overview.md",
+      "sha256": "aac58a68d8b71c31579fede1f962e3249f3189a955cc560b52d7c7900954f266",
+      "section": "Developability Assays"
+    },
+    {
+      "@id": "urn:mesh:artifact/competition_public_gdpa1_dataset_overview_md",
+      "@type": "MeshArtifact",
+      "path": "competition_public/GDPa1 Dataset Overview.md",
+      "sha256": "aac58a68d8b71c31579fede1f962e3249f3189a955cc560b52d7c7900954f266",
+      "section": "Access Requirements"
+    },
+    {
+      "@id": "urn:mesh:artifact/competition_public_how_to_train_an_antibody_developability_model_md",
+      "@type": "MeshArtifact",
+      "path": "competition_public/How to Train an Antibody Developability Model.md",
+      "sha256": "dd4e3f7de944464face75030882b40f30797975a553cf6e7f66d33c8b81a59ad",
+      "section": "Isotype Effects"
+    },
+    {
+      "@id": "urn:mesh:artifact/competition_public_how_to_train_an_antibody_developability_model_md",
+      "@type": "MeshArtifact",
+      "path": "competition_public/How to Train an Antibody Developability Model.md",
+      "sha256": "dd4e3f7de944464face75030882b40f30797975a553cf6e7f66d33c8b81a59ad",
+      "section": "Workflow Overview"
+    },
+    {
+      "@id": "urn:mesh:artifact/init_md",
+      "@type": "MeshArtifact",
+      "path": "init.md",
+      "sha256": "b422e4802b7f77e5877898d992e7d95f47e294454acf51477cc60f01cd07ca7f"
+    },
+    {
+      "@id": "urn:mesh:artifact/research_plans_initial_plan_flow_md",
+      "@type": "MeshArtifact",
+      "path": "research_plans/initial_plan/flow.md",
+      "sha256": "193f01182fdb113974a84749e71d95023f845a8f18763eb3794305dc7fae75e4"
+    },
+    {
+      "@id": "urn:mesh:artifact/research_plans_initial_plan_gaps_md",
+      "@type": "MeshArtifact",
+      "path": "research_plans/initial_plan/gaps.md",
+      "sha256": "ed2f497b107f6269b607ac4c62e7799d1b64544ab97233118b57a22a09054e42"
+    },
+    {
+      "@id": "urn:mesh:artifact/research_plans_initial_plan_gaps_risks_md",
+      "@type": "MeshArtifact",
+      "path": "research_plans/initial_plan/gaps_risks.md",
+      "sha256": "5246509b8a78e43f7c81be962424f3d73fd32fe48c6f8b9a8c9ccf070592434b"
+    },
+    {
+      "@id": "urn:mesh:artifact/research_plans_initial_plan_plan_md",
+      "@type": "MeshArtifact",
+      "path": "research_plans/initial_plan/plan.md",
+      "sha256": "1fc7d93da67a60820bfe223f4e09ba10c53f0113675ef5a3204453e8583aa1e8"
+    },
+    {
+      "@id": "urn:mesh:artifact/semantic_mesh_concepts_ai_finetuning_pipeline_md",
+      "@type": "MeshArtifact",
+      "path": "semantic_mesh/concepts/ai_finetuning_pipeline.md",
+      "sha256": "49e831297e6d8f937e257d7b54458afde209e6b16f2312926dab93c19d551c85"
+    },
+    {
+      "@id": "urn:mesh:artifact/semantic_mesh_concepts_assay_definitions_md",
+      "@type": "MeshArtifact",
+      "path": "semantic_mesh/concepts/assay_definitions.md",
+      "sha256": "c338942814264f761cdc146b39cbceb7bbc15735ed955aadd5005f5910b79035"
+    },
+    {
+      "@id": "urn:mesh:artifact/semantic_mesh_concepts_bioinformatics_pipeline_md",
+      "@type": "MeshArtifact",
+      "path": "semantic_mesh/concepts/bioinformatics_pipeline.md",
+      "sha256": "0fd1b3cfe591fad294a7b49848eabe0e769ae814df15e28a66490acb928ab0b5"
+    },
+    {
+      "@id": "urn:mesh:artifact/semantic_mesh_concepts_biophysics_interpretation_md",
+      "@type": "MeshArtifact",
+      "path": "semantic_mesh/concepts/biophysics_interpretation.md",
+      "sha256": "f7bb66d326764e39023b33fad60a8a9a7e2a3e5f0d0bda7f57d948ca2030e3be"
+    },
+    {
+      "@id": "urn:mesh:artifact/semantic_mesh_concepts_competency_query_framework_md",
+      "@type": "MeshArtifact",
+      "path": "semantic_mesh/concepts/competency_query_framework.md",
+      "sha256": "d21a0a89442fc2ba3cb77260c73d0399650190cd82fdb8a5d523cebdc66132a1"
+    },
+    {
+      "@id": "urn:mesh:artifact/semantic_mesh_concepts_competition_target_alignment_md",
+      "@type": "MeshArtifact",
+      "path": "semantic_mesh/concepts/competition_target_alignment.md",
+      "sha256": "a9de88e2a9140ccdfbf844a875c006df4caf9426ff89daa64a80d43a6427e1a8"
+    },
+    {
+      "@id": "urn:mesh:artifact/semantic_mesh_concepts_context_terms_yaml",
+      "@type": "MeshArtifact",
+      "path": "semantic_mesh/concepts/context_terms.yaml",
+      "sha256": "b96ddbd45675a4f0438dea9930f577bfcba1ac25ccefbf331499c5e88bbac5db",
+      "section": "vh_chain"
+    },
+    {
+      "@id": "urn:mesh:artifact/semantic_mesh_concepts_context_terms_yaml",
+      "@type": "MeshArtifact",
+      "path": "semantic_mesh/concepts/context_terms.yaml",
+      "sha256": "b96ddbd45675a4f0438dea9930f577bfcba1ac25ccefbf331499c5e88bbac5db",
+      "section": "assays"
+    },
+    {
+      "@id": "urn:mesh:artifact/semantic_mesh_concepts_context_terms_yaml",
+      "@type": "MeshArtifact",
+      "path": "semantic_mesh/concepts/context_terms.yaml",
+      "sha256": "b96ddbd45675a4f0438dea9930f577bfcba1ac25ccefbf331499c5e88bbac5db",
+      "section": "mesh_validator"
+    },
+    {
+      "@id": "urn:mesh:artifact/semantic_mesh_concepts_context_terms_yaml",
+      "@type": "MeshArtifact",
+      "path": "semantic_mesh/concepts/context_terms.yaml",
+      "sha256": "b96ddbd45675a4f0438dea9930f577bfcba1ac25ccefbf331499c5e88bbac5db",
+      "section": "surprisal_curriculum"
+    },
+    {
+      "@id": "urn:mesh:artifact/semantic_mesh_concepts_context_terms_yaml",
+      "@type": "MeshArtifact",
+      "path": "semantic_mesh/concepts/context_terms.yaml",
+      "sha256": "b96ddbd45675a4f0438dea9930f577bfcba1ac25ccefbf331499c5e88bbac5db"
+    },
+    {
+      "@id": "urn:mesh:artifact/semantic_mesh_concepts_cross_validation_integrity_md",
+      "@type": "MeshArtifact",
+      "path": "semantic_mesh/concepts/cross_validation_integrity.md",
+      "sha256": "4ee537ce9122cb09c4642283541b7e5e9026f1151e121847ba7a1723a43e9de4"
+    },
+    {
+      "@id": "urn:mesh:artifact/semantic_mesh_concepts_dataset_access_controls_md",
+      "@type": "MeshArtifact",
+      "path": "semantic_mesh/concepts/dataset_access_controls.md",
+      "sha256": "fc31e660881437f4361c763606663b2a5722a4352f72b4cb37901c0177f3771a"
+    },
+    {
+      "@id": "urn:mesh:artifact/semantic_mesh_concepts_drift_detection_quality_assurance_md",
+      "@type": "MeshArtifact",
+      "path": "semantic_mesh/concepts/drift_detection_quality_assurance.md",
+      "sha256": "9d93a4755ba497035416c7c924567a74145707f1a3381f12e052c5ccde734394"
+    },
+    {
+      "@id": "urn:mesh:artifact/semantic_mesh_concepts_ensembling_postprocessing_md",
+      "@type": "MeshArtifact",
+      "path": "semantic_mesh/concepts/ensembling_postprocessing.md",
+      "sha256": "3c6dd5e848480e85c1bd0708b2688164ca938a9da64e7c334f2f0a407d3982b0"
+    },
+    {
+      "@id": "urn:mesh:artifact/semantic_mesh_concepts_evaluation_metrics_md",
+      "@type": "MeshArtifact",
+      "path": "semantic_mesh/concepts/evaluation_metrics.md",
+      "sha256": "5a419dafae1b667ba9ed7f2ac7c6bcf80e36ccc94c48b0310949b739bbb0c15f"
+    },
+    {
+      "@id": "urn:mesh:artifact/semantic_mesh_concepts_feature_engineering_methods_md",
+      "@type": "MeshArtifact",
+      "path": "semantic_mesh/concepts/feature_engineering_methods.md",
+      "sha256": "97160666dbd5b7b92d68c3775e1d69eaa4f6711a3f4099f546d3b823a7ec70ad"
+    },
+    {
+      "@id": "urn:mesh:artifact/semantic_mesh_concepts_isotype_systematics_md",
+      "@type": "MeshArtifact",
+      "path": "semantic_mesh/concepts/isotype_systematics.md",
+      "sha256": "8b99ce20ae46301d431ee709d2f24ab486e9e2eb4f0aea5d45291f1d920c6c56"
+    },
+    {
+      "@id": "urn:mesh:artifact/semantic_mesh_concepts_markov_notes_md",
+      "@type": "MeshArtifact",
+      "path": "semantic_mesh/concepts/markov_notes.md",
+      "sha256": "8d7a2263fa41a0cb699274bc89c47da1d760eafc0e94c4b95b10a5aa46796cb6"
+    },
+    {
+      "@id": "urn:mesh:artifact/semantic_mesh_concepts_model_architectures_training_md",
+      "@type": "MeshArtifact",
+      "path": "semantic_mesh/concepts/model_architectures_training.md",
+      "sha256": "863c193add1626272433138698ee1d5c99cf56190fdc840df669c61f44af6cc5"
+    },
+    {
+      "@id": "urn:mesh:artifact/semantic_mesh_concepts_protocols_md",
+      "@type": "MeshArtifact",
+      "path": "semantic_mesh/concepts/protocols.md",
+      "sha256": "884af5e1c4f9ca005d789530bcc83f11576d6ab9ee5dc935186d5892958fea92"
+    },
+    {
+      "@id": "urn:mesh:artifact/semantic_mesh_concepts_references_provenance_md",
+      "@type": "MeshArtifact",
+      "path": "semantic_mesh/concepts/references_provenance.md",
+      "sha256": "22aba8810f69ba29995ea78deadc5ccb71ea8a07c806e83077f4f72f07746590"
+    },
+    {
+      "@id": "urn:mesh:artifact/semantic_mesh_concepts_semantic_mesh_concepts_md",
+      "@type": "MeshArtifact",
+      "path": "semantic_mesh/concepts/semantic_mesh_concepts.md",
+      "sha256": "5f418551ec15bd4ba19af610541718fa799e162c07bcbb13eb398b247b5055e1",
+      "section": "Calibration-and-Uncertainty"
+    },
+    {
+      "@id": "urn:mesh:artifact/semantic_mesh_concepts_semantic_mesh_concepts_md",
+      "@type": "MeshArtifact",
+      "path": "semantic_mesh/concepts/semantic_mesh_concepts.md",
+      "sha256": "5f418551ec15bd4ba19af610541718fa799e162c07bcbb13eb398b247b5055e1",
+      "section": "Sequence-and-Region-Features"
+    },
+    {
+      "@id": "urn:mesh:artifact/semantic_mesh_concepts_semantic_mesh_concepts_md",
+      "@type": "MeshArtifact",
+      "path": "semantic_mesh/concepts/semantic_mesh_concepts.md",
+      "sha256": "5f418551ec15bd4ba19af610541718fa799e162c07bcbb13eb398b247b5055e1",
+      "section": "Ensemble-and-Gate-Mechanisms"
+    },
+    {
+      "@id": "urn:mesh:artifact/semantic_mesh_concepts_semantic_mesh_concepts_md",
+      "@type": "MeshArtifact",
+      "path": "semantic_mesh/concepts/semantic_mesh_concepts.md",
+      "sha256": "5f418551ec15bd4ba19af610541718fa799e162c07bcbb13eb398b247b5055e1",
+      "section": "Statistical-Smoothing-and-Sequence-Models"
+    },
+    {
+      "@id": "urn:mesh:artifact/semantic_mesh_concepts_sequence_structural_features_md",
+      "@type": "MeshArtifact",
+      "path": "semantic_mesh/concepts/sequence_structural_features.md",
+      "sha256": "052ac082b049d81146f84eabe77fddda431faadc5d21efd19fc752e998128633"
+    },
+    {
+      "@id": "urn:mesh:artifact/semantic_mesh_concepts_statistical_information_features_md",
+      "@type": "MeshArtifact",
+      "path": "semantic_mesh/concepts/statistical_information_features.md",
+      "sha256": "3b6e971c3db3fcd32a75b1681ce7df67213dfc8dc487dd8f8b816c17f4312c10"
+    },
+    {
+      "@id": "urn:mesh:artifact/semantic_mesh_concepts_submission_automation_md",
+      "@type": "MeshArtifact",
+      "path": "semantic_mesh/concepts/submission_automation.md",
+      "sha256": "285d9effd17d4c056cb5e01455672df5083eeedd45af269eb7f8807e4c6af892"
+    },
+    {
+      "@id": "urn:mesh:artifact/semantic_mesh_concepts_submission_schema_standards_md",
+      "@type": "MeshArtifact",
+      "path": "semantic_mesh/concepts/submission_schema_standards.md",
+      "sha256": "cf152d57d8c02d9083d6dfe921335244d6d0a7e70d9bda1ce1bb97f323fd9437"
+    },
+    {
+      "@id": "urn:mesh:artifact/semantic_mesh_concepts_validation_evaluation_logic_md",
+      "@type": "MeshArtifact",
+      "path": "semantic_mesh/concepts/validation_evaluation_logic.md",
+      "sha256": "d9b020bb43e47ed4b16c1da2b31c427aef4da9e0f06d09e911d633aac8661fff"
+    },
+    {
+      "@id": "urn:mesh:artifact/semantic_mesh_library_catalog_yaml",
+      "@type": "MeshArtifact",
+      "path": "semantic_mesh/library/catalog.yaml",
+      "sha256": "bc4bc5fa4a6d3ba8c9e933eeec23e63ed89ef2e40573d74c6557ff6b2cf6523f"
+    },
+    {
+      "@id": "urn:mesh:artifact/semantic_mesh_references_md",
+      "@type": "MeshArtifact",
+      "path": "semantic_mesh/REFERENCES.md",
+      "sha256": "efc9c3da4ce98d68ee2359bea3b29baaf1159908eea94bad83e8ef044cd75b10"
+    },
+    {
+      "@id": "urn:mesh:artifact/semantic_mesh_schemas_glossary_md",
+      "@type": "MeshArtifact",
+      "path": "semantic_mesh/schemas/glossary.md",
+      "sha256": "09783ce62ed2ee879b9a3945c53d8710a560bcf9fb024e21793b39db937c491a",
+      "section": "Antibody"
+    },
+    {
+      "@id": "urn:mesh:artifact/semantic_mesh_schemas_glossary_md",
+      "@type": "MeshArtifact",
+      "path": "semantic_mesh/schemas/glossary.md",
+      "sha256": "09783ce62ed2ee879b9a3945c53d8710a560bcf9fb024e21793b39db937c491a",
+      "section": "Self-Association"
+    },
+    {
+      "@id": "urn:mesh:artifact/semantic_mesh_schemas_glossary_md",
+      "@type": "MeshArtifact",
+      "path": "semantic_mesh/schemas/glossary.md",
+      "sha256": "09783ce62ed2ee879b9a3945c53d8710a560bcf9fb024e21793b39db937c491a"
+    },
+    {
+      "@id": "urn:mesh:node/antibody_structure",
+      "@type": "MeshNode",
+      "title": "Antibody Structure Fundamentals",
+      "summary": "Connects foundational antibody structure vocabulary to downstream assay interpretation and dataset packaging.",
+      "hasOwner": "urn:mesh:owner/biology_lead",
+      "manifestPath": "semantic_mesh/mesh_manifest.yaml",
+      "definition": "Defines the VH/VL architecture, CDR regions, and isotype context that ground all antibody reasoning in the program.",
+      "hasArtifact": [
+        "urn:mesh:artifact/competition_public_gdpa1_dataset_overview_md",
+        "urn:mesh:artifact/semantic_mesh_schemas_glossary_md",
+        "urn:mesh:artifact/semantic_mesh_concepts_context_terms_yaml"
+      ],
+      "relatedTo": [
+        "urn:mesh:node/assays",
+        "urn:mesh:node/dataset_assets"
+      ]
+    },
+    {
+      "@id": "urn:mesh:node/assays",
+      "@type": "MeshNode",
+      "title": "Developability Assays",
+      "summary": "Links developability assay readouts to structural insights and modeling feature design.",
+      "hasOwner": "urn:mesh:owner/assay_lead",
+      "manifestPath": "semantic_mesh/mesh_manifest.yaml",
+      "definition": "Describes the GDPa1 developability assays—HIC, PR_CHO, AC-SINS pH7.4, Tm2, and Titer—and what each measurement captures.",
+      "hasArtifact": [
+        "urn:mesh:artifact/competition_public_gdpa1_dataset_overview_md",
+        "urn:mesh:artifact/semantic_mesh_concepts_context_terms_yaml",
+        "urn:mesh:artifact/semantic_mesh_schemas_glossary_md"
+      ],
+      "relatedTo": [
+        "urn:mesh:node/antibody_structure",
+        "urn:mesh:node/evaluation_metrics",
+        "urn:mesh:node/modeling_features"
+      ]
+    },
+    {
+      "@id": "urn:mesh:node/dataset_assets",
+      "@type": "MeshNode",
+      "title": "GDPa1 + Heldout Assets",
+      "summary": "Bridges GDPa1 and held-out sequence tables with training workflows and assay-aware metadata.",
+      "hasOwner": "urn:mesh:owner/data_steward",
+      "manifestPath": "semantic_mesh/mesh_manifest.yaml",
+      "definition": "Collects the GDPa1 public and private assets, including schema fields, fold identifiers, and documentation for reuse.",
+      "hasArtifact": [
+        "urn:mesh:artifact/competition_public_dataset_gdpa1_v1_2_sequences_csv",
+        "urn:mesh:artifact/competition_public_dataset_heldout_set_sequences_csv",
+        "urn:mesh:artifact/competition_public_dataset_readme_md"
+      ],
+      "relatedTo": [
+        "urn:mesh:node/assays",
+        "urn:mesh:node/training_protocols"
+      ]
+    },
+    {
+      "@id": "urn:mesh:node/evaluation_metrics",
+      "@type": "MeshNode",
+      "title": "Leaderboard Metrics",
+      "summary": "Ties leaderboard scoring requirements back to assay behavior and model calibration strategy.",
+      "hasOwner": "urn:mesh:owner/evaluation_lead",
+      "manifestPath": "semantic_mesh/mesh_manifest.yaml",
+      "definition": "Specifies the official evaluation metrics—per-property Spearman correlation and top-decile recall—and their computation contract.",
+      "hasArtifact": [
+        "urn:mesh:artifact/competition_public_abdev_leaderboard_overview_md",
+        "urn:mesh:artifact/semantic_mesh_concepts_evaluation_metrics_md",
+        "urn:mesh:artifact/semantic_mesh_concepts_semantic_mesh_concepts_md"
+      ],
+      "relatedTo": [
+        "urn:mesh:node/assays",
+        "urn:mesh:node/modeling_features",
+        "urn:mesh:node/governance"
+      ]
+    },
+    {
+      "@id": "urn:mesh:node/modeling_features",
+      "@type": "MeshNode",
+      "title": "Feature Architectures",
+      "summary": "Maps feature sources to assay targets and curriculum design across the modeling stack.",
+      "hasOwner": "urn:mesh:owner/modeling_lead",
+      "manifestPath": "semantic_mesh/mesh_manifest.yaml",
+      "definition": "Captures engineered representations such as ANARCI regions, Markov surprisal, and language-model embeddings used for prediction.",
+      "hasArtifact": [
+        "urn:mesh:artifact/research_plans_initial_plan_plan_md",
+        "urn:mesh:artifact/research_plans_initial_plan_gaps_md",
+        "urn:mesh:artifact/semantic_mesh_concepts_semantic_mesh_concepts_md"
+      ],
+      "relatedTo": [
+        "urn:mesh:node/assays",
+        "urn:mesh:node/markov_dynamics",
+        "urn:mesh:node/training_protocols"
+      ]
+    },
+    {
+      "@id": "urn:mesh:node/training_protocols",
+      "@type": "MeshNode",
+      "title": "Training + CV Workflow",
+      "summary": "Coordinates dataset assets, feature preparation, and evaluation checkpoints into a reproducible training loop.",
+      "hasOwner": "urn:mesh:owner/training_lead",
+      "manifestPath": "semantic_mesh/mesh_manifest.yaml",
+      "definition": "Defines cross-validation policy, curriculum strategy, and submission flow for producing leaderboard-ready models.",
+      "hasArtifact": [
+        "urn:mesh:artifact/research_plans_initial_plan_plan_md",
+        "urn:mesh:artifact/research_plans_initial_plan_flow_md",
+        "urn:mesh:artifact/competition_public_2025_abdev_competition_overview_md",
+        "urn:mesh:artifact/semantic_mesh_concepts_protocols_md"
+      ],
+      "relatedTo": [
+        "urn:mesh:node/dataset_assets",
+        "urn:mesh:node/modeling_features",
+        "urn:mesh:node/evaluation_metrics"
+      ]
+    },
+    {
+      "@id": "urn:mesh:node/governance",
+      "@type": "MeshNode",
+      "title": "Governance + Risk Controls",
+      "summary": "Applies orchestration and compliance controls across training, evaluation, and submission activities.",
+      "hasOwner": "urn:mesh:owner/governance_lead",
+      "manifestPath": "semantic_mesh/mesh_manifest.yaml",
+      "definition": "States the governance directives covering validation gates, licensing checks, and operational approvals.",
+      "hasArtifact": [
+        "urn:mesh:artifact/agents_md",
+        "urn:mesh:artifact/init_md",
+        "urn:mesh:artifact/research_plans_initial_plan_gaps_risks_md",
+        "urn:mesh:artifact/semantic_mesh_concepts_context_terms_yaml"
+      ],
+      "relatedTo": [
+        "urn:mesh:node/evaluation_metrics",
+        "urn:mesh:node/training_protocols"
+      ]
+    },
+    {
+      "@id": "urn:mesh:node/markov_dynamics",
+      "@type": "MeshNode",
+      "title": "Markov + Surprisal Systems",
+      "summary": "Feeds statistical feature programs with surprisal curricula that augment modeling features.",
+      "hasOwner": "urn:mesh:owner/markov_lead",
+      "manifestPath": "semantic_mesh/mesh_manifest.yaml",
+      "definition": "Describes Markov and surprisal-based sequence modeling constructs used to capture distributional shifts.",
+      "hasArtifact": [
+        "urn:mesh:artifact/research_plans_initial_plan_gaps_md",
+        "urn:mesh:artifact/semantic_mesh_concepts_markov_notes_md",
+        "urn:mesh:artifact/semantic_mesh_concepts_context_terms_yaml"
+      ],
+      "relatedTo": [
+        "urn:mesh:node/modeling_features"
+      ]
+    },
+    {
+      "@id": "urn:mesh:node/assay_metric_definitions",
+      "@type": "MeshNode",
+      "title": "Assay & Metric Alignment",
+      "summary": "Aligns assay semantics with evaluation metrics and feature engineering decisions.",
+      "hasOwner": "urn:mesh:owner/assay_lead",
+      "manifestPath": "semantic_mesh/mesh_manifest.yaml",
+      "definition": "Maps each GDPa1 assay to modeling targets, feature expectations, and supporting citations.",
+      "hasArtifact": [
+        "urn:mesh:artifact/semantic_mesh_concepts_competition_target_alignment_md",
+        "urn:mesh:artifact/semantic_mesh_concepts_assay_definitions_md",
+        "urn:mesh:artifact/semantic_mesh_concepts_evaluation_metrics_md"
+      ],
+      "relatedTo": [
+        "urn:mesh:node/assays",
+        "urn:mesh:node/evaluation_metrics",
+        "urn:mesh:node/modeling_features"
+      ]
+    },
+    {
+      "@id": "urn:mesh:node/sequence_structural_features",
+      "@type": "MeshNode",
+      "title": "Sequence & Structure Descriptors",
+      "summary": "Supplies structure-aware descriptors into feature engineering and statistical pipelines.",
+      "hasOwner": "urn:mesh:owner/biology_lead",
+      "manifestPath": "semantic_mesh/mesh_manifest.yaml",
+      "definition": "Defines hydropathy, charge, and lightweight structural metrics resolved by antibody region.",
+      "hasArtifact": [
+        "urn:mesh:artifact/semantic_mesh_concepts_sequence_structural_features_md",
+        "urn:mesh:artifact/semantic_mesh_concepts_context_terms_yaml",
+        "urn:mesh:artifact/semantic_mesh_concepts_semantic_mesh_concepts_md"
+      ],
+      "relatedTo": [
+        "urn:mesh:node/assay_metric_definitions",
+        "urn:mesh:node/modeling_features",
+        "urn:mesh:node/statistical_information_features"
+      ]
+    },
+    {
+      "@id": "urn:mesh:node/feature_engineering_methods",
+      "@type": "MeshNode",
+      "title": "Feature Engineering Methods",
+      "summary": "Connects structural and statistical descriptors to the modeling feature library.",
+      "hasOwner": "urn:mesh:owner/modeling_lead",
+      "manifestPath": "semantic_mesh/mesh_manifest.yaml",
+      "definition": "Details the procedures for generating statistical, physicochemical, and language-model–derived features.",
+      "hasArtifact": [
+        "urn:mesh:artifact/semantic_mesh_concepts_feature_engineering_methods_md",
+        "urn:mesh:artifact/semantic_mesh_concepts_markov_notes_md",
+        "urn:mesh:artifact/research_plans_initial_plan_gaps_md"
+      ],
+      "relatedTo": [
+        "urn:mesh:node/sequence_structural_features",
+        "urn:mesh:node/statistical_information_features",
+        "urn:mesh:node/modeling_features"
+      ]
+    },
+    {
+      "@id": "urn:mesh:node/model_arch_training",
+      "@type": "MeshNode",
+      "title": "Model Architectures & Training",
+      "summary": "Links modeling features and training protocols to downstream ensembling and deployment.",
+      "hasOwner": "urn:mesh:owner/modeling_lead",
+      "manifestPath": "semantic_mesh/mesh_manifest.yaml",
+      "definition": "Outlines the architectures, training schedules, and curriculum tactics governing model development.",
+      "hasArtifact": [
+        "urn:mesh:artifact/semantic_mesh_concepts_model_architectures_training_md",
+        "urn:mesh:artifact/semantic_mesh_concepts_protocols_md",
+        "urn:mesh:artifact/research_plans_initial_plan_flow_md"
+      ],
+      "relatedTo": [
+        "urn:mesh:node/training_protocols",
+        "urn:mesh:node/modeling_features",
+        "urn:mesh:node/ensembling_post_processing"
+      ]
+    },
+    {
+      "@id": "urn:mesh:node/validation_evaluation_logic",
+      "@type": "MeshNode",
+      "title": "Validation & Evaluation Logic",
+      "summary": "Integrates governance policies with submission standards to mirror leaderboard scoring locally.",
+      "hasOwner": "urn:mesh:owner/evaluation_lead",
+      "manifestPath": "semantic_mesh/mesh_manifest.yaml",
+      "definition": "Explains the validation scripts, scoring replicas, and QA gates that enforce evaluation parity.",
+      "hasArtifact": [
+        "urn:mesh:artifact/semantic_mesh_concepts_validation_evaluation_logic_md",
+        "urn:mesh:artifact/semantic_mesh_concepts_evaluation_metrics_md",
+        "urn:mesh:artifact/semantic_mesh_concepts_protocols_md"
+      ],
+      "relatedTo": [
+        "urn:mesh:node/governance",
+        "urn:mesh:node/submission_schema_standards",
+        "urn:mesh:node/drift_detection_quality"
+      ]
+    },
+    {
+      "@id": "urn:mesh:node/cross_validation_integrity",
+      "@type": "MeshNode",
+      "title": "Cross-Validation Integrity",
+      "summary": "Channels dataset controls and governance guidelines into leakage-safe fold stewardship.",
+      "hasOwner": "urn:mesh:owner/data_steward",
+      "manifestPath": "semantic_mesh/mesh_manifest.yaml",
+      "definition": "Defines the rules that prevent data leakage, maintain fold balance, and track manifest hygiene.",
+      "hasArtifact": [
+        "urn:mesh:artifact/semantic_mesh_concepts_cross_validation_integrity_md",
+        "urn:mesh:artifact/competition_public_dataset_readme_md",
+        "urn:mesh:artifact/semantic_mesh_concepts_protocols_md"
+      ],
+      "relatedTo": [
+        "urn:mesh:node/dataset_assets",
+        "urn:mesh:node/governance",
+        "urn:mesh:node/model_arch_training"
+      ]
+    },
+    {
+      "@id": "urn:mesh:node/submission_schema_standards",
+      "@type": "MeshNode",
+      "title": "Submission Schema & Standards",
+      "summary": "Connects validation logic and governance oversight to enforce submission formats.",
+      "hasOwner": "urn:mesh:owner/automation_lead",
+      "manifestPath": "semantic_mesh/mesh_manifest.yaml",
+      "definition": "Documents the CSV schema, metadata, and change-control expectations for leaderboard uploads.",
+      "hasArtifact": [
+        "urn:mesh:artifact/semantic_mesh_concepts_submission_schema_standards_md",
+        "urn:mesh:artifact/semantic_mesh_concepts_evaluation_metrics_md",
+        "urn:mesh:artifact/competition_public_abdev_leaderboard_overview_md"
+      ],
+      "relatedTo": [
+        "urn:mesh:node/validation_evaluation_logic",
+        "urn:mesh:node/governance"
+      ]
+    },
+    {
+      "@id": "urn:mesh:node/ensembling_post_processing",
+      "@type": "MeshNode",
+      "title": "Ensembling & Post-Processing",
+      "summary": "Feeds calibrated ensemble outputs into validation pipelines for final packaging.",
+      "hasOwner": "urn:mesh:owner/modeling_lead",
+      "manifestPath": "semantic_mesh/mesh_manifest.yaml",
+      "definition": "Specifies ensembling strategies, calibration routines, and post-processing steps prior to submission.",
+      "hasArtifact": [
+        "urn:mesh:artifact/semantic_mesh_concepts_ensembling_postprocessing_md",
+        "urn:mesh:artifact/semantic_mesh_concepts_semantic_mesh_concepts_md",
+        "urn:mesh:artifact/research_plans_initial_plan_plan_md"
+      ],
+      "relatedTo": [
+        "urn:mesh:node/model_arch_training",
+        "urn:mesh:node/validation_evaluation_logic",
+        "urn:mesh:node/statistical_information_features"
+      ]
+    },
+    {
+      "@id": "urn:mesh:node/statistical_information_features",
+      "@type": "MeshNode",
+      "title": "Statistical & Information-Theory Features",
+      "summary": "Supports Markov dynamics and structural descriptors with shared statistical signals.",
+      "hasOwner": "urn:mesh:owner/markov_lead",
+      "manifestPath": "semantic_mesh/mesh_manifest.yaml",
+      "definition": "Defines statistical and information-theoretic features, including entropy and surprisal measures.",
+      "hasArtifact": [
+        "urn:mesh:artifact/semantic_mesh_concepts_statistical_information_features_md",
+        "urn:mesh:artifact/semantic_mesh_concepts_markov_notes_md",
+        "urn:mesh:artifact/semantic_mesh_concepts_semantic_mesh_concepts_md"
+      ],
+      "relatedTo": [
+        "urn:mesh:node/markov_dynamics",
+        "urn:mesh:node/feature_engineering_methods",
+        "urn:mesh:node/sequence_structural_features"
+      ]
+    },
+    {
+      "@id": "urn:mesh:node/drift_detection_quality",
+      "@type": "MeshNode",
+      "title": "Drift Detection & QA",
+      "summary": "Relays governance and evaluation signals into pre-submission drift and QA monitoring.",
+      "hasOwner": "urn:mesh:owner/governance_lead",
+      "manifestPath": "semantic_mesh/mesh_manifest.yaml",
+      "definition": "Describes monitoring metrics, alerting workflows, and QA procedures that guard against dataset drift.",
+      "hasArtifact": [
+        "urn:mesh:artifact/semantic_mesh_concepts_drift_detection_quality_assurance_md",
+        "urn:mesh:artifact/semantic_mesh_concepts_protocols_md",
+        "urn:mesh:artifact/research_plans_initial_plan_gaps_risks_md"
+      ],
+      "relatedTo": [
+        "urn:mesh:node/validation_evaluation_logic",
+        "urn:mesh:node/governance",
+        "urn:mesh:node/cross_validation_integrity"
+      ]
+    },
+    {
+      "@id": "urn:mesh:node/competency_query_framework",
+      "@type": "MeshNode",
+      "title": "Competency & Query Framework",
+      "summary": "Bridges ontology vocabulary, reference ledgers, and governance needs for agent queries.",
+      "hasOwner": "urn:mesh:owner/ontology_lead",
+      "manifestPath": "semantic_mesh/mesh_manifest.yaml",
+      "definition": "Captures competency questions, ontology bindings, and reusable query templates for the mesh.",
+      "hasArtifact": [
+        "urn:mesh:artifact/semantic_mesh_concepts_competency_query_framework_md",
+        "urn:mesh:artifact/semantic_mesh_concepts_context_terms_yaml",
+        "urn:mesh:artifact/semantic_mesh_schemas_glossary_md"
+      ],
+      "relatedTo": [
+        "urn:mesh:node/assay_metric_definitions",
+        "urn:mesh:node/references_provenance_sources",
+        "urn:mesh:node/governance"
+      ]
+    },
+    {
+      "@id": "urn:mesh:node/references_provenance_sources",
+      "@type": "MeshNode",
+      "title": "References & Provenance Sources",
+      "summary": "Documents citation trails that underpin governance, assay alignment, and ontology terms.",
+      "hasOwner": "urn:mesh:owner/governance_lead",
+      "manifestPath": "semantic_mesh/mesh_manifest.yaml",
+      "definition": "Maintains the provenance ledger of citations and source materials referenced across the mesh.",
+      "hasArtifact": [
+        "urn:mesh:artifact/semantic_mesh_references_md",
+        "urn:mesh:artifact/semantic_mesh_concepts_references_provenance_md",
+        "urn:mesh:artifact/semantic_mesh_library_catalog_yaml"
+      ],
+      "relatedTo": [
+        "urn:mesh:node/governance",
+        "urn:mesh:node/assay_metric_definitions",
+        "urn:mesh:node/competency_query_framework"
+      ]
+    },
+    {
+      "@id": "urn:mesh:node/bioinformatics_pipeline",
+      "@type": "MeshNode",
+      "title": "Bioinformatics Data Pipeline",
+      "summary": "Connects dataset ingestion steps to cross-validation integrity and feature readiness.",
+      "hasOwner": "urn:mesh:owner/data_steward",
+      "manifestPath": "semantic_mesh/mesh_manifest.yaml",
+      "definition": "Defines the bioinformatics workflow for authentication, QC, numbering, and structure linkage of GDPa1 sequences.",
+      "hasArtifact": [
+        "urn:mesh:artifact/semantic_mesh_concepts_bioinformatics_pipeline_md",
+        "urn:mesh:artifact/competition_public_gdpa1_dataset_overview_md",
+        "urn:mesh:artifact/competition_public_dataset_readme_md"
+      ],
+      "relatedTo": [
+        "urn:mesh:node/dataset_assets",
+        "urn:mesh:node/cross_validation_integrity",
+        "urn:mesh:node/modeling_features"
+      ]
+    },
+    {
+      "@id": "urn:mesh:node/biophysics_interpretation",
+      "@type": "MeshNode",
+      "title": "Biophysics Interpretation",
+      "summary": "Explains how assay biology informs modeling features and performance expectations.",
+      "hasOwner": "urn:mesh:owner/assay_lead",
+      "manifestPath": "semantic_mesh/mesh_manifest.yaml",
+      "definition": "Provides the biochemical rationale behind hydrophobicity, self-association, thermostability, and yield assays.",
+      "hasArtifact": [
+        "urn:mesh:artifact/semantic_mesh_concepts_biophysics_interpretation_md",
+        "urn:mesh:artifact/competition_public_gdpa1_dataset_overview_md",
+        "urn:mesh:artifact/competition_public_2025_abdev_competition_overview_md"
+      ],
+      "relatedTo": [
+        "urn:mesh:node/assays",
+        "urn:mesh:node/sequence_structural_features",
+        "urn:mesh:node/modeling_features"
+      ]
+    },
+    {
+      "@id": "urn:mesh:node/isotype_systematics",
+      "@type": "MeshNode",
+      "title": "IgG Isotype Systematics",
+      "summary": "Relates subclass effects to training protocols and feature adjustments.",
+      "hasOwner": "urn:mesh:owner/biology_lead",
+      "manifestPath": "semantic_mesh/mesh_manifest.yaml",
+      "definition": "Summarizes IgG isotype differences and their expected impact on stability and modeling diagnostics.",
+      "hasArtifact": [
+        "urn:mesh:artifact/semantic_mesh_concepts_isotype_systematics_md",
+        "urn:mesh:artifact/competition_public_gdpa1_dataset_overview_md",
+        "urn:mesh:artifact/competition_public_how_to_train_an_antibody_developability_model_md"
+      ],
+      "relatedTo": [
+        "urn:mesh:node/modeling_features",
+        "urn:mesh:node/training_protocols",
+        "urn:mesh:node/sequence_structural_features"
+      ]
+    },
+    {
+      "@id": "urn:mesh:node/ai_finetuning_pipeline",
+      "@type": "MeshNode",
+      "title": "AI Fine-Tuning Pipeline",
+      "summary": "Operationalizes modeling features and training plans through fine-tuning workflows.",
+      "hasOwner": "urn:mesh:owner/modeling_lead",
+      "manifestPath": "semantic_mesh/mesh_manifest.yaml",
+      "definition": "Describes embedding generation, fine-tuning loops, and reproducibility controls for AI models.",
+      "hasArtifact": [
+        "urn:mesh:artifact/semantic_mesh_concepts_ai_finetuning_pipeline_md",
+        "urn:mesh:artifact/competition_public_how_to_train_an_antibody_developability_model_md",
+        "urn:mesh:artifact/research_plans_initial_plan_plan_md"
+      ],
+      "relatedTo": [
+        "urn:mesh:node/model_arch_training",
+        "urn:mesh:node/modeling_features",
+        "urn:mesh:node/training_protocols"
+      ]
+    },
+    {
+      "@id": "urn:mesh:node/submission_automation",
+      "@type": "MeshNode",
+      "title": "Submission Automation",
+      "summary": "Executes validation and governance requirements to deliver compliant submissions.",
+      "hasOwner": "urn:mesh:owner/automation_lead",
+      "manifestPath": "semantic_mesh/mesh_manifest.yaml",
+      "definition": "Details automation around credentials, schema validation, and packaging for leaderboard uploads.",
+      "hasArtifact": [
+        "urn:mesh:artifact/semantic_mesh_concepts_submission_automation_md",
+        "urn:mesh:artifact/competition_public_abdev_leaderboard_overview_md",
+        "urn:mesh:artifact/semantic_mesh_concepts_submission_schema_standards_md"
+      ],
+      "relatedTo": [
+        "urn:mesh:node/submission_schema_standards",
+        "urn:mesh:node/validation_evaluation_logic",
+        "urn:mesh:node/governance"
+      ]
+    },
+    {
+      "@id": "urn:mesh:node/dataset_access_controls",
+      "@type": "MeshNode",
+      "title": "Dataset Access Controls",
+      "summary": "Reinforces governance by regulating dataset access and manifest hygiene.",
+      "hasOwner": "urn:mesh:owner/governance_lead",
+      "manifestPath": "semantic_mesh/mesh_manifest.yaml",
+      "definition": "Sets the policies for license acceptance, read-only handling, and audit logging of GDPa1 assets.",
+      "hasArtifact": [
+        "urn:mesh:artifact/semantic_mesh_concepts_dataset_access_controls_md",
+        "urn:mesh:artifact/competition_public_gdpa1_dataset_overview_md",
+        "urn:mesh:artifact/agents_md"
+      ],
+      "relatedTo": [
+        "urn:mesh:node/governance",
+        "urn:mesh:node/dataset_assets",
+        "urn:mesh:node/cross_validation_integrity"
+      ]
+    },
+    {
+      "@id": "urn:mesh:node/antibody_structure#informs#assays",
+      "@type": "MeshRelation",
+      "schema:source": "urn:mesh:node/antibody_structure",
+      "schema:target": "urn:mesh:node/assays",
+      "informs": "urn:mesh:node/assays"
+    },
+    {
+      "@id": "urn:mesh:node/dataset_assets#supplies#training_protocols",
+      "@type": "MeshRelation",
+      "schema:source": "urn:mesh:node/dataset_assets",
+      "schema:target": "urn:mesh:node/training_protocols",
+      "supplies": "urn:mesh:node/training_protocols"
+    },
+    {
+      "@id": "urn:mesh:node/modeling_features#optimizes#evaluation_metrics",
+      "@type": "MeshRelation",
+      "schema:source": "urn:mesh:node/modeling_features",
+      "schema:target": "urn:mesh:node/evaluation_metrics",
+      "optimizes": "urn:mesh:node/evaluation_metrics"
+    },
+    {
+      "@id": "urn:mesh:node/governance#constrains#training_protocols",
+      "@type": "MeshRelation",
+      "schema:source": "urn:mesh:node/governance",
+      "schema:target": "urn:mesh:node/training_protocols",
+      "constrains": "urn:mesh:node/training_protocols"
+    },
+    {
+      "@id": "urn:mesh:node/markov_dynamics#augments#modeling_features",
+      "@type": "MeshRelation",
+      "schema:source": "urn:mesh:node/markov_dynamics",
+      "schema:target": "urn:mesh:node/modeling_features",
+      "augments": "urn:mesh:node/modeling_features"
+    },
+    {
+      "@id": "urn:mesh:node/assay_metric_definitions#aligns_with#modeling_features",
+      "@type": "MeshRelation",
+      "schema:source": "urn:mesh:node/assay_metric_definitions",
+      "schema:target": "urn:mesh:node/modeling_features",
+      "aligns_with": "urn:mesh:node/modeling_features"
+    },
+    {
+      "@id": "urn:mesh:node/sequence_structural_features#supplies#feature_engineering_methods",
+      "@type": "MeshRelation",
+      "schema:source": "urn:mesh:node/sequence_structural_features",
+      "schema:target": "urn:mesh:node/feature_engineering_methods",
+      "supplies": "urn:mesh:node/feature_engineering_methods"
+    },
+    {
+      "@id": "urn:mesh:node/feature_engineering_methods#enables#model_arch_training",
+      "@type": "MeshRelation",
+      "schema:source": "urn:mesh:node/feature_engineering_methods",
+      "schema:target": "urn:mesh:node/model_arch_training",
+      "enables": "urn:mesh:node/model_arch_training"
+    },
+    {
+      "@id": "urn:mesh:node/model_arch_training#feeds#ensembling_post_processing",
+      "@type": "MeshRelation",
+      "schema:source": "urn:mesh:node/model_arch_training",
+      "schema:target": "urn:mesh:node/ensembling_post_processing",
+      "feeds": "urn:mesh:node/ensembling_post_processing"
+    },
+    {
+      "@id": "urn:mesh:node/validation_evaluation_logic#governs#submission_schema_standards",
+      "@type": "MeshRelation",
+      "schema:source": "urn:mesh:node/validation_evaluation_logic",
+      "schema:target": "urn:mesh:node/submission_schema_standards",
+      "governs": "urn:mesh:node/submission_schema_standards"
+    },
+    {
+      "@id": "urn:mesh:node/cross_validation_integrity#informs#validation_evaluation_logic",
+      "@type": "MeshRelation",
+      "schema:source": "urn:mesh:node/cross_validation_integrity",
+      "schema:target": "urn:mesh:node/validation_evaluation_logic",
+      "informs": "urn:mesh:node/validation_evaluation_logic"
+    },
+    {
+      "@id": "urn:mesh:node/statistical_information_features#supports#drift_detection_quality",
+      "@type": "MeshRelation",
+      "schema:source": "urn:mesh:node/statistical_information_features",
+      "schema:target": "urn:mesh:node/drift_detection_quality",
+      "supports": "urn:mesh:node/drift_detection_quality"
+    },
+    {
+      "@id": "urn:mesh:node/ensembling_post_processing#validates#validation_evaluation_logic",
+      "@type": "MeshRelation",
+      "schema:source": "urn:mesh:node/ensembling_post_processing",
+      "schema:target": "urn:mesh:node/validation_evaluation_logic",
+      "validates": "urn:mesh:node/validation_evaluation_logic"
+    },
+    {
+      "@id": "urn:mesh:node/references_provenance_sources#documents#competency_query_framework",
+      "@type": "MeshRelation",
+      "schema:source": "urn:mesh:node/references_provenance_sources",
+      "schema:target": "urn:mesh:node/competency_query_framework",
+      "documents": "urn:mesh:node/competency_query_framework"
+    },
+    {
+      "@id": "urn:mesh:node/bioinformatics_pipeline#enforces#dataset_access_controls",
+      "@type": "MeshRelation",
+      "schema:source": "urn:mesh:node/bioinformatics_pipeline",
+      "schema:target": "urn:mesh:node/dataset_access_controls",
+      "enforces": "urn:mesh:node/dataset_access_controls"
+    },
+    {
+      "@id": "urn:mesh:node/bioinformatics_pipeline#supports#cross_validation_integrity",
+      "@type": "MeshRelation",
+      "schema:source": "urn:mesh:node/bioinformatics_pipeline",
+      "schema:target": "urn:mesh:node/cross_validation_integrity",
+      "supports": "urn:mesh:node/cross_validation_integrity"
+    },
+    {
+      "@id": "urn:mesh:node/biophysics_interpretation#explains#assays",
+      "@type": "MeshRelation",
+      "schema:source": "urn:mesh:node/biophysics_interpretation",
+      "schema:target": "urn:mesh:node/assays",
+      "explains": "urn:mesh:node/assays"
+    },
+    {
+      "@id": "urn:mesh:node/isotype_systematics#modulates#modeling_features",
+      "@type": "MeshRelation",
+      "schema:source": "urn:mesh:node/isotype_systematics",
+      "schema:target": "urn:mesh:node/modeling_features",
+      "modulates": "urn:mesh:node/modeling_features"
+    },
+    {
+      "@id": "urn:mesh:node/ai_finetuning_pipeline#operationalizes#model_arch_training",
+      "@type": "MeshRelation",
+      "schema:source": "urn:mesh:node/ai_finetuning_pipeline",
+      "schema:target": "urn:mesh:node/model_arch_training",
+      "operationalizes": "urn:mesh:node/model_arch_training"
+    },
+    {
+      "@id": "urn:mesh:node/submission_automation#executes#validation_evaluation_logic",
+      "@type": "MeshRelation",
+      "schema:source": "urn:mesh:node/submission_automation",
+      "schema:target": "urn:mesh:node/validation_evaluation_logic",
+      "executes": "urn:mesh:node/validation_evaluation_logic"
+    },
+    {
+      "@id": "urn:mesh:node/dataset_access_controls#reinforces#governance",
+      "@type": "MeshRelation",
+      "schema:source": "urn:mesh:node/dataset_access_controls",
+      "schema:target": "urn:mesh:node/governance",
+      "reinforces": "urn:mesh:node/governance"
+    }
+  ]
+}

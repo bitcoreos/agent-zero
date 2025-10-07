@@ -49,19 +49,19 @@ components:
 		summary: mermaid workflow graph from data ingest to submission
 		tags: [pipeline, visualization]
 	antibody_glossary:
-		path: semantic_mesh/ontological/glossary.md
+		path: semantic_mesh/schemas/glossary.md
 		summary: terminological grounding for assays, antibody properties, modeling vocabulary
 		tags: [ontology, glossary]
 	semantic_concepts:
-		path: semantic_mesh/semantic/semantic_mesh_concepts.md
+		path: semantic_mesh/concepts/semantic_mesh_concepts.md
 		summary: curated concept mesh linking sequence features, modeling techniques, calibration logic
 		tags: [semantic, concepts]
 		semantic_context_terms:
-			path: semantic_mesh/semantic/context_terms.yaml
+			path: semantic_mesh/concepts/context_terms.yaml
 			summary: compact vocabulary map (antibody terms, assays, modeling constructs) with sources + tags
 			tags: [semantic, vocabulary]
 		semantic_core_concepts:
-			path: semantic_mesh/semantic/core_concepts.yaml
+			path: semantic_mesh/concepts/core_concepts.yaml
 			summary: distilled lattice of high-priority concepts linking plans and competition briefs
 			tags: [semantic, concepts, lattice]
 		mesh_bootstrap:
