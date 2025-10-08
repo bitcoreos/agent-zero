@@ -1,0 +1,67 @@
+\section*{Evidence Scan: CDR-H3 Aromatic Cluster Signatures Tied to Aggregation Alerts}
+
+\subsection*{Executive Signals}
+\begin{itemize}
+  \item Mechanism: \textbf{surface-exposed aromatic clusters} (W/Y/F) in CDR-H3 drive \emph{hydrophobic patching}, $\pi$–$\pi$ stacking, and nonspecific contacts $\Rightarrow$ elevated self-association, viscosity, HMW species, and delayed HIC retention \cite{Hebditch2019,Jain2017,Geoghegan2016,Park2024,Phan2022}.
+  \item Empirics: \textbf{HIC RT} increases with CDR aromatic content; \textbf{AC-SINS} shifts with self-association; \textbf{CIC} correlates with HIC for hydrophobic/nonspecific binders \cite{Hebditch2019,Jain2017,Waibl2021,Kohli2015}.
+  \item Sequence-level coupling: APRs frequently overlap CDRs; \textbf{H3 motifs enriched in W and Y} associate with nonspecificity and aggregation risk \cite{Wang2010,Kelly2017}.
+\end{itemize}
+
+\subsection*{Mechanistic Rationale}
+Aromatics in H3 elevate local nonpolar surface density; planar rings enable $\pi$–$\pi$ interactions and cation–$\pi$ contacts, stabilizing weak, multivalent Fv–Fv networks. In high-salt HIC/AC-SINS conditions, lyotropic screening exposes hydrophobic patches, amplifying retention or plasmon shifts. Sequence composition $\rightarrow$ surface patches $\rightarrow$ assay alerts \cite{Hebditch2019,Jain2017,Phan2022,Waibl2021}.
+
+\subsection*{Empirical Links (Assay $\leftrightarrow$ H3 Aromatics)}
+\begin{itemize}
+  \item \textbf{HIC} (salt-gradient RT): positive association with \underline{CDR aromatic fraction}, non-linear with charge; models using CDR aromatic content predict delayed RT \cite{Hebditch2019,Jain2017}.
+  \item \textbf{AC-SINS/PS-SINS}: plasmon peak shifts up with increased self-association; engineered reduction of hydrophobic/aromatic patches reduces self-association \cite{Phan2022,Geoghegan2016}.
+  \item \textbf{CIC}: increased cross-interaction for hydrophobic/nonspecific paratopes; correlates with delayed HIC in discovery panels \cite{Kohli2015,Jain2017}.
+  \item \textbf{Viscosity/high concentration}: solvent-exposed H3 aromatics raise k$_\text{self}$ and viscosity; targeted mutagenesis of W/Y in CDRs reduces viscosity while preserving potency \cite{Park2024,Dai2024,Geoghegan2016}.
+\end{itemize}
+
+\subsection*{Sequence Signatures (H3)}
+\begin{itemize}
+  \item \textbf{Aromatic load}: $\phi_{H3}^{\text{arom}}=\frac{\#\{W,Y,F\}}{L_{H3}}$. Risk heuristic: $\phi_{H3}^{\text{arom}}\ge 0.30$ with predicted solvent exposure for $\ge 2$ aromatics \cite{Hebditch2019,Jain2017,Park2024}.
+  \item \textbf{Contiguity/cluster}: contiguous [WYF]\{2,3\}, or central H3 triads (positions 99–101 Kabat) containing $\ge 2$ aromatics; enrichment of multi-Trp motifs in H3 drives nonspecificity \cite{Kelly2017}.
+  \item \textbf{Patch geometry}: aromatic sidechains forming a convex/nonplanar patch at paratope; sequence features outperform static nonpolar area for HIC and HMWS correlation \cite{Hebditch2019}.
+  \item \textbf{APR overlap}: CDR-local APRs enriched in Trp/Tyr; H3 APR exposure couples binding and aggregation liabilities \cite{Wang2010}.
+\end{itemize}
+
+\subsection*{Alert Mapping (Rules-of-Thumb)}
+\begin{center}
+\begin{tabular}{p{3.6cm} p{6.8cm} p{4.2cm}}
+\textbf{Signature (H3)} & \textbf{Interpretation} & \textbf{Likely Alert}\\ \hline
+$\phi_{H3}^{\text{arom}}\ge 0.30$ and SAP/SASA indicates $\ge 2$ exposed aromatics & Hydrophobic/aromatic paratope patch & Delayed HIC RT; elevated CIC; AC-SINS shift \cite{Hebditch2019,Jain2017}\\
+[WYF]\{2,3\} contiguous or WxxW/WYxY near H3 center & $\pi$–$\pi$ clusters stabilize weak Fv–Fv & AC-SINS up; viscosity increase at $\ge$100 mg/mL \cite{Kelly2017,Phan2022,Park2024}\\
+Central H3 triad with $\ge$2 aromatics + positive flank (Arg/Lys) & Cation–$\pi$ aided patching & CIC/HIC both high \cite{Kohli2015,Jain2017}\\
+APR predicted within H3 containing W/Y & Overlap binding/aggregation hotspots & HMW species on stability stress, PEG LLPS risk \cite{Wang2010,Hebditch2019}\\
+\end{tabular}
+\end{center}
+
+\subsection*{Case Evidence}
+\textbf{Engineered paratopes}: Reducing hydrophobic/aromatic variables in V-domains lowers AC-SINS signal and viscosity without potency loss \cite{Geoghegan2016,Dai2024}. \textbf{Library-level H3 motifs}: Trp-rich H3 centers enrich nonspecific binders; multi-Trp needed to drive phenotype \cite{Kelly2017}. \textbf{Panel analytics}: CDR aromatic content explains HIC variability; charge modulates nonlinearly \cite{Hebditch2019,Jain2017}.
+
+\subsection*{Screening Protocol (minimal)}
+\begin{enumerate}
+  \item Compute $\phi_{H3}^{\text{arom}}$, detect [WYF]\{2,3\}, WxxW/WYxY; predict SASA/SAP for aromatics \cite{Jain2017,Park2024}.
+  \item Flag if: $\phi_{H3}^{\text{arom}}\ge 0.30$ \emph{and} exposed aromatics $\ge 2$ \emph{or} any contiguous [WYF]\{2,3\}. 
+  \item Run HIC RT, AC-SINS (salt-matched), CIC; confirm co-alerts. If flagged, mutate to polar aromatics (Y$\rightarrow$S/T/N/Q) or reduce contiguity; re-test \cite{Geoghegan2016,Dai2024}.
+\end{enumerate}
+
+\subsection*{Limits}
+Assay and buffer context matter; HIC$\leftrightarrow$CIC correlations vary by panel; paratope engineering must preserve affinity/epitope geometry \cite{Jain2017,Waibl2021}.
+
+\section*{References}
+\begin{small}
+\begin{thebibliography}{99}
+\bibitem{Hebditch2019} Hebditch M, Roche A, Curtis RA, Warwicker J. \emph{J Pharm Sci}. 2019;108(4):1434–1441. doi:10.1016/j.xphs.2018.11.035.
+\bibitem{Jain2017} Jain T, et~al. \emph{Bioinformatics}. 2017;33(23):3758–3766. doi:10.1093/bioinformatics/btx519.
+\bibitem{Geoghegan2016} Dobson CL, et~al. \emph{Sci Rep}. 2016;6:38644. doi:10.1038/srep38644.
+\bibitem{Park2024} Park S, et~al. \emph{MAbs}. 2024;16(1):2346072. doi:10.1080/19420862.2024.2346072.
+\bibitem{Phan2022} Phan TTQ, et~al. \emph{Biotechnol Prog}. 2022;38(5):e3305. doi:10.1002/btpr.3305.
+\bibitem{Waibl2021} Waibl F, et~al. \emph{Biophys J}. 2021;120(4):740–752. doi:10.1016/j.bpj.2020.12.020.
+\bibitem{Kohli2015} Kohli N, et~al. \emph{MAbs}. 2015;7(4):752–758. doi:10.1080/19420862.2015.1048414.
+\bibitem{Wang2010} Wang X, et~al. \emph{MAbs}. 2010;2(5):452–470. doi:10.4161/mabs.2.5.12645.
+\bibitem{Kelly2017} Kelly RL, et~al. \emph{Nat Biomed Eng}. 2017;1:979–989. doi:10.1038/s41551-017-0161-7.
+\bibitem{Dai2024} Dai W, et~al. \emph{MAbs}. 2024;16(1):2304363. doi:10.1080/19420862.2024.2304363.
+\end{thebibliography}
+\end{small}

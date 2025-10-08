@@ -1,0 +1,108 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{natbib}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, urlcolor=blue, citecolor=blue}
+
+\title{Hydrophobicity / HIC Risk Mapping for GDPa1}
+\date{October 7, 2025}
+\author{BITCORE Research Node}
+
+\begin{document}
+\maketitle
+
+\section*{Scope}
+Map what HIC measures, why it signals risk, and how to exploit it in GDPa1 modeling. Claims are source-backed in-line.
+
+\section{Assay context: GDPa1}
+GDPa1 benchmarks predictions for five properties including Hydrophobicity by HIC; the full dataset spans nine assays across 242--246 IgGs profiled by the PROPHET-Ab platform \citep{GDPa1Rules2025,GDPa1HF,Arsiwala2025}. HIC is one of the core developability readouts in the competition label set \citep{GDPa1Rules2025,GDPa1HF}.
+
+\section{What HIC measures}
+HIC quantifies \emph{apparent surface hydrophobicity} by retention on mildly hydrophobic ligands under high salt, with elution on salt decrease; retention increases with exposed hydrophobic patches and is modulated by salt type, ligand chemistry, and residual charge effects \citep{Ewonde2024, EwondeProtocol2022, Fekete2016, Baca2016}. For mAbs, retention time is a practical proxy for Fv surface hydrophobicity under screening conditions \citep{Waibl2022, Jain2017Bioinf, Karlberg2020}.
+
+\section{Why HIC matters: liabilities signaled}
+\subsection*{Self-association and aggregation}
+High HIC retention associates with increased self-association under salt and with higher HMWS/aggregation risk in panels of clinical-stage mAbs \citep{Estep2015,Hebditch2019}. AC-SINS, a self-association assay, correlates with HIC and flags similar liabilities \citep{Estep2015}. 
+
+\subsection*{Viscosity and solubility}
+Reducing HIC retention via patch edits lowers solution viscosity; conversely, large hydrophobic patches increase aggregation and poor solubility \citep{Armstrong2024,Park2024}. 
+
+\subsection*{Nonspecific binding and PK}
+Hydrophobic CDR patches and elevated HIC retention associate with nonspecific binding, polyreactivity, and poor PK/fast clearance risks \citep{Bailly2020,Grinshpun2021,Ausserwoger2023}.
+
+\section{Sequence/structure determinants}
+Retention is driven by exposed hydrophobic/aromatic residues (Tyr/Phe/Trp) and hydrophobic patch size in CDRs; ligand chemistry and mobile-phase salt further tune magnitude; charge patches can still influence retention under typical HIC conditions \citep{Hebditch2019,Ewonde2024,Waibl2022}. Sequence-only or sequence+structure features predictive of delayed retention include side-chain surface exposure propensities and hydrophobicity scales \citep{Jain2017Bioinf,Waibl2022,Karlberg2020}.
+
+\section{Operational notes for modeling in GDPa1}
+\begin{itemize}\itemsep0.25em
+  \item \textbf{Primary signal}: predict HIC retention as a monotone function of exposed hydrophobic patching on Fv, emphasizing aromatic content and spatial exposure; validate with cross-assay consistency (AC-SINS, PSP/CHO) \citep{Jain2017Bioinf,Estep2015,GDPa1HF}.
+  \item \textbf{Confounders}: salt type/strength, ligand chemistry, and residual electrostatics can shift retention; expect dataset-specific calibration \citep{Ewonde2024,EwondeProtocol2022,Baca2016}.
+  \item \textbf{Risk mapping}: high predicted HIC $\Rightarrow$ elevated risks for self-association/aggregation, viscosity, and nonspecific binding; triangulate with AC-SINS and polyreactivity for stronger liability calls \citep{Estep2015,Armstrong2024,Bailly2020,Grinshpun2021}.
+  \item \textbf{Reference thresholds}: prior clinical-stage panels established empirical HIC ``flag'' zones (``delayed retention'') used in developability triage; adapt thresholds to GDPa1 conditions \citep{Jain2017PNAS,Jain2017Bioinf}.
+\end{itemize}
+
+\section{Minimal feature set for HIC prediction}
+\textbf{High signal, low compute:}
+(1) CDR hydrophobicity and aromatic counts; (2) sequence-derived solvent exposure proxies for Fv residues; (3) hydrophobic patch size metrics; (4) Fv net charge/pI to account for residual electrostatics; train with monotonic regularization toward retention \citep{Jain2017Bioinf,Waibl2022,Karlberg2020,Ewonde2024}.
+
+\section{Takeaway}
+In GDPa1, HIC is the hydrophobic-surface reporter. Elevated retention is a compact surrogate for multi-axis risk: self-association/aggregation, viscosity, and nonspecific binding. Model the patches, calibrate to assay specifics, and fuse with AC-SINS/PSP to de-risk \citep{GDPa1Rules2025,GDPa1HF,Estep2015,Bailly2020,Hebditch2019,Armstrong2024}.
+
+\begin{thebibliography}{99}
+
+\bibitem[GDPa1Rules2025]{GDPa1Rules2025}
+Ginkgo Bioworks. \emph{2025 Ginkgo Antibody Developability Prediction Competition: Official Rules and Participant Agreement}. 2025. Available online.
+
+\bibitem[GDPa1HF]{GDPa1HF}
+Ginkgo Datapoints. \emph{GDPa1: Antibody developability dataset}. Hugging Face dataset card. Accessed 2025.
+
+\bibitem[Arsiwala~\emph{et~al.}, 2025]{Arsiwala2025}
+Arsiwala A., Bhatt R., Yang Y., \emph{et~al.} \emph{A high-throughput platform for biophysical antibody developability assessment to enable AI/ML model training}. bioRxiv, 2025.
+
+\bibitem[Ewonde~\emph{et~al.}, 2024]{Ewonde2024}
+Ewonde R.E., Böttinger K., De Vos J., \emph{et~al.} Selectivity and Resolving Power of HIC Targeting mAb Variant Separation. \emph{Analytical Chemistry} (Open Access), 2024.
+
+\bibitem[Ewonde~\& Desmet, 2022]{EwondeProtocol2022}
+Ewonde R.E., Desmet G. A protocol for setting-up robust hydrophobic interaction chromatography. \emph{Current Protocols}, 2022.
+
+\bibitem[Fekete~\emph{et~al.}, 2016]{Fekete2016}
+Fekete S., Beck A., Fekete J., Guillarme D. Hydrophobic interaction chromatography for the characterization of mAbs. \emph{Journal of Pharmaceutical and Biomedical Analysis}, 2016.
+
+\bibitem[Baca~\emph{et~al.}, 2016]{Baca2016}
+Baca M., \emph{et~al.} A comprehensive study to protein retention in HIC. \emph{Journal of Chromatography B}, 2016.
+
+\bibitem[Waibl~\emph{et~al.}, 2022]{Waibl2022}
+Waibl F., \emph{et~al.} Comparison of hydrophobicity scales for predicting antibody HIC retention. \emph{Frontiers in Molecular Biosciences}, 2022.
+
+\bibitem[Jain~\emph{et~al.}, 2017a]{Jain2017PNAS}
+Jain T., Sun T., Durand S., \emph{et~al.} Biophysical properties of the clinical-stage antibody landscape. \emph{PNAS}, 2017.
+
+\bibitem[Jain~\emph{et~al.}, 2017b]{Jain2017Bioinf}
+Jain T., Boland T., Lilov A., \emph{et~al.} Prediction of delayed retention in HIC from sequence using ML. \emph{Bioinformatics}, 2017.
+
+\bibitem[Estep~\emph{et~al.}, 2015]{Estep2015}
+Estep P., Caffry I., Yu Y., \emph{et~al.} Alternative to HIC for high-throughput characterization (AC-SINS). \emph{mAbs}, 2015.
+
+\bibitem[Hebditch~\emph{et~al.}, 2019]{Hebditch2019}
+Hebditch M., \emph{et~al.} Models for antibody behavior in HIC and self-association. \emph{Journal of Pharmaceutical Sciences}, 2019.
+
+\bibitem[Karlberg~\emph{et~al.}, 2020]{Karlberg2020}
+Karlberg M., \emph{et~al.} QSAR implementation for HIC retention time prediction of mAbs. \emph{International Journal of Molecular Sciences}, 2020.
+
+\bibitem[Armstrong~\emph{et~al.}, 2024]{Armstrong2024}
+Armstrong G.B., \emph{et~al.} A framework for biophysical screening of mutations targeting hydrophobic/electrostatic patches; viscosity linkage to HIC. \emph{Communications Biology}, 2024.
+
+\bibitem[Park~\emph{et~al.}, 2024]{Park2024}
+Park E., \emph{et~al.} Molecular surface descriptors predict antibody developability failures. \emph{Nature Communications}, 2024.
+
+\bibitem[Bailly~\emph{et~al.}, 2020]{Bailly2020}
+Bailly M., \emph{et~al.} Predicting antibody developability profiles through early screening. \emph{mAbs}, 2020.
+
+\bibitem[Grinshpun~\emph{et~al.}, 2021]{Grinshpun2021}
+Grinshpun B., \emph{et~al.} In vitro correlates and in silico properties discriminating fast/slow clearance. \emph{mAbs}, 2021.
+
+\bibitem[Ausserwöger~\emph{et~al.}, 2023]{Ausserwoger2023}
+Ausserwöger H., \emph{et~al.} Surface patches induce nonspecific binding and phase separation. \emph{PNAS}, 2023.
+
+\end{thebibliography}
+\end{document}

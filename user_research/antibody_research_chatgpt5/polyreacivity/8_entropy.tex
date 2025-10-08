@@ -1,0 +1,93 @@
+\section*{Entropy Study: Polyspecificity Risk Stratification Across Surprisal Tiers}
+
+\subsection*{Scope}
+Goal: map sequence-information content (surprisal) to polyspecificity risk classes, grounded in empirical determinants of antibody polyreactivity and nonspecific binding (PSR/PSP, heparin/lysate binding, charge/hydrophobe patches) and paratope dynamics literature.
+
+\subsection*{Definitions}
+\textbf{Polyreactivity / polyspecificity}: non-specific or multi-antigen binding that increases clearance and safety risk in therapeutics \cite{Cunningham2021,Herling2023,Chen2024}.\\
+\textbf{PSR/PSP}: high-throughput assays quantifying nonspecific binding to complex reagents or particles \cite{Xu2013,Makowski2021}.\\
+\textbf{Local surprisal}: $S_k(i)=-\log p(s_{i..i+k-1})$; negative log-probability of a $k$-mer under a background model estimated over human IG variable-region repertoires (or curated developable sets). High $S_k$ indicates locally rare motifs \cite{Humphrey2020}.\\
+\textbf{Entropy}: Shannon sequence entropy over sliding windows (proxy for compositional variability); complements surprisal \cite{Anashkina2021}.
+
+\subsection*{Biophysical priors linking sequence features \textrightarrow\ polyreactivity}
+\begin{itemize}\setlength\itemsep{2pt}
+\item Heavy chain dominance: V\textsubscript{H} drives most polyreactivity; risk rises with positive charge and hydrophobicity (and combinations) \cite{Chen2024}.
+\item Charge patterning: elevated Lys/Arg, high pI, and basic patches promote binding to anionic species (DNA, heparin, lysate components) \cite{Lecerf2023,Cunningham2021}.
+\item Hydrophobic patches: surface hydrophobe clusters control nonspecific binding and even phase separation \cite{Ausserwoger2023}.
+\item Dynamics: polyreactivity associates with flexible, multi-state paratopes; affinity maturation tends to rigidify and reduce polyreactivity \cite{Shehata2019,FQ2020states,FQ2020rigid,Jeliazkov2018,Guthmiller2020,Prigent2018}.
+\item Sequence motifs: bioinformatic analyses implicate increased aromatics/hydrophobes and basic residues in polyreactive sets \cite{Boughter2020,Lecerf2023}.
+\end{itemize}
+
+\subsection*{Hypothesis}
+Local sequence rarity (high $S_k$) indicates atypical physico-chemical microcontexts (e.g., cationic/hydrophobic clusters or unusual loop chemistries) that correlate with: (i) larger positive/negative surface-patch imbalance, (ii) higher conformational heterogeneity, and thus (iii) increased PSR/PSP signal and off-target binding risk. Prediction: monotone non-decreasing relationship between top-quantile $S_k$ burden and polyreactivity readouts, modulated by net charge and patchiness. (Mechanistic support: charge/hydrophobe patches \cite{Chen2024,Ausserwoger2023}; flexibility–polyreactivity linkage \cite{Shehata2019,FQ2020states,Guthmiller2020}.)
+
+\subsection*{Surprisal-tiering protocol (sequence-only; chain-specific)}
+\noindent Background model: IGHV/IGKV human repertoire Markov model (order 1–3) or empirical $k$-mer table; $k\in[3,6]$ recommended \cite{Humphrey2020}.\\
+\textbf{Compute:} for each position/window, $S_k(i)$; summarize per chain by:
+\[
+\text{Burden}_{q} = \frac{1}{L}\sum_{i} \mathbb{I}\{S_k(i)\ge \text{Quantile}_q\},\quad q\in\{90,95,99\}.
+\]
+\[
+\text{S-mean}=\frac{1}{L}\sum_i S_k(i),\quad \text{S-max}=\max_i S_k(i).
+\]
+\textbf{Tiers (per chain, conservative):}\\
+T0 (Baseline): $\text{Burden}_{90}<0.05$ and S-mean $<\mu+\sigma$.\\
+T1 (Mild): $0.05\le\text{Burden}_{90}<0.10$ or S-mean $\in[\mu+\sigma,\mu+2\sigma)$.\\
+T2 (Moderate): $\text{Burden}_{95}\ge0.05$ or S-max $\ge \text{Q}_{99}$.\\
+T3 (High): $\text{Burden}_{99}\ge0.02$ or (\text{S-mean} $\ge \mu+2\sigma$ and $\text{Burden}_{95}\ge0.10$).\\
+(\emph{Notes}: $\mu,\sigma,\text{Q}_p$ derived from a reference set of low-PSR clinical-stage mAbs; thresholds are to be calibrated on labeled PSR/PSP panels \cite{Makowski2021,Herling2023}.)
+
+\subsection*{Risk model (integrates priors + tiers)}
+\[
+\text{logit}(\Pr[\text{polyreactive}]) = \beta_0 + \beta_1 \text{Tier}_{VH} + \beta_2 \text{Tier}_{VK} + \beta_3 \text{NetCharge}_{VH} + \beta_4 \text{HydropPatch}_{VH} + \beta_5 \text{pI}_{VH} + \beta_6 \text{CDR\!-\!H3Len} + \beta_7 \text{FlexProxy},
+\]
+where \textit{HydropPatch} = largest Kyte–Doolittle patch on solvent-exposed surface (from fast model or proxy descriptors), \textit{FlexProxy} = entropy of predicted paratope states or loop RMSF proxy; include interaction (\textit{NetCharge}$\times$Tier) given heavy-chain mediation \cite{Chen2024,Shehata2019,FQ2020states}. Regularize with monotonic constraints on $\beta_1,\beta_3,\beta_4$.
+
+\subsection*{Assay mapping and decision rules}
+\begin{itemize}\setlength\itemsep{2pt}
+\item \textbf{Screen}: PSR/PSP flow assays (lysate, DNA, heparin) \cite{Xu2013,Makowski2021}; orthogonal microfluidic NSB fingerprints \cite{Herling2023}; heparin/HIC as confirmatory \cite{Cunningham2021,Ausserwoger2023}.
+\item \textbf{Cut-lines (to be fit)}: choose PSR MFI thresholds that maximize Youden’s J vs. tiered predictions on a clinical-stage set \cite{Makowski2021,Herling2023}.
+\item \textbf{Escalation}: Tier T2–T3 and/or high PSR $\Rightarrow$ charge trimming (reduce Lys/Arg clusters), de-aromatize exposed patches, or maturation-driven rigidification (sequence-level) \cite{Shehata2019,Cunningham2021,Lecerf2023}.
+\end{itemize}
+
+\subsection*{Validation plan}
+\textbf{Data}: assemble $\geq$200–400 mAbs with PSR/PSP and heparin/HIC labels (public + internal).\\
+\textbf{Models}: baseline logistic vs. isotonic add-on for tiers; nested models with and without surprisal features to test incremental AUC, PR-AUC, calibration, and partial-AUC at low false-positive rates.\\
+\textbf{Ablations}: swap background models (IGH repertoire vs. therapeutic set), vary $k$, chain-only vs. combined, remove charge/hydrophobe covariates to isolate surprisal signal.\\
+\textbf{Mechanistic checks}: enrichment of high-surprisal windows in CDR-H3 and basic/hydrophobe motifs \cite{Boughter2020,Lecerf2023}; correlation of tier with FlexProxy \cite{FQ2020states,Jeliazkov2018}.\\
+\textbf{Prospective}: blinded prospective PSR on 50 designs spanning tiers T0–T3; pre-registered thresholds.
+
+\subsection*{Interpretation}
+\begin{itemize}\setlength\itemsep{2pt}
+\item Surprisal alone is not causal; it priors local rarity that co-travels with risky chemistries and dynamics \cite{Humphrey2020,Chen2024,Ausserwoger2023}.
+\item Expect heaviest lift from V\textsubscript{H} tier, net positive charge, and hydrophobe-patch metrics; dynamics proxies add in flexible families \cite{Chen2024,Shehata2019,FQ2020states}.
+\item Affinity maturation or targeted edits that reduce tiered burden should reduce PSR \cite{Shehata2019,Cunningham2021}.
+\end{itemize}
+
+\subsection*{Limitations}
+Calibration requires matched assay conditions; background models sensitive to training corpora; dynamics proxies are approximations; direct causality unproven—framework is risk stratification, not mechanistic proof \cite{Cunningham2021,Herling2023}.
+
+\subsection*{Minimal methods (reproducible sketch)}
+Build $k$-mer tables from IMGT human IGHV/IGKV. Compute $S_k$ on V-regions, summarize burdens and S-mean/S-max. Derive priors (charge, pI, hydropatch) from sequence. Fit monotone-regularized logistic with 5-fold stratified CV. Report performance with stratified confidence intervals. Release code and reference distributions.
+
+\subsection*{References}
+\begin{small}
+\begin{thebibliography}{99}
+\bibitem{Makowski2021} Makowski EK et al. Highly sensitive detection of antibody nonspecific interactions using flow cytometry. \emph{mAbs} (2021). \url{https://pmc.ncbi.nlm.nih.gov/articles/PMC8317921/}
+\bibitem{Xu2013} Xu Y et al. Addressing polyspecificity of antibodies selected from an in vitro library. \emph{Protein Eng Des Sel} (2013). \url{https://academic.oup.com/peds/article/26/10/663/1513811}
+\bibitem{Cunningham2021} Cunningham O et al. Polyreactivity and polyspecificity in therapeutic antibody development. \emph{mAbs} (2021). \url{https://pmc.ncbi.nlm.nih.gov/articles/PMC8726659/}
+\bibitem{Herling2023} Herling TW et al. Nonspecificity fingerprints for clinical-stage antibodies. \emph{PNAS} (2023). \url{https://www.pnas.org/doi/10.1073/pnas.2306700120}
+\bibitem{Chen2024} Chen HT et al. Human antibody polyreactivity is governed primarily by the heavy chain. \emph{Cell Reports} (2024). \url{https://www.sciencedirect.com/science/article/pii/S2211124724011525}
+\bibitem{Lecerf2023} Lecerf M et al. Polyreactivity of antibodies from different B-cell populations. \emph{Front Immunol} (2023). \url{https://www.frontiersin.org/articles/10.3389/fimmu.2023.1266668/full}
+\bibitem{Ausserwoger2023} Ausserwöger H et al. Surface patches induce nonspecific binding and phase separation. \emph{PNAS} (2023). \url{https://www.pnas.org/doi/10.1073/pnas.2210332120}
+\bibitem{Shehata2019} Shehata L et al. Affinity maturation enhances specificity but compromises conformational stability. \emph{Cell Reports} (2019). \url{https://www.cell.com/cell-reports/pdf/S2211-1247(19)31104-0.pdf}
+\bibitem{FQ2020rigid} Fernández-Quintero ML et al. Local and global rigidification upon antibody affinity maturation. \emph{Front Mol Biosci} (2020). \url{https://pmc.ncbi.nlm.nih.gov/articles/PMC7426445/}
+\bibitem{FQ2020states} Fernández-Quintero ML et al. Antibodies exhibit multiple paratope states influencing V\textsubscript{H}/V\textsubscript{L} dynamics. \emph{Commun Biol} (2020). \url{https://www.nature.com/articles/s42003-020-01319-z}
+\bibitem{Jeliazkov2018} Jeliazkov JR et al. Repertoire analysis suggests rigidification reduces entropic losses. \emph{Front Immunol} (2018). \url{https://www.frontiersin.org/articles/10.3389/fimmu.2018.00413/full}
+\bibitem{Guthmiller2020} Guthmiller JJ et al. Polyreactive B cells selected to provide weakly cross-reactive immunity. \emph{Immunity} (2020). \url{https://www.cell.com/immunity/fulltext/S1074-7613(20)30446-5}
+\bibitem{Prigent2018} Prigent J et al. Conformational plasticity in broadly neutralizing HIV-1 antibodies. \emph{Cell Reports} (2018). \url{https://www.sciencedirect.com/science/article/pii/S2211124718306995}
+\bibitem{Boughter2020} Boughter CT et al. Biochemical patterns of antibody polyreactivity revealed via CDR analysis. \emph{eLife} (2020). \url{https://elifesciences.org/articles/61393}
+\bibitem{Humphrey2020} Humphrey S et al. k-mer surprisal to quantify local sequence complexity. \emph{Bioinformatics} (2020). \url{https://pmc.ncbi.nlm.nih.gov/articles/PMC7648452/}
+\bibitem{Anashkina2021} Anashkina AA et al. Entropy analysis of protein sequences. \emph{Biophys Physicobiol} (2021). \url{https://pmc.ncbi.nlm.nih.gov/articles/PMC8700119/}
+\end{thebibliography}
+\end{small}

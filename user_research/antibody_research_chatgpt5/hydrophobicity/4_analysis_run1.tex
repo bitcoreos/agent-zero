@@ -1,0 +1,132 @@
+```latex
+\section*{Analysis brief: “structure-lite” (IgFold) contact proxies vs observed HIC variance}
+
+\textbf{Scope.} Map 3D-lite features from IgFold-predicted Fv structures to HIC retention variability; identify signal-bearing proxies, confounders, and validation steps.
+
+\textbf{Definition.} “Structure-lite” = single IgFold static model of VH/VL (no MD, no glycan, no explicit resin model, no conformational ensemble).
+
+\textbf{Mechanism premise.} HIC retention increases with size and exposure of hydrophobic surface patches (incl.\ aromatics) under high-salt charge screening; charge distribution and resin chemistry modulate signal.
+```
+
+([PMC][1])
+
+```latex
+\section*{Contact-proxy feature set from IgFold}
+
+\begin{enumerate}\itemsep0.2em
+\item \textbf{Hydrophobic SASA}: sum and fraction of SASA for \{A,V,I,L,M,F,W,Y\}; CDR-specific and global.
+\item \textbf{Largest hydrophobic patch area}: size of maximal connected surface patch (graph on exposed hydrophobes).
+\item \textbf{Aromatic exposure}: SASA and patch density for F/W/Y; CDR-H3 emphasis.
+\item \textbf{Hydrophobic contact density}: per-residue contact counts within $r\le6\,\AA$ limited to hydrophobic pairs; inverse as exposure proxy.
+\item \textbf{KD-weighted SASA}: Kyte–Doolittle hydropathy as weights on per-atom SASA.
+\item \textbf{Surface charge map covariates}: net charge, pI, local positive/negative patch adjacency to hydrophobes (captures electrostatic shielding in salt).
+\item \textbf{Paratope localization indices}: fraction of hydrophobic SASA and aromatic SASA within CDR-H3 apex vs framework.
+\end{enumerate}
+```
+
+([PMC][2])
+
+```latex
+\section*{Why these proxies should track HIC variance}
+
+\textbf{Hydrophobic SASA \& patch size}: retention tied to hydrophobic contact area and patch topology.
+
+\textbf{Aromatics}: exposed F/W/Y strengthen hydrophobic and $\pi$ interactions, increasing retention.
+
+\textbf{Charge context}: high salt screens electrostatics; residual charge topology still modulates effective hydrophobe exposure and selectivity.
+
+\textbf{CDR-H3 focus}: dominant contributor to extreme local hydrophobicity; patch edits shift HIC RT.
+```
+
+([ScienceDirect][3])
+
+```latex
+\section*{Evidence that “lite” structure suffices for RT signal}
+
+\textbf{Sequence-only baselines} predict delayed HIC RT but improve with structure-informed surface terms.
+
+\textbf{QSAR tiers} show added value from homology/MD descriptors over sequence alone, yet coarse structural descriptors already capture major variance.
+
+\textbf{Molecular-surface descriptors} (hydrophobic patches, charge patches) correlate with multiple developability endpoints including HIC-like risks.
+
+\textbf{Static-structure caveat}: ensembles matter; most hydrophobic regions dominate RT but dynamics can shift exposure.
+```
+
+([OUP Academic][4])
+
+```latex
+\section*{Operationalization on IgFold outputs}
+
+\begin{enumerate}\itemsep0.2em
+\item Build Fv with IgFold; resolve side chains; strip glycans.
+\item Compute per-atom SASA (probe 1.4\,\AA); tag hydrophobes and aromatics.
+\item Construct surface graph; report largest hydrophobic patch area, count, and density.
+\item Tally aromatic SASA and centroid clustering in CDR-H3.
+\item Compute KD-weighted SASA and hydrophobic contact density ($\le6\,\AA$).
+\item Map surface charge (pH 7.0–7.4); compute hydrophobe–charge adjacency features.
+\item Fit regularized model to HIC RT: start with elastic net on features; include interaction terms (aromatic\_SASA $\times$ salt\_type, charge\_patch\_adjacency).
+\end{enumerate}
+```
+
+([Nature][5])
+
+```latex
+\section*{Confounders and controls}
+
+Resin ligand chemistry and zeta-potential; salt type and gradient; protein glycosylation; load and temperature; conformational ensembles not captured by a single structure; sequence motifs creating context-dependent exposure.
+\textit{Controls}: stratify by resin; include salt/resin covariates; sensitivity analyses with modest conformer sampling for CDR-H3.
+```
+
+([SpringerOpen][6])
+
+```latex
+\section*{Expected signals (directional)}
+
+\begin{itemize}\itemsep0.2em
+\item $\uparrow$Largest hydrophobic patch area $\Rightarrow$ $\uparrow$RT.
+\item $\uparrow$Aromatic SASA (F/W/Y), esp.\ in CDR-H3 $\Rightarrow$ $\uparrow$RT.
+\item $\uparrow$KD-weighted SASA $\Rightarrow$ $\uparrow$RT.
+\item Hydrophobe–positive charge adjacency under high salt: small $\downarrow$RT or resin-dependent modulation.
+\end{itemize}
+```
+
+([ScienceDirect][3])
+
+```latex
+\section*{Validation plan}
+
+\textbf{Internal:} k-fold CV on GDP-like mAb sets; report $\Delta R^2$ of structure-lite features over sequence baseline, SHAP for patch features.
+
+\textbf{External:} test across resins and salts; check calibration drift.
+
+\textbf{Ablations:} drop aromatics; drop charge-adjacency; swap IgFold with homology model; compare to SAP-style patch metric.
+
+\textbf{Success criterion:} robust gain in explained RT variance with minimal overfit; consistent aromatic/CDR-H3 importance.
+```
+
+([PMC][7])
+
+```latex
+\section*{Limitations}
+
+Single static IgFold may miss exposure fluctuations; no explicit protein–resin physics; glycan and post-translational effects excluded; extreme sequence novelty can degrade structure quality.
+```
+
+([ScienceDirect][8])
+
+```latex
+\section*{Takeaway}
+
+IgFold-derived surface/patch proxies are justified, cheap, and should explain a significant fraction of HIC RT variance; aromatics and largest hydrophobic patch dominate, with charge-context as a secondary modulator. Prior art shows structure-informed features outperform sequence-only baselines while avoiding MD cost; apply with resin/salt controls and ensemble-aware caveats.
+```
+
+([OUP Academic][4])
+
+[1]: https://pmc.ncbi.nlm.nih.gov/articles/PMC3851231/?utm_source=chatgpt.com "Purification of monoclonal antibodies by hydrophobic ..."
+[2]: https://pmc.ncbi.nlm.nih.gov/articles/PMC11168226/?utm_source=chatgpt.com "Molecular surface descriptors to predict antibody ..."
+[3]: https://www.sciencedirect.com/science/article/abs/pii/S0021967304004121?utm_source=chatgpt.com "Effect of surface hydrophobicity distribution on retention ..."
+[4]: https://academic.oup.com/bioinformatics/article/33/23/3758/4083264?utm_source=chatgpt.com "Prediction of delayed retention of antibodies in hydrophobic ..."
+[5]: https://www.nature.com/articles/s41467-023-38063-x?utm_source=chatgpt.com "Fast, accurate antibody structure prediction from deep ..."
+[6]: https://bioresourcesbioprocessing.springeropen.com/articles/10.1186/s40643-024-00738-8?utm_source=chatgpt.com "Modeling the behavior of monoclonal antibodies on ..."
+[7]: https://pmc.ncbi.nlm.nih.gov/articles/PMC6410772/?utm_source=chatgpt.com "Five computational developability guidelines for ..."
+[8]: https://www.sciencedirect.com/science/article/pii/S2667119023000083?utm_source=chatgpt.com "Structural pre-training improves physical accuracy of ..."

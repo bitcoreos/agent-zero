@@ -1,0 +1,62 @@
+\section*{Analysis Brief: IgFold “Structure-Lite” Contact Proxies vs. Observed HIC Variance}
+
+\subsection*{Scope}
+Evaluate whether fast, backbone-focused antibody models (IgFold) yield surface/contacts proxies that explain variance in Hydrophobic Interaction Chromatography (HIC) readouts; identify limits and controls.
+
+\subsection*{Assay & Mechanism Facts}
+HIC retention primarily reflects desolvation and adsorption of exposed hydrophobic surface patches under high salt; retention is modulated by salt identity/strength, pH relative to pI, temperature, gradient shape, ligand chemistry, and load. Hydrophobic patches dominate signal; electrostatics modulate it near pI. \emph{Implication}: features must capture patch size/topology and local charge context. (complete cites in Traceability)
+
+\subsection*{Model Substrate}
+\textbf{IgFold} predicts antibody Fv structures from sequence in seconds with per-residue error estimates; outputs are refined to full-atom models but remain “structure-lite” versus MD ensembles. \emph{Implication}: adequate for coarse patch geometry; limited for conformational averaging and side-chain microstates.
+
+\subsection*{Feature Set: Structure-Lite Contact Proxies}
+Given an IgFold Fv:
+\begin{enumerate}
+\item \textbf{Nonpolar SASA} (NP-SASA): solvent-exposed ASA of aliphatic/aromatic side chains; report total and by domain (VH/VL) and by regions (CDRs vs FR). 
+\item \textbf{Largest Contiguous Hydrophobic Patch} (LCHP): maximum surface patch size (Å$^{2}$) of connected nonpolar vertices on a solvent-excluded mesh; record patch count and Gini of patch areas.
+\item \textbf{Hydrophobic Contact Density} (HCD): count of side-chain heavy-atom contacts within 4.5–5.0 Å where both residues are hydrophobic; stratify by surface accessibility to penalize buried contacts.
+\item \textbf{Aromatic Exposure Index} (AEI): sum of exposed ring-centroid SASA for F, W, Y; separate for CDR-H3 tip vs. scaffold.
+\item \textbf{Patch Charge Context} (PCC): net Coulombic potential from K/R/H/D/E neighbors within 10 Å of the LCHP centroid; captures charge–hydrophobe coupling that affects retention near pI.
+\item \textbf{Patch Hydropathy Gradient} (PHG): local Kyte–Doolittle or Jain HIC-trained scale mean within 6 Å vs. bulk surface mean; proxy for patch contrast.
+\item \textbf{Uncertainty Weights} (UW): per-residue IgFold error used to down-weight contributions; compute feature means across $N$ side-chain rotamer samplings to approximate microstate variance.
+\end{enumerate}
+
+\subsection*{Statistical Plan}
+\begin{enumerate}
+\item \textbf{Targets}: HIC retention time or normalized RT; optionally “delayed retention” classification.
+\item \textbf{Associations}: Spearman $\rho$ between each proxy and HIC; report 95\% CIs via bootstrap; partial correlations controlling for net charge/pI.
+\item \textbf{Models}: Elastic net and gradient boosting on standardized features \{\textsf{NP-SASA, LCHP, HCD, AEI, PCC, PHG}\} + sequence covariates (length, pI, net charge). 
+\item \textbf{Controls}: Column ligand type, salt, pH, gradient slope as categorical/continuous covariates if available; batch and date as random effects.
+\item \textbf{Uncertainty propagation}: Monte Carlo over rotamers and IgFold error masks; report variance explained $R^{2}$ distributions.
+\end{enumerate}
+
+\subsection*{Expected Signal}
+\textbf{Literature-anchored priors}:
+\begin{itemize}
+\item Structure-based surface patch descriptors (AggScore/MOE patches, SAP-like metrics) correlate with HIC and aggregation; sequence-only hydropathy is weaker. 
+\item Increased structural fidelity (MD-relaxed ensembles) improves HIC prediction over homology models; thus IgFold likely performs between sequence-only and MD. 
+\item Conformational ensembles influence apparent hydrophobicity; single static structures can under- or over-estimate patch sizes on flexible CDRs, especially H3.
+\end{itemize}
+\textbf{Inference}: IgFold proxies should capture \emph{directional} HIC risk (rank-ordering) but will under-explain variance when patch expression is conformation-dependent or when buffer/column effects dominate.
+
+\subsection*{Variance Sources to Account For}
+\begin{enumerate}
+\item \textbf{Assay}: salt type/strength, pH vs. pI, temperature, gradient program, stationary phase ligand density/chemistry, load, system salt memory and column aging.
+\item \textbf{Analyte}: local positive patches adjacent to hydrophobes, Met/Trp oxidation state, glycan heterogeneity, ADC payloads (if any), post-translational states.
+\item \textbf{Modeling}: homology/template bias, side-chain placement, lack of dynamics; different hydrophobicity scales produce materially different HIC predictions.
+\end{enumerate}
+
+\subsection*{Decision Rules (practical)}
+\begin{itemize}
+\item Flag as HIC-risk if any of: top-decile LCHP, top-decile AEI in CDR-H3, PCC indicates locally positive environment, or NP-SASA $>$ threshold calibrated on a reference panel.
+\item For borderline cases, require ensemble stability: proxies must remain above thresholds across uncertainty samplings.
+\end{itemize}
+
+\subsection*{Limitations}
+Structure-lite proxies lack explicit solvent and conformational averaging; charge–hydrophobe coupling is pH-dependent; assay-to-assay differences can exceed feature differences; generalization across column chemistries is non-trivial.
+
+\subsection*{Next Validation}
+Reproduce published HIC panels; benchmark: (i) sequence-only hydropathy+exposure estimates, (ii) IgFold proxies (this brief), (iii) MD-relaxed ensembles. Compare AUROC for delayed-retention classification and $R^{2}_{\mathrm{ext}}$ for RT prediction; report calibration curves. Use per-study salt/pH/column covariates where disclosed.
+
+\subsection*{Key Takeaway}
+Use IgFold to get fast, uncertainty-aware hydrophobic patch proxies that rank HIC risk and explain a \emph{portion} of variance; expect improved but sub-MD performance; always co-model charge and assay conditions; validate per-laboratory protocol.

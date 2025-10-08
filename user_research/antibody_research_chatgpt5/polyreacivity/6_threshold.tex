@@ -1,0 +1,75 @@
+\section*{Threshold Mapping: VH/VL Charge Imbalance $\leftrightarrow$ PR\_CHO Excursions}
+
+\subsection*{Scope}
+Map sequence/electrostatic thresholds that elevate polyreactivity against CHO lysate (PR\_CHO). Use charged-residue distributions and VH/VL imbalance descriptors to flag excursion risk.
+
+\subsection*{Assay + Construct Definitions}
+\textbf{PR\_CHO}: flow-cytometry readout of non-specific binding to CHO-derived polyspecificity reagents (SMP/SCP) or bead-conjugated lysates; higher signal = more polyreactivity \cite{huggingface_ginkgo_blog,makowski_psp,arsi_WP, xu_psr}.\\
+\textbf{Charge terms at pH 7.4}: $Q_{VH}$, $Q_{VL}$ = net charges of VH and VL; $\Delta Q = Q_{VH}-Q_{VL}$; FvCSP $= Q_{VH}\cdot Q_{VL}$ (sequence-level); \textbf{SFvCSP} = structural variant restricted to exposed residues \cite{raybould_pnas2019, tap_site}.\\
+\textbf{Patch metrics}: PPC/PNC = patch-weighted positive/negative charge in CDR vicinity \cite{raybould_pnas2019, tap_site}.\\
+\textbf{Heavy-chain dominance}: CDR-H1/H2/H3 positive charge and hydrophobicity are primary drivers of polyreactivity \cite{chen_cellrep2024}.
+
+\subsection*{Mechanistic linkage}
+Anionic CHO lysate components (GAGs, nucleic acids, acidic glyco/lipoproteins) bind cationic/paratope-exposed patches. Elevated paratope-positive potential, especially on VH CDRs, increases PR\_CHO. Large VH/VL charge asymmetry can amplify long-range electrostatic attraction and surface stickiness; SFvCSP captures this asymmetry on structure \cite{cunningham_review, chen_cellrep2024, raybould_pnas2019}.
+
+\subsection*{Evidence-backed thresholds}
+\begin{itemize}\setlength\itemsep{2pt}
+\item \textbf{PR\_CHO excursion gate (assay-side)}: PSR/CHO-SMP categorization threshold around flow-MFI $\approx 0.27$ used for polyreactive vs. non-polyreactive bins in validation studies; values above this gate denote excursions \cite{makowski_thesis}.
+\item \textbf{Patch risk (sequence/structure-side)}: PPC red-flag if $>$ clinical-stage envelope (TAP); PPC values exceeding the 100th percentile of therapeutics indicate high non-specificity risk, and 95–100th percentile yields amber \cite{tap_site, raybould_ctx2024}.
+\item \textbf{Charge imbalance (structure-side)}: SFvCSP more negative than TAP red boundary indicates strong VH/VL opposite-charge bias; therapeutics avoid very negative SFvCSP due to colloidal/viscosity risks; these same electrostatics co-occur with non-specificity liabilities \cite{raybould_pnas2019, deane_qsar}.
+\item \textbf{Heavy-chain cationicity (sequence-side)}: enrichment of Lys/Arg in CDR-H3 and positive paratope potential associates with higher polyreactivity/PSR \cite{chen_cellrep2024, lecerf_polyreact2023}.
+\end{itemize}
+
+\subsection*{Operational mapping rule-set}
+Let $\mathcal{R}$ flag PR\_CHO excursion risk if any of the following hold:
+\[
+\mathcal{R} = 
+\begin{cases}
+\text{High risk}, & \text{if } \text{PPC}\in[95\%,100\%]_{\text{CST}}\ \lor\ \text{PPC}>\text{TAP red}\ \lor\ \text{SFvCSP}<\text{TAP red} \\
+& \text{or } \left(Q_{VH}\gg 0\ \land\ \text{paratope }(+)\text{ patch on VH CDRs}\right) \\
+\text{Moderate}, & \text{if } \text{PPC in amber}\ \lor\ \text{SFvCSP in amber}\ \lor\ \Delta Q\ \text{large and }Q_{VH}>0 \\
+\text{Low}, & \text{if } \text{PPC below amber}\ \land\ \text{SFvCSP within therapeutic band}\ \land\ Q_{VH}\approx Q_{VL}\le 0
+\end{cases}
+\]
+Interpretation: PPC exceedance is a direct paratope-positivity signal; SFvCSP exceedance captures VH/VL charge asymmetry that often co-travels with non-specificity; heavy-chain cationicity is a primary causal lever. Use PR\_CHO assay thresholds (e.g., MFI $\gtrsim 0.27$) as empirical excursion cut-points for labeling during model calibration \cite{makowski_thesis, tap_site, chen_cellrep2024, raybould_pnas2019}.
+
+\subsection*{Minimal feature set for screening}
+\begin{enumerate}\setlength\itemsep{2pt}
+\item Compute $Q_{VH}$, $Q_{VL}$ at pH 7.4; derive $\Delta Q$, FvCSP.
+\item Model VH/VL structures (ABodyBuilder2/IgFold acceptable) to compute SFvCSP and PPC around CDRs.
+\item Quantify paratope electrostatic potential on VH CDR surface; record Lys/Arg counts in CDR-H3.
+\item Label PR\_CHO excursions using assay gate; regress PR\_CHO vs.\ \{PPC, SFvCSP, $Q_{VH}$, $\Delta Q$\}; expect strongest weights on PPC and VH terms \cite{raybould_pnas2019, chen_cellrep2024}.
+\end{enumerate}
+
+\subsection*{Mitigation levers}
+Reduce VH-CDR cationicity (K/R$\rightarrow$E/D/S/Y swaps that preserve affinity), smooth paratope potential, and re-balance VH/VL to move SFvCSP toward therapeutic band; such balancing has improved PK and reduced non-specificity in prior work \cite{datta_mannan, cunningham_review}.
+
+\subsection*{Caveats}
+PSR vs.\ PSP implementations differ in dynamic range; cross-lab calibration is required. Charge metrics correlate but are not determinative; hydrophobic patches and loop dynamics also modulate PR\_CHO \cite{makowski_psp, jain_review2024}.
+
+\subsection*{Key thresholds to implement (pragmatic)}
+\begin{itemize}\setlength\itemsep{2pt}
+\item \textbf{Assay label}: PR\_CHO $>$ MFI $\sim$0.27 $\Rightarrow$ excursion (tune per lab) \cite{makowski_thesis}.
+\item \textbf{PPC}: $>$ TAP red (above CST max) $\Rightarrow$ high risk; 95–100\% $\Rightarrow$ amber \cite{tap_site, raybould_ctx2024}.
+\item \textbf{SFvCSP}: below TAP red bound $\Rightarrow$ high risk; 0–5\% $\Rightarrow$ amber \cite{raybould_pnas2019, deane_qsar}.
+\end{itemize}
+
+\subsection*{Outcome}
+Use PPC and SFvCSP as primary gates; use $Q_{VH}$/$\Delta Q$ as amplifiers; validate against internal PR\_CHO to set lab-specific cutoffs.
+
+\begin{thebibliography}{99}\footnotesize
+\bibitem{huggingface_ginkgo_blog} Ginkgo Datapoints Blog. ``How to Train an Antibody Developability Model.'' 2025. URL.
+\bibitem{makowski_psp} Makowski EK et al. \emph{mAbs} / \emph{J Immunol Methods} reports on PSP assay; 2021. URL.
+\bibitem{arsi_WP} Arsiwala A et al. ``High-throughput platform for biophysical antibody assessment.'' bioRxiv, 2025. URL.
+\bibitem{xu_psr} Xu Y et al. \emph{Protein Eng Des Sel}, 2013. PSR assay. URL.
+\bibitem{raybould_pnas2019} Raybould MIJ et al. \emph{PNAS}, 2019. TAP, SFvCSP/PPC metrics. URL.
+\bibitem{tap_site} OPIG TAP web app. Metric definitions and flag bands. 2025. URL.
+\bibitem{chen_cellrep2024} Chen HT et al. \emph{Cell Reports}, 2024. Heavy-chain CDR charge drives polyreactivity. URL.
+\bibitem{cunningham_review} Cunningham O et al. \emph{mAbs}, 2021. Review on polyreactivity mechanisms. URL.
+\bibitem{raybould_ctx2024} Raybould MIJ et al. \emph{Commun Biol}, 2024. Contextualizing TAP risk flags. URL.
+\bibitem{deane_qsar} Deane CM. UK QSAR talk on SFvCSP risk directionality, 2019. URL.
+\bibitem{datta_mannan} Datta-Mannan A et al. \emph{mAbs}, 2015. Balancing CDR charge improves PK. URL.
+\bibitem{lecerf_polyreact2023} Lecerf M et al. \emph{Front Immunol}, 2023. Positive-charge enrichment in CDR-H3. URL.
+\bibitem{makowski_thesis} Makowski E. PhD thesis, 2023. PSR MFI gate $\sim$0.27; assay calibration. URL.
+\bibitem{jain_review2024} Jain T et al. \emph{mAbs}, 2024. In vitro correlates and PK relationships. URL.
+\end{thebibliography}

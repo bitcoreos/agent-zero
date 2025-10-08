@@ -1,0 +1,80 @@
+\section*{Motif Atlas: Basic Residue Run-Length Patterns that Trigger QA Escalations}
+
+\subsection*{Scope}
+Primary sequence motifs with enriched basic residues (K, R, H) that elevate risk of expression failure, proteolysis, non-specific binding/polyreactivity, or unintended cellular trafficking. Evidence-focused; minimal heuristics for automated flags.
+
+\subsection*{Notation}
+B ≔ {K,R}; regex-like patterns in \texttt{monospace}. CDR ≔ IMGT CDRs for antibodies.
+
+\subsection*{Summary Table (flag rules + rationale)}
+\begin{tabular}{p{3.0cm} p{3.6cm} p{5.6cm} p{4.8cm}}
+\hline
+\textbf{Class} & \textbf{Pattern (example regex)} & \textbf{Primary Risk Mechanism} & \textbf{Flag Heuristic}\\
+\hline
+Polybasic stretch (translation/RQC) & \texttt{K\{9,\}} or \texttt{R\{9,\}} (amino-acid level)\par \textit{Note: codon-level poly(A) (AAA)$\ge$9–12} & Ribosome stalling on poly(A)/polybasic tracts → ribosome collisions → RQC, aborted translation, low yield \cite{Matsuo2017,Tesina2019,DOrazio2021}. & Hard flag if any \texttt{K} or \texttt{R} run length $\ge$9. If present, \textbf{escalate codon check}: AAA-rich vs AAG; document RQC risk.\\
+\hline
+NLS-like basic cluster (monopartite) & \texttt{K(K|R)X(K|R)}; exemplar SV40 T-Ag \texttt{PKKKRKV} (5 contiguous basic) & Importin-$\alpha/\beta$ recognition → nuclear localization; in biologics, potential off-target uptake or altered trafficking \cite{Hodel2001,NguyenBa2009,Lu2021}. & Soft flag if motif present; \textbf{hard flag} if $\ge$4 contiguous B in solvent-exposed/linker regions.\\
+\hline
+NLS-like basic cluster (bipartite) & \texttt{KRX\{10-12\}KRXK} & Same as above (two basic clusters with 10–12 aa spacer) \cite{Lu2021,NguyenBa2009}. & Soft flag; \textbf{hard flag} if exposed and within flexible linkers.\\
+\hline
+Heparin/HS-binding basic cluster (Cardin–Weintraub) & \texttt{XBBXBX} or \texttt{XBBBXXBX} (B=K/R) & GAG binding → non-specific interactions, PSR/PSP positives, clearance risk \cite{CardinWeintraub,Fromm1997,PLOS2019}. & Hard flag if motif occurs in CDRs or exposed linkers; require PSP/PSR check and HIC/AC-SINS context.\\
+\hline
+Consecutive arginines in CDRs & \texttt{R\{2,\}} within CDRs (esp. H3) & Positive charge patches drive non-specific and self-interactions; viscosity, clearance penalties \cite{WolfPerez2022,Lecerf2023,Chen2024}. & Hard flag if \texttt{RRR} in any CDR or net positive CDR patch; couple to PSP/PSR and self-association assays.\\
+\hline
+PC/furin cleavage site & \texttt{R-X-(K|R)-R} (P4–P1) & Proprotein convertase cleavage in secretory pathway → clipping of linkers/hinges/fusions \cite{Garten2018,Lubinski2022,UniProtFurin}. & Hard flag if motif is solvent-exposed and in junctions; recommend PCSK susceptibility modeling or in vitro protease challenge.\\
+\hline
+Histidine clusters (pH labile) & \texttt{H\{4,\}} or dense H in CDRs & pH-dependent binding and assay artifacts; can inflate polyreactivity after low-pH exposure \cite{Klaus2021,Schroter2015,Arakawa2023}. & Soft flag if H-cluster in CDRs; \textbf{escalate} if low-pH steps exist (Protein A elution, VI).\\
+\hline
+\end{tabular}
+
+\subsection*{Detection Rules (minimal, automatable)}
+\begin{itemize}\setlength\itemsep{2pt}
+\item \textbf{Runs}: scan for \texttt{K\{n,\}}, \texttt{R\{n,\}}. Set $n{=}9$ for RQC concern; $n{=}4$ for trafficking/non-specificity concern.
+\item \textbf{NLS}: search \texttt{K(K|R)X(K|R)}, \texttt{KRX\{10-12\}KRXK}; require solvent exposure or linker context for hard flag.
+\item \textbf{GAG-binding}: sliding windows (6–8 aa) matching \texttt{XBBXBX}/\texttt{XBBBXXBX}.
+\item \textbf{CDR-focused arginine}: locate \texttt{R\{2,\}} inside IMGT CDRs; combine with local pI and electrostatic patch metrics.
+\item \textbf{Furin}: search \texttt{R-X-(K|R)-R}; map to junctions/hinge/linker; check accessibility.
+\item \textbf{Histidine}: \texttt{H\{4,\}} in CDRs or clusters with nearby acidic residues; annotate pH-lability risk.
+\end{itemize}
+
+\subsection*{Why QA Escalates}
+\begin{enumerate}\setlength\itemsep{2pt}
+\item \textbf{Expression risk}: poly(A)/polybasic runs cause ribosome collisions and RQC; Matsuo quantified thresholds ($>$8–12 K codons) linking length to repression \cite{Matsuo2017}; poly(A) tracts stall eukaryotic ribosomes \cite{Tesina2019,DOrazio2021}.
+\item \textbf{Non-specificity/PSR/PSP}: positive patches and consecutive arginines promote nonspecific binding and self-association impacting viscosity and PK \cite{WolfPerez2022,Lecerf2023,Chen2024}.
+\item \textbf{Trafficking}: classical NLS motifs with 4–5 contiguous basics (SV40 PKKKRKV) or bipartite clusters drive nuclear import via importin-$\alpha/\beta$ \cite{Hodel2001,NguyenBa2009,Lu2021}.
+\item \textbf{Matrix binding}: Cardin–Weintraub basic patterns confer heparin/HS binding \cite{CardinWeintraub,Fromm1997,PLOS2019}.
+\item \textbf{Proteolysis}: RX(K/R)R motifs are preferred furin/PC cleavage sites in the secretory route \cite{Garten2018,Lubinski2022,UniProtFurin}.
+\item \textbf{pH-labile binding}: histidine-enriched CDRs can create pH-dependent binding and acid-exposure-induced polyreactivity \cite{Klaus2021,Schroter2015,Arakawa2023}.
+\end{enumerate}
+
+\subsection*{Escalation Matrix (actionable)}
+\begin{itemize}\setlength\itemsep{2pt}
+\item \textbf{Run-length $\ge$9 K/R}: classify as \textit{RQC-high}; codon audit; redesign or recode.
+\item \textbf{CDR \texttt{RRR} or 4+ contiguous B anywhere exposed}: \textit{Non-specificity-high}; do PSR/PSP, SIC/AC-SINS, HIC; mutate to neutral/acidic.
+\item \textbf{NLS patterns in linkers/termini}: \textit{Trafficking risk}; mutate to break motif.
+\item \textbf{GAG motifs in CDRs/linkers}: \textit{Matrix-binding risk}; test heparin/HS ELISA; reduce B density/spacing.
+\item \textbf{Furin motif at junctions}: \textit{Proteolysis risk}; mutate P1–P4 to break RX(K/R)R; protease challenge study.
+\item \textbf{H clusters + low-pH processing}: \textit{pH artifact risk}; neutral-pH elution/VI; histidine rational edits if needed.
+\end{itemize}
+
+\subsection*{Key References}
+\begin{thebibliography}{99}\setlength{\itemsep}{1pt}
+\bibitem{Matsuo2017} Matsuo Y \textit{et al.} “Ubiquitination of stalled ribosome…” \textit{Nat Commun} 2017. Evidence that $>$8–12 lysine codons repress translation $\sim$20-fold in yeast.
+\bibitem{Tesina2019} Tesina P \textit{et al.} “Molecular mechanism of translational stalling by inhibitory codon pairs and poly(A).” \textit{EMBO J} 2019.
+\bibitem{DOrazio2021} D’Orazio KN \& Green R. “Ribosome states signal RNA quality control.” \textit{Mol Cell} 2021.
+\bibitem{Hodel2001} Hodel MR \textit{et al.} “Dissection of a nuclear localization signal.” \textit{J Biol Chem} 2001. SV40 PKKKRKV as canonical monopartite NLS.
+\bibitem{NguyenBa2009} Nguyen Ba AN \textit{et al.} “A simple HMM for NLS.” \textit{BMC Bioinformatics} 2009. cNLS consensus K(K/R)X(K/R) and KRX$_{10–12}$KRXK.
+\bibitem{Lu2021} Lu J \textit{et al.} “Types of nuclear localization signals.” \textit{Cell Commun Signal} 2021.
+\bibitem{CardinWeintraub} Cardin AD \& Weintraub HJ. “Molecular modeling of proteoglycan-protein interactions.” \textit{Arteriosclerosis} 1989. Cardin–Weintraub XBBXBX/XBBBXXBX.
+\bibitem{Fromm1997} Fromm JR \textit{et al.} “Pattern and spacing of basic amino acids in heparin binding sites.” \textit{Arch Biochem Biophys} 1997.
+\bibitem{PLOS2019} Pijuan-Sala B \textit{et al.} “HS-binding domain mapping with CW motifs.” \textit{PLoS ONE} 2019.
+\bibitem{WolfPerez2022} Wolf Pérez AM \textit{et al.} “Assessment of therapeutic antibody developability…” 2022. Notes that multiple consecutive arginines facilitate nonspecific interactions.
+\bibitem{Lecerf2023} Lecerf M \textit{et al.} “Polyreactivity of antibodies… distinct sequence patterns.” \textit{Front Immunol} 2023. Arg enrichment in HCDR3 correlates with polyreactivity.
+\bibitem{Chen2024} Chen Y \textit{et al.} “Multi-objective engineering of therapeutic antibodies.” PhD thesis + Nat Biomed Eng 2023 derivative. Positive CDR charge correlates with non-specificity.
+\bibitem{Garten2018} Garten W \textit{et al.} “Proprotein convertases.” \textit{Int J Mol Sci} 2018. Furin prefers RX(K/R)R.
+\bibitem{Lubinski2022} Lubinski B \textit{et al.} “Intrinsic furin-mediated cleavability S1/S2.” \textit{J Virol} 2022. Motif P4–P1 R-X-(K/R)-R.
+\bibitem{UniProtFurin} UniProt Furin (P09958): consensus RX(K/R)R and substrates.
+\bibitem{Klaus2021} Klaus T \textit{et al.} “pH-responsive antibodies.” \textit{J Biomed Sci} 2021.
+\bibitem{Schroter2015} Schröter C \textit{et al.} “Generic approach to engineer antibody pH-switches.” \textit{mAbs} 2015.
+\bibitem{Arakawa2023} Arakawa T \textit{et al.} “Mechanistic insight into poly-reactivity…” \textit{Antibodies} 2023. Acid exposure and histidine contexts can elevate polyreactivity.
+\end{thebibliography}

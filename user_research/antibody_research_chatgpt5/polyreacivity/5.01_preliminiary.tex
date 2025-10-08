@@ -1,0 +1,91 @@
+\section*{Polyreactivity / PSP Signatures: CHO-Lysate Determinants and Entropy-Linked Risks}
+
+\subsection*{Definition}
+Polyreactivity = low-affinity binding to many unrelated biomolecules; operationalized via PSR/PSP readouts against complex lysates (CHO SMP, Sf9 SMP/SCP) and surrogate panels (heparin, DNA, lipids).
+
+\subsection*{Mechanistic model}
+\begin{itemize}\setlength\itemsep{2pt}
+\item \textbf{Electrostatics}: excess positive surface potential in V-domains (CDR K/R clusters, high pI, charge patchiness) drives attraction to anionic species in lysates (GAGs, nucleic acids, acidic glyco/lipoproteins).
+\item \textbf{Hydrophobics}: exposed aromatics (F/W/Y) and aliphatic patches enable water-release contacts with membrane/matrix proteins and lipids.
+\item \textbf{Conformational entropy}: flexible paratopes (high sequence/structural entropy, longer/mobile loops) sample microstates that accommodate diverse ligands; acid or arginine substitutions can unmask/induce cryptic polyreactivity.
+\end{itemize}
+
+\subsection*{CHO lysate binding determinants (PSR/PSP context)}
+\begin{itemize}\setlength\itemsep{2pt}
+\item \textbf{Reagent composition}: biotinylated soluble membrane proteins (SMP) from CHO provide heterogeneous anionic and hydrophobic targets; capture enables FACS or bead assays.
+\item \textbf{Primary drivers in antibodies}: 
+  \begin{enumerate}\setlength\itemsep{1pt}
+  \item CDR net positive charge and uneven charge distribution (local patches).
+  \item Aromatic content and hydrophobic surface area in CDRs.
+  \item Heavy-chain dominance of these features (esp. HCDR3).
+  \end{enumerate}
+\item \textbf{Matrix side drivers}: abundance of negatively charged glycans, nucleic acids, and acidic membrane proteins in CHO SMP elevates charge-mediated stickiness; lipid/protein micelles expose hydrophobic domains.
+\end{itemize}
+
+\subsection*{PSR vs PSP assays and signatures}
+\begin{itemize}\setlength\itemsep{2pt}
+\item \textbf{PSR}: CHO (and Sf9) SMP/SCP lysate binding reported as MFI; correlates with cross-interaction and in vivo clearance surrogates.
+\item \textbf{PSP}: particle-based multiplex readout for non-specificity; higher sensitivity at low material; strong agreement with CHO SMP and OVA proxy screens.
+\item \textbf{Assay clustering}: PSR/BVP/CIC/CSI form charge-dominant cluster; HIC/SMAC form hydrophobicity-dominant cluster; interplay at high HIC salt.
+\end{itemize}
+
+\subsection*{Entropy-linked polyspecificity risks}
+\begin{itemize}\setlength\itemsep{2pt}
+\item \textbf{Sequence entropy signature}: polyreactive sets show distinct Shannon-entropy distributions; elevated diversity at key CDR positions aligns with broadened microstate sampling.
+\item \textbf{Induced polyreactivity}: acid processing increases conformational plasticity and non-specific binding; arginine-enrichment in CDRs boosts low-affinity promiscuity.
+\end{itemize}
+
+\subsection*{Quantitative predictors (sequence-level)}
+For Fv or CDR-only features, compute:
+\[
+\text{NetCDRCharge} = \sum (K+R) - (D+E),\quad \text{AbsCharge} = |K+R| + |D+E|
+\]
+\[
+\text{Aro} = F+W+Y,\quad \text{pI}_{\mathrm{V}},\quad \text{Patch}_{+}=\max\limits_{\text{surface}}(\phi_{+}),\quad L_{\mathrm{HCDR3}},\quad \text{ArgCount}_{\mathrm{CDR}}
+\]
+\[
+H_{\mathrm{seq}} = -\sum_{i} p_{i}\log p_{i}\ \ (\text{per CDR position})
+\]
+Empirical risk signals: high NetCDRCharge, high Aro, imbalanced patches, long HCDR3, high ArgCount, elevated $H_{\mathrm{seq}}$.
+
+\subsection*{Cross-assay expectations}
+\begin{center}
+\begin{tabular}{lccc}
+\hline
+\textbf{Liability} & \textbf{PSR/PSP} & \textbf{CIC/BVP} & \textbf{HIC}\\
+\hline
+High $+$ charge (CDR) & $\uparrow$ & $\uparrow$ & $\downarrow$ retention at low salt; interplay at high salt\\
+Aromatic patch & $\uparrow$ & $\uparrow$ (context) & $\uparrow$ retention\\
+Charge balance (evenness) & $\downarrow$ risk & $\downarrow$ & mixed\\
+Entropy/flexibility & $\uparrow$ & $\uparrow$ & context-dependent\\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{PK/clearance linkage}
+Excess positive patches and hydrophobics increase endothelial/membrane binding and FcRn off-target interactions, elevating pinocytosis and clearance; charge \emph{balance}, not just pI, governs exposure.
+
+\subsection*{Engineering controls (prioritized)}
+\begin{enumerate}\setlength\itemsep{2pt}
+\item \textbf{Neutralize CDR charge patches}: K/R$\rightarrow$Q/N/E/D swaps at solvent-exposed hot spots; aim NetCDRCharge $\approx$ 0 with balanced local electrostatics.
+\item \textbf{De-aromatize exposed CDR hydrophobics}: F/W/Y$\rightarrow$Y/S/T/E contextually; retain core paratope aromatics only.
+\item \textbf{Reduce Arg density}: R$\rightarrow$K or polar residues; Arg hotspots are high-risk for PSR/PSP.
+\item \textbf{Shorten or rigidify HCDR3}: trim insertions; introduce glycines only if not increasing flexibility; consider Pro/Gly patterns to tune backbone entropy.
+\item \textbf{Process control}: avoid low-pH elutions; use neutral-pH viral inactivation and non-acid Protein A alternatives to prevent induced polyreactivity.
+\end{enumerate}
+
+\subsection*{Minimal screening panel (low material)}
+PSR-CHO SMP FACS or bead, PSP flow assay, BVP-ELISA, CIC, HIC. Accept if: PSR/PSP within panel interquartile; CIC moderate; HIC retention not extreme; no induced polyreactivity after low-pH challenge.
+
+\subsection*{Modeling recipe (practical)}
+\begin{enumerate}\setlength\itemsep{2pt}
+\item Features: \{NetCDRCharge, AbsCharge, pI$_V$, Aro, Patch$_{+}$, L$_{\mathrm{HCDR3}}$, ArgCount, $H_{\mathrm{seq}}$\}.
+\item Train separate regressors for PSR/PSP (charge-dominant) and HIC (hydrophobe-dominant); fuse via two-head model.
+\item Calibrate to cutoffs tied to internal PSR/PSP percentiles; flag sequences exceeding any head’s 90th percentile risk.
+\end{enumerate}
+
+\subsection*{Key takeaways}
+CHO-PSR signals primarily report charge- and hydrophobe-driven non-specificity with heavy-chain emphasis; entropy/flexibility elevates promiscuity and can be process-induced; mitigate by charge balancing and patch pruning; validate with PSR/PSP+CIC/HIC orthogonality.
+
+\subsection*{References (inline identifiers)}
+Xu~2013; US20160077105A1; Hebditch~2019; Rabia~2018; Cunningham~2021; Makowski~2021; Boughter~2020; Arakawa~2023; Chen~2024; Waight~2023.

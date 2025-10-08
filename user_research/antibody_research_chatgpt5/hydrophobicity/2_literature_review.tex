@@ -1,0 +1,76 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{siunitx}
+\usepackage{enumitem}
+\setlist{nosep,leftmargin=1.1em}
+
+\title{Salt–Mediated Retention Mechanics and Kyte–Doolittle Modulation Patterns: Focused Literature Review}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section*{Scope}
+Retention in hydrophobic interaction chromatography (HIC) under salt gradients; ion–specific effects (Hofmeister); solvophobic theory parameterization; sequence/surface determinants; Kyte–Doolittle (KD) hydropathy signal formation and limits.
+
+\section{Mechanistic core: solvophobic salt control}
+\textbf{Claim.} Protein retention in HIC increases with kosmotropic salt activity due to the hydrophobic effect; the dependence is captured by solvophobic theory with salt \emph{molality} $m$ and the salt’s \emph{molal surface–tension increment} $\left(\mathrm{d}\sigma/\mathrm{d}m\right)$ as key drivers \cite{Melander1977,Melander1984}. \\
+\textbf{Model.} In isocratic HIC,
+\begin{equation}
+\ln\!\big(k' - k'_M\big) \;=\; \ln k'_0 \;-\; b\,m \;+\; c\,m^{-1} \;+\; \alpha\, m,
+\quad \text{with}\;\; k'=\varphi(\varepsilon_p + K),
+\label{eq:solvophobic}
+\end{equation}
+where $k'$ is the solute retention factor, $k'_M$ the apparent salt term, $\varphi$ the phase ratio, $\varepsilon_p$ intraparticle porosity, $K$ the Henry coefficient, and $\{b,c,\alpha\}$ empirical/thermodynamic lumped parameters; at high $m$ the dependence reduces to $\ln(k'-k'_M)\approx A+\alpha m$ (exponential retention increase vs.\ $m$) \cite{Melander1984,Creasy2018}. \\
+\textbf{Ion specificity.} Relative retention amplification follows Hofmeister-type ordering; strong kosmotropes (e.g.\ sulfate) raise $\sigma$ and promote retention; chaotropes can weaken it or invert trends, system-dependent \cite{Gregory2022,Melander1977}.
+
+\section{Gradient behavior and non-monotonic phenomena}
+\textbf{Standard HIC operation.} Bind at high salt, elute with descending salt gradient; retention drops as $m\downarrow$ \cite{Queiroz2001}. \\
+\textbf{U-shaped $k(m)$ curves.} Some proteins show increased retention again at low $m$ (rebinding/trapping) yielding U-shaped $k$ vs.\ $m$; outcome governed by normalized gradient slope; steep gradients can overtake the zone and cause partial elution or capture \cite{Creasy2018}. \\
+\textbf{Process lever.} Choice of salt (e.g.\ \ce{(NH4)2SO4} vs.\ \ce{NaCl}), start $m$, gradient slope, temperature, and resin hydrophobicity co-determine elution window and recovery \cite{Creasy2018,LCGC2019}.
+
+\section{Protein determinants of retention}
+\textbf{Hydrophobic patches dominate.} Surface-exposed apolar patches of sufficient size produce stronger retention than uniformly distributed mild hydrophobicity; patch-size thresholds arise from hydrophobic effect statistics \cite{Waibl2022}. \\
+\textbf{Charge coupling.} Net/patch charges modulate retention, especially at lower $m$ where electrostatics re-emerge; charge is minor at short retention times but becomes major at long retention times in analytical HIC regimes \cite{Hebditch2019}. \\
+\textbf{Structure-informed correlations.} Dimensionless retention time correlates with computed surface hydrophobicity from 3D structures; quadratic models in average surface hydrophobicity predict DRT \cite{Lienqueo2002,Mahn2009}.
+
+\section{Kyte–Doolittle hydropathy: signal formation and limits}
+\textbf{Method.} KD assigns residue hydropathy values and applies a sliding window average; window length modulates signal bandwidth: $\sim$5–7 aa enriches surface-patch detection; $\sim$19–21 aa targets TM helices, smoothing away fine patches \cite{Kyte1982,QiagenHydropathy}. \\
+\textbf{Modulation pattern.} As window length increases, peak amplitudes broaden and merge; short windows reveal discontinuous, high-curvature positive bands that better approximate HIC-relevant surface patches; long windows bias toward contiguous membrane-like segments and can suppress patch signals (conceptual, empirical demonstrations in transmembrane prediction literature) \cite{Snider2009,Deber2001}. \\
+\textbf{Predictivity for HIC.} KD and Eisenberg scales show limited ability to rank antibody HIC retention; HIC-calibrated scales or sequence$\to$exposure models perform better (e.g.\ Jain-scale/ML) \cite{Waibl2022,Jain2017}. \\
+\textbf{Practice.} Use KD as a rapid patch locator with short windows; validate against HIC data; prefer surface-exposure-weighted or HIC-trained scales for quantitative ranking \cite{Waibl2022,Mahn2009}.
+
+\section{Concise implications}
+\begin{itemize}
+\item Salt choice matters via $\mathrm{d}\sigma/\mathrm{d}m$; sulfate $\gg$ chloride for retention amplification \cite{Melander1977,Melander1984,Gregory2022}.
+\item High-$m$ region obeys near-linear $\ln k$ vs.\ $m$; gradient slope sets recovery robustness; U-shapes require conservative gradients \cite{Creasy2018}.
+\item Sequence hydropathy must be interpreted through surface exposure and patch size; raw KD is insufficient for quantitative HIC ordering in mAbs \cite{Waibl2022,Hebditch2019,Jain2017}.
+\end{itemize}
+
+\section*{Key equations (operational)}
+\begin{align}
+\ln(k') &\approx A + \alpha m \quad\text{(high-$m$ solvophobic limit)} \label{eq:hi-m}\\
+\mathrm{DRT} &= a + b\,\phi_{\mathrm{surface}} + c\,\phi_{\mathrm{surface}}^2 \quad\text{(structure $\to$ retention correlation)} \label{eq:drt}\\
+\mathrm{KD}(i;W) &= \frac{1}{W}\sum_{j=i-(W-1)/2}^{i+(W-1)/2} h_{\mathrm{KD}}(j) \quad\text{(window-averaged hydropathy)} \label{eq:kd}
+\end{align}
+
+\begin{thebibliography}{99}\small
+\bibitem{Melander1977} Melander, W.; Horváth, C. \emph{Arch. Biochem. Biophys.} \textbf{1977}, 183, 200–215. doi:10.1016/0003-9861(77)90434-9.
+\bibitem{Melander1984} Melander, W. R.; Corradini, D.; Horváth, C. \emph{J. Chromatogr.} \textbf{1984}, 317, 67–85. PMID:6530455.
+\bibitem{Queiroz2001} Queiroz, J. A.; Tomaz, C. T.; Cabral, J. M. S. \emph{J. Biotechnol.} \textbf{2001}, 87, 143–159. doi:10.1016/S0168-1656(01)00237-1.
+\bibitem{Creasy2018} Creasy, A.; Carta, G.; McDonald, P.; et al. \emph{J. Chromatogr. A} \textbf{2018}, 1547, 53–61.
+\bibitem{LCGC2019} Fekete, S.; et al. \emph{LCGC North America} (2019): ``HIC of Proteins.'' 
+\bibitem{Gregory2022} Gregory, G. L.; et al. \emph{Phys. Chem. Chem. Phys.} \textbf{2022}, 24, 18478–18518. doi:10.1039/D2CP00847E.
+\bibitem{Hebditch2019} Hebditch, M.; Roche, A.; Curtis, R. A.; Warwicker, J. \emph{J. Pharm. Sci.} \textbf{2019}, 108, 1434–1441.
+\bibitem{Lienqueo2002} Lienqueo, M. E.; Mahn, A.; Asenjo, J. A. \emph{J. Chromatogr. A} \textbf{2002}, 978, 71–79.
+\bibitem{Mahn2009} Mahn, A.; Lienqueo, M. E.; Salgado, J. C. \emph{J. Chromatogr. A} \textbf{2009}, 1216, 1838–1844.
+\bibitem{Waibl2022} Waibl, F.; et al. \emph{Front. Mol. Biosci.} \textbf{2022}, 9, 960194.
+\bibitem{Kyte1982} Kyte, J.; Doolittle, R. F. \emph{J. Mol. Biol.} \textbf{1982}, 157, 105–132.
+\bibitem{QiagenHydropathy} QIAGEN CLC Workbench Manual: ``Protein hydrophobicity'' (accessed 2025).
+\bibitem{Snider2009} Snider, C.; et al. \emph{Protein Sci.} \textbf{2009}, 18, 2624–2628. % MPEx overview
+\bibitem{Deber2001} Deber, C. M.; et al. \emph{Protein Sci.} \textbf{2001}, 10, 212–219.
+\bibitem{Jain2017} Jain, T.; et al. \emph{Bioinformatics} \textbf{2017}, 33, 3758–3766.
+\end{thebibliography}
+
+\end{document}
